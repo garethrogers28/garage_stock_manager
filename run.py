@@ -47,6 +47,9 @@ def view_all_vehicles():
 
     sheet = SHEET.worksheet('stock')
     stock = sheet.get_all_records()
+    """
+    Checks to see if the sheet is empty, prints error message if it is. 
+    """
     if not stock:
         print("\nNo vehicles in stock.")
     else:
@@ -54,6 +57,46 @@ def view_all_vehicles():
         for vehicle in stock:
             print(f"ID: {vehicle['id']}, Make: {vehicle['make']}, Model: {vehicle['model']}, Year: {vehicle['year']}, Mileage: {vehicle['mileage']}, Sale Price: {vehicle['sale_price']}, Status: {vehicle['status']}")
 
+def add_vehicle():
+    """
+    Adds a new vehicle to the garage stock sheet.
+    Validates input and appends the vehicle as a new row.
+    """
+    sheet = SHEET.worksheet('stock')
+
+    # asks user for vehicle details
+    reg_number = input("Enter vehicle registration number (e.g., CN18 YGG): ").upper()
+    make = input("Enter vehicle make (e.g., Ford): ").title()
+    model = input("Enter vehicle model (e.g., Fiesta): ").title()
+
+    # Validate numeric input year
+    while True:
+        try:
+            year = int(input("Enter vehicle year (e.g., 2018): "))
+            if 1975 <= year <= 2028:
+                break
+            else:
+                print("Please enter a valid year between 1975 and 2028.")
+        except ValueError:
+            print("Invalid input. Please enter a numeric year.")
+
+    # Validate numeric input for mileage
+    while True:
+        try:
+            mileage = int(input("Enter vehicle mileage (e.g., 50000): "))
+            if mileage >= 0:
+                break
+            else:
+                print("Mileage cannot be negative. Please enter a valid mileage.")
+        except ValueError:
+            print("Invalid input. Please enter a number for the mileage.")
+      
+                 
+ 
+
+
+
+     
 
 
 def main():
