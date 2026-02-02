@@ -90,15 +90,21 @@ def add_vehicle():
                 print("Mileage cannot be negative. Please enter a valid mileage.")
         except ValueError:
             print("Invalid input. Please enter a number for the mileage.")
-      
+
+    # Validate numeric input for sale price
+    while True:
+        try:
+            sale_price = int(input("Enter vehicle sale price (e.g., 10000): "))
+            if sale_price >= 0:
+                break
+            else:
+                print("Sale price cannot be negative. Please enter a valid sale price.")
+        except ValueError:
+            print("Invalid input. Please enter a number for the sale price.")
+
+
+
                  
- 
-
-
-
-     
-
-
 def main():
     """
     Main program loop.
