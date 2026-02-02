@@ -44,11 +44,17 @@ def view_all_vehicles():
     """
     Displays all vehicles in the garage stock.
     """
+
     sheet = SHEET.worksheet('stock')
     stock = sheet.get_all_records()
-    print("\nCurrent Vehicles in Stock:")
-    for vehicle in stock:
-        print(f"ID: {vehicle['id']}, Make: {vehicle['make']}, Model: {vehicle['model']}, Year: {vehicle['year']}, Mileage: {vehicle['mileage']}, Sale Price: {vehicle['sale_price']}, Status: {vehicle['status']}")
+    if not stock:
+        print("\nNo vehicles in stock.")
+    else:
+        print("\nCurrent Vehicles in Stock:")
+        for vehicle in stock:
+            print(f"ID: {vehicle['id']}, Make: {vehicle['make']}, Model: {vehicle['model']}, Year: {vehicle['year']}, Mileage: {vehicle['mileage']}, Sale Price: {vehicle['sale_price']}, Status: {vehicle['status']}")
+
+
 
 def main():
     """
@@ -68,7 +74,6 @@ def main():
         elif choice == 4:
             print("Exiting Garage Stock Manager. Goodbye!")
             break
-
 if __name__ == "__main__":
     main()
 
