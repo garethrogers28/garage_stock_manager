@@ -103,13 +103,31 @@ def add_vehicle():
     """
     sheet = SHEET.worksheet('stock')
 
+     # Get existing stock to calculate next ID
+    stock = sheet.get_all_records()
+    if stock:
+        next_id = max(vehicle['id'] for vehicle in stock) + 1
+    else:
+        next_id = 1
+
     # asks user for vehicle details
     reg_number = input("Enter vehicle registration number (e.g., CN18 YGG): ").upper()
     make = input("Enter vehicle make (e.g., Ford): ").title()
     model = input("Enter vehicle model (e.g., Fiesta): ").title()
     year = get_valid_year("Enter vehicle year (e.g., 2018): ")
     mileage = get_valid_int("Enter vehicle mileage (e.g., 50000): ")
+    purchase_price = get_valid_float("Enter vehicle purchase price (e.g., 8000): ")
     sale_price = get_valid_float("Enter vehicle sale price (e.g., 10000): ")
+
+    # Default status is 'For Sale' and auto date/time
+    status = 'For Sale' 
+    date_added = date.today().strftime("%Y-%m-%d")
+
+    # Append new vehicle to the sheet
+    sheet.append_row([next_id, reg_number, make, model, year, mileage, purchase_price, sale_price, status, date_added])
+
+    print(f"\nVehicle ID {next_id} ({reg_number}) added successfully!")
+
 
     
               
