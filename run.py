@@ -57,6 +57,19 @@ def view_all_vehicles():
         for vehicle in stock:
             print(f"ID: {vehicle['id']}, Make: {vehicle['make']}, Model: {vehicle['model']}, Year: {vehicle['year']}, Mileage: {vehicle['mileage']}, Sale Price: {vehicle['sale_price']}, Status: {vehicle['status']}")
 
+# Validate Integer for mileage function
+def get_valid_int(prompt, min_value=None, max_value=None):
+    while True:
+        try:
+            mileage = int(input("Enter vehicle mileage (e.g., 50000): "))
+            if mileage >= 0:
+                break
+            else:
+                print("Mileage cannot be negative. Please enter a valid mileage:")
+        except ValueError:
+            print("Invalid input. Please enter a number for the mileage:")
+
+
 def add_vehicle():
     """
     Adds a new vehicle to the garage stock sheet.
@@ -69,7 +82,7 @@ def add_vehicle():
     make = input("Enter vehicle make (e.g., Ford): ").title()
     model = input("Enter vehicle model (e.g., Fiesta): ").title()
 
-    # Validate numeric input year
+    '''# Validate numeric input year
     while True:
         try:
             year = int(input("Enter vehicle year (e.g., 2018): "))
@@ -78,7 +91,7 @@ def add_vehicle():
             else:
                 print("Please enter a valid year between 1975 and 2028:")
         except ValueError:
-            print("Invalid input. Please enter a numeric year:")
+            print("Invalid input. Please enter a numeric year:")'''
 
     # Validate numeric input for mileage
     while True:
