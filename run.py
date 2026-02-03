@@ -45,8 +45,9 @@ def view_all_vehicles():
     """
     Displays all vehicles in the garage stock.
     """
-
     sheet = SHEET.worksheet('stock')
+
+    # Fetch all records
     stock = sheet.get_all_records()
     
     #Checks to see if the sheet is empty, prints error message if it is. 
@@ -56,7 +57,7 @@ def view_all_vehicles():
     else:
         print("\nCurrent Vehicles in Stock:\n")
         for vehicle in stock:
-            print(f"ID: {vehicle['id']}, Make: {vehicle['make']}, Model: {vehicle['model']}, Year: {vehicle['year']}, Mileage: {vehicle['mileage']}, Sale Price: {vehicle['sale_price']}, Status: {vehicle['status']}\n")
+            print(f"ID: {vehicle['id']}, Registration: {vehicle['reg_number']}, Make: {vehicle['make']}, Model: {vehicle['model']}, Year: {vehicle['year']}, Mileage: {vehicle['mileage']}, Sale Price: {vehicle['sale_price']}, Status: {vehicle['status']}\n")
 
 #Prevent empty entry 
 def get_required_input(prompt):
@@ -67,6 +68,7 @@ def get_required_input(prompt):
             return value
         else:
             print("This field cannot be empty. Please enter a value.")
+
 
 # Validating year
 def get_valid_year(prompt, min_year=1975, max_year=2028):
@@ -142,11 +144,18 @@ def remove_vehicle():
     """
     Removes a vehicle from the garage stock sheet when sold
     """
+    sheet = SHEET.worksheet('stock')
+
+    # Fetch all records
+    stock = sheet.get_all_records()
+
+    # Check if stock is empty
+    if not stock:
+        print("\nNo vehicles available to remove.")
+        return
+    
     view_all_vehicles()
-    new_id = get_valid_int("Enter vehicle ID to delete: ")
-
-
-              
+        
 def main():
     """
     Main program loop.
@@ -164,7 +173,7 @@ def main():
 
         elif choice == 3:
             remove_vehicle()
-            print("\nRemove vehicle feature coming soon...")
+            
 
         elif choice == 4:
             print("\nExiting Garage Stock Manager. Goodbye!\n")
@@ -172,6 +181,3 @@ def main():
         
 if __name__ == "__main__":
     main()
-
-
-
