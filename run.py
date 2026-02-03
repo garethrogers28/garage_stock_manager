@@ -24,10 +24,10 @@ def display_main_menu():
     """
     print("\nWelcome to Garage Stock Manager\n")
     print("Please choose an option:")
-    print("1. View all vehicles")
+    print("\n1. View all vehicles")
     print("2. Add a vehicle")
     print("3. Remove a vehicle")
-    print("4. Exit")
+    print("4. Exit\n")
 
 def get_user_choice():
     """
@@ -54,13 +54,14 @@ def view_all_vehicles():
     if not stock:
         print("\nNo vehicles in stock.")
     else:
-        print("\nCurrent Vehicles in Stock:")
+        print("\nCurrent Vehicles in Stock:\n")
         for vehicle in stock:
-            print(f"ID: {vehicle['id']}, Make: {vehicle['make']}, Model: {vehicle['model']}, Year: {vehicle['year']}, Mileage: {vehicle['mileage']}, Sale Price: {vehicle['sale_price']}, Status: {vehicle['status']}")
+            print(f"ID: {vehicle['id']}, Make: {vehicle['make']}, Model: {vehicle['model']}, Year: {vehicle['year']}, Mileage: {vehicle['mileage']}, Sale Price: {vehicle['sale_price']}, Status: {vehicle['status']}\n")
 
 #Prevent empty entry 
 def get_required_input(prompt):
     while True:
+        # remove leading/trailing spaces
         value = input(prompt).strip()
         if value:
             return value
@@ -119,13 +120,13 @@ def add_vehicle():
         next_id = 1
 
     # asks user for vehicle details
-    reg_number = get_required_input("Enter vehicle registration number (e.g., CN18 YGG): ").upper()
-    make = get_required_input("Enter vehicle make (e.g., Ford): ").title()
-    model = get_required_input("Enter vehicle model (e.g., Fiesta): ").title()
-    year = get_valid_year("Enter vehicle year (e.g., 2018): ")
-    mileage = get_valid_int("Enter vehicle mileage (e.g., 50000): ")
-    purchase_price = get_valid_float("Enter vehicle purchase price (e.g., 8000): ")
-    sale_price = get_valid_float("Enter vehicle sale price (e.g., 10000): ")
+    reg_number = get_required_input("\nEnter vehicle registration number (e.g., CN18 YGG): ").upper()
+    make = get_required_input("\nEnter vehicle make (e.g., Ford): ").title()
+    model = get_required_input("\nEnter vehicle model (e.g., Fiesta): ").title()
+    year = get_valid_year("\nEnter vehicle year (e.g., 2018): ")
+    mileage = get_valid_int("\nEnter vehicle mileage (e.g., 50000): ")
+    purchase_price = get_valid_float("\nEnter vehicle purchase price (e.g., 8000): ")
+    sale_price = get_valid_float("\nEnter vehicle sale price (e.g., 10000): ")
 
     # Default status is 'For Sale' and auto date/time
     status = 'For Sale' 
