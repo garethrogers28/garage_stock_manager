@@ -138,7 +138,14 @@ def add_vehicle():
     print(f"\nVehicle ID {next_id} ({reg_number}) added successfully!")
 
 
-    
+def remove_vehicle():    
+    """
+    Removes a vehicle from the garage stock sheet when sold
+    """
+    view_all_vehicles()
+    new_id = get_valid_int("Enter vehicle ID to delete: ")
+
+
               
 def main():
     """
@@ -156,10 +163,11 @@ def main():
             add_vehicle()
 
         elif choice == 3:
+            remove_vehicle()
             print("\nRemove vehicle feature coming soon...")
 
         elif choice == 4:
-            print("Exiting Garage Stock Manager. Goodbye!")
+            print("\nExiting Garage Stock Manager. Goodbye!\n")
             break
         
 if __name__ == "__main__":
