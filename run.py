@@ -72,7 +72,7 @@ def get_valid_year(prompt, min_year=1975, max_year=2028):
             print("Invalid input. Please enter a numeric year.")
 
 # Validate Integer for mileage function
-def get_valid_int(prompt, min_value=0.0):
+def get_valid_int(prompt, min_value=0):
     while True:
         try:
             value = int(input(prompt))
@@ -84,16 +84,17 @@ def get_valid_int(prompt, min_value=0.0):
             print("Invalid input. Please enter a valid number.")
 
 # Validate Float for sale price function
-def get_valid_float(prompt):
+def get_valid_float(prompt, min_value=0):
     while True:
         try:
-            sale_price = float(input("Enter vehicle sale price (e.g., 10000): "))
-            if sale_price >= 0:
+            sale_price = float(input(prompt))
+            if sale_price >= min_value:
                 return sale_price
             else:
-                print("Sale price cannot be negative. Please enter a valid sale price:")
+                print(f"Value must be at least {min_value}.")
         except ValueError:
-            print("Invalid input. Please enter a number for the sale price: ")
+            print("Invalid input. Please enter a valid number.")
+
 
 
 def add_vehicle():
