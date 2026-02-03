@@ -47,9 +47,9 @@ def view_all_vehicles():
 
     sheet = SHEET.worksheet('stock')
     stock = sheet.get_all_records()
-    """
-    Checks to see if the sheet is empty, prints error message if it is. 
-    """
+    
+    #Checks to see if the sheet is empty, prints error message if it is. 
+    
     if not stock:
         print("\nNo vehicles in stock.")
     else:
@@ -76,9 +76,9 @@ def add_vehicle():
             if 1975 <= year <= 2028:
                 break
             else:
-                print("Please enter a valid year between 1975 and 2028.")
+                print("Please enter a valid year between 1975 and 2028:")
         except ValueError:
-            print("Invalid input. Please enter a numeric year.")
+            print("Invalid input. Please enter a numeric year:")
 
     # Validate numeric input for mileage
     while True:
@@ -87,22 +87,20 @@ def add_vehicle():
             if mileage >= 0:
                 break
             else:
-                print("Mileage cannot be negative. Please enter a valid mileage.")
+                print("Mileage cannot be negative. Please enter a valid mileage:")
         except ValueError:
-            print("Invalid input. Please enter a number for the mileage.")
+            print("Invalid input. Please enter a number for the mileage:")
 
     # Validate numeric input for sale price
     while True:
         try:
-            sale_price = int(input("Enter vehicle sale price (e.g., 10000): "))
+            sale_price = float(input("Enter vehicle sale price (e.g., 10000): "))
             if sale_price >= 0:
                 break
             else:
-                print("Sale price cannot be negative. Please enter a valid sale price.")
+                print("Sale price cannot be negative. Please enter a valid sale price:")
         except ValueError:
-            print("Invalid input. Please enter a number for the sale price.")
-
-
+            print("Invalid input. Please enter a number for the sale price: ")
 
                  
 def main():
@@ -116,13 +114,18 @@ def main():
         if choice == 1:
             view_all_vehicles()
             input("\nPress Enter to return to the main menu...")
+
         elif choice == 2:
+            add_vehicle()
             print("Add vehicle feature coming soon...")
+
         elif choice == 3:
-            print("Remove vehicle feature coming soon...")
+            print("\nRemove vehicle feature coming soon...")
+
         elif choice == 4:
             print("Exiting Garage Stock Manager. Goodbye!")
             break
+        
 if __name__ == "__main__":
     main()
 
