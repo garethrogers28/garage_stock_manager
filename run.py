@@ -75,7 +75,7 @@ def get_valid_year(prompt, min_year=1975, max_year=2028):
 def get_valid_int(prompt, min_value=0.0):
     while True:
         try:
-            value = float(input(prompt))
+            value = int(input(prompt))
             if value >= min_value:
                 return value
             else:
