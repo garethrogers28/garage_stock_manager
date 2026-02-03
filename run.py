@@ -83,13 +83,13 @@ def get_valid_int(prompt, min_value=0):
         except ValueError:
             print("Invalid input. Please enter a valid number.")
 
-# Validate Float for sale price function
+# Validate Float for sale/purchase price function
 def get_valid_float(prompt, min_value=0):
     while True:
         try:
-            sale_price = float(input(prompt))
-            if sale_price >= min_value:
-                return sale_price
+            price = float(input(prompt))
+            if price >= min_value:
+                return price
             else:
                 print(f"Value must be at least {min_value}.")
         except ValueError:
@@ -145,7 +145,6 @@ def main():
 
         elif choice == 2:
             add_vehicle()
-            print("Add vehicle feature coming soon...")
 
         elif choice == 3:
             print("\nRemove vehicle feature coming soon...")
