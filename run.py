@@ -58,6 +58,14 @@ def view_all_vehicles():
         for vehicle in stock:
             print(f"ID: {vehicle['id']}, Make: {vehicle['make']}, Model: {vehicle['model']}, Year: {vehicle['year']}, Mileage: {vehicle['mileage']}, Sale Price: {vehicle['sale_price']}, Status: {vehicle['status']}")
 
+#Prevent empty entry 
+def get_required_input(prompt):
+    while True:
+        value = input(prompt).strip()
+        if value:
+            return value
+        else:
+            print("This field cannot be empty. Please enter a value.")
 
 # Validating year
 def get_valid_year(prompt, min_year=1975, max_year=2028):
@@ -111,9 +119,9 @@ def add_vehicle():
         next_id = 1
 
     # asks user for vehicle details
-    reg_number = input("Enter vehicle registration number (e.g., CN18 YGG): ").upper()
-    make = input("Enter vehicle make (e.g., Ford): ").title()
-    model = input("Enter vehicle model (e.g., Fiesta): ").title()
+    reg_number = get_required_input("Enter vehicle registration number (e.g., CN18 YGG): ").upper()
+    make = get_required_input("Enter vehicle make (e.g., Ford): ").title()
+    model = get_required_input("Enter vehicle model (e.g., Fiesta): ").title()
     year = get_valid_year("Enter vehicle year (e.g., 2018): ")
     mileage = get_valid_int("Enter vehicle mileage (e.g., 50000): ")
     purchase_price = get_valid_float("Enter vehicle purchase price (e.g., 8000): ")
