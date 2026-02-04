@@ -57,6 +57,17 @@ def get_stock(sheet):
         return None
     return stock # Return the stock records so it can be used again
 
+def find_vehicle_by_id(stock, vehicle_id):
+    '''
+    Returns the vehicle dict and its row number in the sheet, or (None, None) if not found.
+    '''
+    for index, vehicle in enumerate(stock, start=2):
+        try:  # start=2 to account for header row
+            if int(vehicle['id']) == vehicle_id:
+                return vehicle, index
+        except ValueError:
+            continue
+    return None, None
 
 def view_all_vehicles():
     sheet = get_stock_sheet()
@@ -122,7 +133,7 @@ def add_vehicle():
     """
     Adds a new vehicle to the garage stock sheet.
     """
-    sheet = SHEET.worksheet('stock')
+    sheet = get_stock_sheet() # Get the stock worksheet   
 
      # Get existing stock to calculate next ID
     stock = sheet.get_all_records()
@@ -154,11 +165,22 @@ def remove_vehicle():
     """
     Removes a vehicle from the garage stock sheet when sold
     """
-    sheet = SHEET.worksheet('stock')
-    stock = get_stock(sheet) # Reuse get_stock function to fetch records
+    sheet = get_stock_sheet()
+    stock = get_stock(sheet) # Reuse get_stock function to fetch records(helper)
     if not stock:
         return 
     view_all_vehicles()# Show current vehicles before removal
+
+    while True:
+        vehicle_id = get_valid_int("\nEnter vehicle ID to delete: ", min_value=1)
+        vehicle, row_number = find_vehicle_by_id(stock, vehicle_id)
+
+        if vehicle:
+            sheet.delete_rows(row_number)
+            print(f"\nVehicle ID {vehicle_id} ({vehicle['reg_number']}) removed successfully!")
+            break
+        else:
+            print(f"\nVehicle ID {vehicle_id} not found.")
         
 def main():
     """
