@@ -63,20 +63,17 @@ def get_stock_sheet():
 
 def get_stock(sheet):
     """
-    Returns stock records or None if empty or if there is an error.
+    Returns stock records or None if empty or on error.
     Normalizes all vehicle IDs to integers.
     """
-    try:
-        stock = sheet.get_all_records()
-    except Exception:
-        print("\nError accessing stock data.")    
+    stock = safe_sheet_call(sheet.get_all_records)
+    if stock is None:  # API error
         return None
-    
+
     if not stock:
         print("\nNo vehicles in stock.")
         return None
     
-    # Normalize all IDs to integers
     for vehicle in stock:
         try:
             vehicle['id'] = int(vehicle['id'])
@@ -85,6 +82,7 @@ def get_stock(sheet):
             return None
 
     return stock
+
 
 
 def find_vehicle_by_id(stock, vehicle_id):
@@ -194,15 +192,11 @@ def add_vehicle():
     """
     Adds a new vehicle to the garage stock sheet.
     """
-    sheet = get_stock_sheet() # Get the stock worksheet   
-    stock = get_stock(sheet) # Reuse get_stock function to fetch records(helper)
+    sheet = get_stock_sheet()
+    stock = get_stock(sheet)
 
-    if stock:
-        next_id = max(vehicle['id'] for vehicle in stock) + 1 # Determine next ID
-    else:
-        next_id = 1
+    next_id = max([v['id'] for v in stock], default=0) + 1 if stock else 1
 
-    # asks user for vehicle details
     reg_number = get_required_input("\nEnter vehicle registration number (e.g., CN18 YGG): ").upper()
     make = get_required_input("\nEnter vehicle make (e.g., Ford): ").title()
     model = get_required_input("\nEnter vehicle model (e.g., Fiesta): ").title()
@@ -211,33 +205,41 @@ def add_vehicle():
     purchase_price = get_valid_float("\nEnter vehicle purchase price (e.g., 8000): ")
     sale_price = get_valid_float("\nEnter vehicle sale price (e.g., 10000): ")
 
-    # Default status is 'For Sale' and auto date/time
-    status = 'For Sale' 
+    status = 'For Sale'
     date_added = date.today().strftime("%Y-%m-%d")
 
-    # Append new vehicle to the sheet
-    sheet.append_row([next_id, reg_number, make, model, year, mileage, purchase_price, sale_price, status, date_added])
+    success = safe_sheet_call(
+        sheet.append_row,
+        [next_id, reg_number, make, model, year, mileage, purchase_price, sale_price, status, date_added]
+    )
 
-    print(f"\nVehicle ID {next_id} ({reg_number}) added successfully!")
+    if success is not None:
+        print(f"\nVehicle ID {next_id} ({reg_number}) added successfully!")
+    else:
+        print("\nFailed to add vehicle due to API error.")
 
 
-def remove_vehicle():    
+def remove_vehicle():
     """
     Removes a vehicle from the garage stock sheet based on vehicle ID.
     """
     sheet = get_stock_sheet()
-    stock = get_stock(sheet) # Reuse get_stock function to fetch records(helper)
+    stock = get_stock(sheet)
     if not stock:
-        return 
-    view_all_vehicles(stock)# Show current stock to user
+        return
+
+    view_all_vehicles(stock)
 
     while True:
         vehicle_id = get_valid_int("\nEnter vehicle ID to remove: ", min_value=1)
         vehicle, row_number = find_vehicle_by_id(stock, vehicle_id)
 
         if vehicle:
-            sheet.delete_rows(row_number)
-            print(f"\nVehicle ID {vehicle_id} ({vehicle['reg_number']}) removed successfully!")
+            success = safe_sheet_call(sheet.delete_rows, row_number)
+            if success is not None:
+                print(f"\nVehicle ID {vehicle_id} ({vehicle['reg_number']}) removed successfully!")
+            else:
+                print("\nFailed to remove vehicle due to API error.")
             break
         else:
             print(f"\nVehicle ID {vehicle_id} not found, please review the list and try again.")
@@ -258,7 +260,7 @@ def main():
             add_vehicle()
 
         elif choice == 3:
-            remove_vehicle()
+            remove_vehicle()                                                        
             
         elif choice == 4:
             print("\nExiting Garage Stock Manager. Goodbye!\n")
