@@ -151,14 +151,10 @@ def remove_vehicle():
     Removes a vehicle from the garage stock sheet when sold
     """
     sheet = SHEET.worksheet('stock')
+    stock = get_stock(sheet) # Reuse get_stock function to fetch records
 
-    # Fetch all records
-    stock = sheet.get_all_records()
-
-    # Check if stock is empty
     if not stock:
-        print("\nNo vehicles available to remove.")
-        return
+        return 
     
     view_all_vehicles()
         
@@ -180,7 +176,6 @@ def main():
         elif choice == 3:
             remove_vehicle()
             
-
         elif choice == 4:
             print("\nExiting Garage Stock Manager. Goodbye!\n")
             break
