@@ -41,6 +41,11 @@ def get_user_choice():
         else:
             print("Invalid choice. Please enter a number between 1 and 4.")
 
+def get_stock_sheet():
+    """
+    Returns the stock worksheet from the Google Sheet.
+    """
+    return SHEET.worksheet('stock')
 
 def get_stock(sheet):
     """
@@ -54,7 +59,7 @@ def get_stock(sheet):
 
 
 def view_all_vehicles():
-    sheet = SHEET.worksheet('stock')
+    sheet = get_stock_sheet()
     stock = get_stock(sheet) # Reuse get_stock function to fetch records
      # If stock is None, exit the function
 
@@ -74,7 +79,6 @@ def get_required_input(prompt):
             return value
         else:
             print("This field cannot be empty. Please enter a value.")
-
 
 # Validating year
 def get_valid_year(prompt, min_year=1975, max_year=2028):
@@ -99,7 +103,7 @@ def get_valid_int(prompt, min_value=0):
                 print(f"Please enter a number greater than or equal to {min_value}.")
         except ValueError:
             print("Invalid input. Please enter a valid number.")
-
+            
 # Validate Float for sale/purchase price function
 def get_valid_float(prompt, min_value=0):
     while True:
@@ -152,11 +156,9 @@ def remove_vehicle():
     """
     sheet = SHEET.worksheet('stock')
     stock = get_stock(sheet) # Reuse get_stock function to fetch records
-
     if not stock:
         return 
-    
-    view_all_vehicles()
+    view_all_vehicles()# Show current vehicles before removal
         
 def main():
     """
