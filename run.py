@@ -55,6 +55,10 @@ def get_stock(sheet):
     if not stock:
         print("\nNo vehicles in stock.")
         return None
+    
+     # Normalize all IDs to integers
+    for vehicle in stock:
+        vehicle['id'] = int(vehicle['id'])
     return stock # Return the stock records so it can be used again
 
 def find_vehicle_by_id(stock, vehicle_id):
@@ -63,7 +67,7 @@ def find_vehicle_by_id(stock, vehicle_id):
     '''
     for index, vehicle in enumerate(stock, start=2):
         try:  # start=2 to account for header row
-            if int(vehicle['id']) == vehicle_id:
+            if (vehicle['id']) == vehicle_id:
                 return vehicle, index
         except ValueError:
             continue
@@ -72,7 +76,7 @@ def find_vehicle_by_id(stock, vehicle_id):
 def view_all_vehicles():
     sheet = get_stock_sheet()
     stock = get_stock(sheet) # Reuse get_stock function to fetch records
-     # If stock is None, exit the function
+     
 
     if not stock:# stock is empty
         return 
@@ -128,17 +132,14 @@ def get_valid_float(prompt, min_value=0):
             print("Invalid input. Please enter a valid number.")
 
 
-
 def add_vehicle():
     """
     Adds a new vehicle to the garage stock sheet.
     """
     sheet = get_stock_sheet() # Get the stock worksheet   
-
-     # Get existing stock to calculate next ID
-    stock = sheet.get_all_records()
+    stock = get_stock(sheet) # Reuse get_stock function to fetch records(helper)
     if stock:
-        next_id = max(vehicle['id'] for vehicle in stock) + 1
+        next_id = max(vehicle['id'] for vehicle in stock) + 1 # ensure ID is integer
     else:
         next_id = 1
 
