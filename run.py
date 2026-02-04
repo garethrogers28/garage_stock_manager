@@ -62,9 +62,9 @@ def get_stock(sheet):
     return stock # Return the stock records so it can be used again
 
 def find_vehicle_by_id(stock, vehicle_id):
-    '''
+    """
     Returns the vehicle dict and its row number in the sheet, or (None, None) if not found.
-    '''
+    """
     for index, vehicle in enumerate(stock, start=2):
         try:  # start=2 to account for header row
             if (vehicle['id']) == vehicle_id:
@@ -74,6 +74,7 @@ def find_vehicle_by_id(stock, vehicle_id):
     return None, None
 
 def view_all_vehicles(stock=None):
+    """ View all vehicles in stock """
     if stock is None:
         sheet = get_stock_sheet()
         stock = get_stock(sheet)
@@ -84,8 +85,9 @@ def view_all_vehicles(stock=None):
     for vehicle in stock:
             print(f"ID: {vehicle['id']}, Registration: {vehicle['reg_number']}, Make: {vehicle['make']}, Model: {vehicle['model']}, Year: {vehicle['year']}, Mileage: {vehicle['mileage']}, Sale Price: {vehicle['sale_price']}, Status: {vehicle['status']}\n")
 
-#Prevent empty entry 
+
 def get_required_input(prompt):
+    """Prevent empty entry function"""
     while True:
         # remove leading/trailing spaces
         value = input(prompt).strip()
@@ -94,8 +96,10 @@ def get_required_input(prompt):
         else:
             print("This field cannot be empty. Please enter a value.")
 
-# Validating year
+
 def get_valid_year(prompt, min_year=1975, max_year=2028):
+    """Validate Integer for mileage function
+    """
     while True:
         try:
             year = int(input(prompt))
@@ -106,8 +110,11 @@ def get_valid_year(prompt, min_year=1975, max_year=2028):
         except ValueError:
             print("Invalid input. Please enter a numeric year.")
 
-# Validate Integer for mileage function
+
 def get_valid_int(prompt, min_value=0):
+    """
+    Validate Integer for mileage function
+    """
     while True:
         try:
             value = int(input(prompt))
@@ -118,8 +125,10 @@ def get_valid_int(prompt, min_value=0):
         except ValueError:
             print("Invalid input. Please enter a valid number.")
             
-# Validate Float for sale/purchase price function
+
 def get_valid_float(prompt, min_value=0):
+    """Validate Float for sale/purchase price function
+    """
     while True:
         try:
             price = float(input(prompt))
