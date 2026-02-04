@@ -192,7 +192,7 @@ def main():
         
         if choice == 1:
             view_all_vehicles()
-            input("\nPress Enter to return to the main menu...")
+            input("\nPress Enter to return to the main menu...\n")
 
         elif choice == 2:
             add_vehicle()
