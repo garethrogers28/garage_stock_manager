@@ -13,6 +13,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('garage_stock_manager')
 
+
 def display_main_menu():
     """
     Display the main menu to the user.
@@ -29,6 +30,7 @@ def display_main_menu():
     print("3. Remove a vehicle")
     print("4. Exit\n")
 
+
 def get_user_choice():
     """
     Get the user's choice and
@@ -41,11 +43,13 @@ def get_user_choice():
         else:
             print("Invalid choice. Please enter a number between 1 and 4.")
 
+
 def get_stock_sheet():
     """
     Returns the stock worksheet from the Google Sheet.
     """
     return SHEET.worksheet('stock')
+
 
 def get_stock(sheet):
     """
@@ -61,6 +65,7 @@ def get_stock(sheet):
         vehicle['id'] = int(vehicle['id'])
     return stock # Return the stock records so it can be used again
 
+
 def find_vehicle_by_id(stock, vehicle_id):
     """
     Returns the vehicle dict and its row number in the sheet, or (None, None) if not found.
@@ -73,8 +78,17 @@ def find_vehicle_by_id(stock, vehicle_id):
             continue
     return None, None
 
+
 def view_all_vehicles(stock=None):
-    """ View all vehicles in stock """
+    """
+    Display all vehicles in stock.
+
+    Args:
+        stock (list[dict], optional): List of vehicle records. 
+                                      If None, fetches from Google Sheet.
+    Returns:
+        None
+    """
     if stock is None:
         sheet = get_stock_sheet()
         stock = get_stock(sheet)
@@ -83,7 +97,16 @@ def view_all_vehicles(stock=None):
     
     print("\nCurrent Vehicles in Stock:\n")
     for vehicle in stock:
-            print(f"ID: {vehicle['id']}, Registration: {vehicle['reg_number']}, Make: {vehicle['make']}, Model: {vehicle['model']}, Year: {vehicle['year']}, Mileage: {vehicle['mileage']}, Sale Price: {vehicle['sale_price']}, Status: {vehicle['status']}\n")
+        print(
+        f"ID: {vehicle['id']}, "
+        f"Registration: {vehicle['reg_number']}, "
+        f"Make: {vehicle['make']}, "
+        f"Model: {vehicle['model']}, "
+        f"Year: {vehicle['year']}, "
+        f"Mileage: {vehicle['mileage']}, "
+        f"Sale Price: {vehicle['sale_price']}, "
+        f"Status: {vehicle['status']}\n"
+    )
 
 
 def get_required_input(prompt):
@@ -98,7 +121,16 @@ def get_required_input(prompt):
 
 
 def get_valid_year(prompt, min_year=1975, max_year=2028):
-    """Validate Integer for mileage function
+    """
+    Prompt the user to enter a year and validate it falls within min_year and max_year.
+
+    Args:
+        prompt (str): The message shown to the user.
+        min_year (int): Minimum allowable year.
+        max_year (int): Maximum allowable year.
+
+    Returns:
+        int: A valid year within the specified range.
     """
     while True:
         try:
@@ -112,9 +144,7 @@ def get_valid_year(prompt, min_year=1975, max_year=2028):
 
 
 def get_valid_int(prompt, min_value=0):
-    """
-    Validate Integer for mileage function
-    """
+    """Prompt the user for an integer >= min_value."""
     while True:
         try:
             value = int(input(prompt))
@@ -127,8 +157,7 @@ def get_valid_int(prompt, min_value=0):
             
 
 def get_valid_float(prompt, min_value=0):
-    """Validate Float for sale/purchase price function
-    """
+    """Prompt the user for a float >= min_value."""
     while True:
         try:
             price = float(input(prompt))
