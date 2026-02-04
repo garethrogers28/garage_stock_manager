@@ -41,22 +41,28 @@ def get_user_choice():
         else:
             print("Invalid choice. Please enter a number between 1 and 4.")
 
-def view_all_vehicles():
-    """
-    Displays all vehicles in the garage stock.
-    """
-    sheet = SHEET.worksheet('stock')
 
-    # Fetch all records
+def get_stock(sheet):
+    """
+    Returns stock records or None if empty.
+    """
     stock = sheet.get_all_records()
-    
-    #Checks to see if the sheet is empty, prints error message if it is. 
-    
     if not stock:
         print("\nNo vehicles in stock.")
-    else:
-        print("\nCurrent Vehicles in Stock:\n")
-        for vehicle in stock:
+        return None
+    return stock # Return the stock records so it can be used again
+
+
+def view_all_vehicles():
+    sheet = SHEET.worksheet('stock')
+    stock = get_stock(sheet) # Reuse get_stock function to fetch records
+     # If stock is None, exit the function
+
+    if not stock:# stock is empty
+        return 
+    
+    print("\nCurrent Vehicles in Stock:\n")
+    for vehicle in stock:
             print(f"ID: {vehicle['id']}, Registration: {vehicle['reg_number']}, Make: {vehicle['make']}, Model: {vehicle['model']}, Year: {vehicle['year']}, Mileage: {vehicle['mileage']}, Sale Price: {vehicle['sale_price']}, Status: {vehicle['status']}\n")
 
 #Prevent empty entry 
