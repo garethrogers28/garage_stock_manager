@@ -73,13 +73,12 @@ def find_vehicle_by_id(stock, vehicle_id):
             continue
     return None, None
 
-def view_all_vehicles():
-    sheet = get_stock_sheet()
-    stock = get_stock(sheet) # Reuse get_stock function to fetch records
-     
-
-    if not stock:# stock is empty
-        return 
+def view_all_vehicles(stock=None):
+    if stock is None:
+        sheet = get_stock_sheet()
+        stock = get_stock(sheet)
+        if not stock:
+            return
     
     print("\nCurrent Vehicles in Stock:\n")
     for vehicle in stock:
@@ -138,8 +137,9 @@ def add_vehicle():
     """
     sheet = get_stock_sheet() # Get the stock worksheet   
     stock = get_stock(sheet) # Reuse get_stock function to fetch records(helper)
+
     if stock:
-        next_id = max(vehicle['id'] for vehicle in stock) + 1 # ensure ID is integer
+        next_id = max(vehicle['id'] for vehicle in stock) + 1 # Determine next ID
     else:
         next_id = 1
 
@@ -164,16 +164,16 @@ def add_vehicle():
 
 def remove_vehicle():    
     """
-    Removes a vehicle from the garage stock sheet when sold
+    Removes a vehicle from the garage stock sheet based on vehicle ID.
     """
     sheet = get_stock_sheet()
     stock = get_stock(sheet) # Reuse get_stock function to fetch records(helper)
     if not stock:
         return 
-    view_all_vehicles()# Show current vehicles before removal
+    view_all_vehicles(stock)# Show current stock to user
 
     while True:
-        vehicle_id = get_valid_int("\nEnter vehicle ID to delete: ", min_value=1)
+        vehicle_id = get_valid_int("\nEnter vehicle ID to remove: ", min_value=1)
         vehicle, row_number = find_vehicle_by_id(stock, vehicle_id)
 
         if vehicle:
@@ -181,7 +181,7 @@ def remove_vehicle():
             print(f"\nVehicle ID {vehicle_id} ({vehicle['reg_number']}) removed successfully!")
             break
         else:
-            print(f"\nVehicle ID {vehicle_id} not found.")
+            print(f"\nVehicle ID {vehicle_id} not found, please review the list and try again.")
         
 def main():
     """
