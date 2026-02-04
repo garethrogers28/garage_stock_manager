@@ -53,17 +53,28 @@ def get_stock_sheet():
 
 def get_stock(sheet):
     """
-    Returns stock records or None if empty.
+    Returns stock records or None if empty or if there is an error.
+    Normalizes all vehicle IDs to integers.
     """
-    stock = sheet.get_all_records()
+    try:
+        stock = sheet.get_all_records()
+    except Exception:
+        print("\nError accessing stock data.")    
+        return None
+    
     if not stock:
         print("\nNo vehicles in stock.")
         return None
     
-     # Normalize all IDs to integers
+    # Normalize all IDs to integers
     for vehicle in stock:
-        vehicle['id'] = int(vehicle['id'])
-    return stock # Return the stock records so it can be used again
+        try:
+            vehicle['id'] = int(vehicle['id'])
+        except (ValueError, TypeError):
+            print("\nInvalid vehicle ID found in stock data.")
+            return None
+
+    return stock
 
 
 def find_vehicle_by_id(stock, vehicle_id):
