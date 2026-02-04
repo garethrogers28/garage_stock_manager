@@ -13,6 +13,16 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('garage_stock_manager')
 
+def safe_sheet_call(func, *args, **kwargs):
+    """
+    Safely call a Google Sheets API function.
+    Returns None if there is an error.
+    """
+    try:
+        return func(*args, **kwargs)
+    except Exception as e:
+        print(f"\nError accessing Google Sheet: {e}")
+        return None
 
 def display_main_menu():
     """
@@ -82,7 +92,7 @@ def find_vehicle_by_id(stock, vehicle_id):
     Returns the vehicle dict and its row number in the sheet, or (None, None) if not found.
     """
     for index, vehicle in enumerate(stock, start=2):
-        try:  # start=2 to account for header row
+        try:  # start=2 to account for header row being 1
             if (vehicle['id']) == vehicle_id:
                 return vehicle, index
         except ValueError:
