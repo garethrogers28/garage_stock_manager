@@ -1,6 +1,14 @@
+"""
+Garage Stock Manager - A command-line application to manage vehicle inventory for a used car garage.
+"""
+
 import gspread
 from google.oauth2.service_account import Credentials
 from datetime import date
+
+# =========================================
+# 1. SETUP / API CONNECTION
+# =========================================
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -13,52 +21,28 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('garage_stock_manager')
 
+# =========================================
+# 2. HELPER FUNCTIONS
+#    - Generic reusable functions
+# =========================================
+
 def safe_sheet_call(func, *args, **kwargs):
     """
     Safely call a Google Sheets API function.
     Returns None if there is an error.
     """
     try:
+        # Attempt the API call
         return func(*args, **kwargs)
     except Exception as e:
         print(f"\nError accessing Google Sheet: {e}")
         return None
-    
-
-def display_main_menu():
-    """
-    Display the main menu to the user.
-    Shows the 4 options:
-    1. View all vehicles
-    2. Add a vehicle
-    3. Remove a vehicle
-    4. Exit
-    """
-    print("\nWelcome to Garage Stock Manager\n")
-    print("Please choose an option:")
-    print("\n1. View all vehicles")
-    print("2. Add a vehicle")
-    print("3. Remove a vehicle")
-    print("4. Exit\n")
-
-
-def get_user_choice():
-    """
-    Get the user's choice and
-    Validates the input to ensure it's between 1 and 4.
-    """
-    while True:
-        choice = input("Enter your choice (1-4): ")
-        if choice in ['1', '2', '3', '4']:
-            return int(choice)
-        else:
-            print("Invalid choice. Please enter a number between 1 and 4.")
-
 
 def get_stock_sheet():
     """
     Returns the stock worksheet from the Google Sheet.
     """
+     # Directly access the 'stock' worksheet, assuming it exists and is correctly named.
     return SHEET.worksheet('stock')
 
 
@@ -67,14 +51,16 @@ def get_stock(sheet):
     Returns stock records or None if empty or on error.
     Normalizes all vehicle IDs to integers.
     """
-    stock = safe_sheet_call(sheet.get_all_records)# safe_sheet_call to handle potential API errors
+    # safe_sheet_call to handle potential API errors
+    stock = safe_sheet_call(sheet.get_all_records)
     if stock is None:  # API error
         return None
 
-    if not stock:
+    if not stock: # Sheet is empty
         print("\nNo vehicles in stock.")
         return None
     
+     # Convert all 'id' fields to integers for consistency
     for vehicle in stock:
         try:
             vehicle['id'] = int(vehicle['id'])
@@ -89,63 +75,41 @@ def require_stock_or_exit():
     Retrieves the stock sheet and stock data.
     Exits early with a user-friendly message if unavailable.
     """
+    # Get the sheet
     sheet = get_stock_sheet()
+    # Get the current stock
     stock = get_stock(sheet)
 
-    if stock is None:
+    if stock is None: # Could not retrieve stock data (either empty or API error)
         print("\nUnable to retrieve stock data. Please check your internet/API connection and try again.")
         return None, None
     
     return sheet, stock
 
+    
 def find_vehicle_by_id(stock, vehicle_id):
     """
     Returns the vehicle dict and its row number in the sheet, or (None, None) if not found.
     """
-    for index, vehicle in enumerate(stock, start=2):
-        try:  # start=2 to account for header row being 1
+    for index, vehicle in enumerate(stock, start=2): # start=2 to account for header row being 1
+        try:  
             if (vehicle['id']) == vehicle_id:
                 return vehicle, index
         except ValueError:
             continue
     return None, None
 
-
-def view_all_vehicles(stock=None):
-    """
-    Display all vehicles in stock.
-
-    Args:
-        stock (list[dict], optional): List of vehicle records. 
-                                      If None, fetches from Google Sheet.
-    Returns:
-        None
-    """
-    if stock is None:
-        sheet = get_stock_sheet()
-        stock = get_stock(sheet)
-        if not stock:
-            return
-    
-    print("\nCurrent Vehicles in Stock:\n")
-    for vehicle in stock:
-        print(
-        f"ID: {vehicle['id']}, "
-        f"Registration: {vehicle['reg_number']}, "
-        f"Make: {vehicle['make']}, "
-        f"Model: {vehicle['model']}, "
-        f"Year: {vehicle['year']}, "
-        f"Mileage: {vehicle['mileage']}, "
-        f"Sale Price: {vehicle['sale_price']}, "
-        f"Status: {vehicle['status']}\n"
-    )
+# =========================================
+# 3. USER INPUT FUNCTIONS
+#    - Functions that validate and sanitize input
+# =========================================
 
 
 def get_required_input(prompt):
     """Prevent empty entry function"""
     while True:
-        # remove leading/trailing spaces
-        value = input(prompt).strip()
+        
+        value = input(prompt).strip()# strip() to remove leading/trailing spaces, ensuring we don't accept input that is just spaces
         if value:
             return value
         else:
@@ -200,17 +164,89 @@ def get_valid_float(prompt, min_value=0):
         except ValueError:
             print("Invalid input. Please enter a valid number.")
 
+            
+
+# =========================================
+# 4. DISPLAY FUNCTIONS
+#    - Functions that show information to the user
+# =========================================
+
+
+def get_user_choice():
+    """
+    Get the user's choice and
+    Validates the input to ensure it's between 1 and 4.
+    """
+    while True:
+        choice = input("Enter your choice (1-4): ") # No need to strip() here since we're checking for specific valid inputs, and any leading/trailing spaces would make it invalid anyway.
+        if choice in ['1', '2', '3', '4']:
+            return int(choice)
+        else:
+            print("Invalid choice. Please enter a number between 1 and 4.")
+
+def display_main_menu():
+    """
+    Display the main menu to the user.
+    Shows the 4 options:
+    1. View all vehicles
+    2. Add a vehicle
+    3. Remove a vehicle
+    4. Exit
+    """
+    print("\nWelcome to Garage Stock Manager\n")
+    print("Please choose an option:")
+    print("\n1. View all vehicles")
+    print("2. Add a vehicle")
+    print("3. Remove a vehicle")
+    print("4. Exit\n")
+
+def view_all_vehicles(stock=None):# Allow passing stock data to avoid redundant API calls if we already have it, improving efficiency when called from other functions like remove_vehicle.
+    """
+    Display all vehicles in stock.
+
+    Args:
+        stock (list[dict], optional): List of vehicle records. 
+                                      If None, fetches from Google Sheet.
+    Returns:
+        None
+    """
+    if stock is None:
+        sheet = get_stock_sheet()
+        stock = get_stock(sheet)
+        if not stock:
+            return
+    
+    print("\nCurrent Vehicles in Stock:\n")
+    for vehicle in stock:
+        print(
+        f"ID: {vehicle['id']}, "
+        f"Registration: {vehicle['reg_number']}, "
+        f"Make: {vehicle['make']}, "
+        f"Model: {vehicle['model']}, "
+        f"Year: {vehicle['year']}, "
+        f"Mileage: {vehicle['mileage']}, "
+        f"Sale Price: {vehicle['sale_price']}, "
+        f"Status: {vehicle['status']}\n"
+    )
+
+# =========================================
+# 5. VEHICLE MANAGEMENT FUNCTIONS
+#    - Add, remove vehicles
+# =========================================
 
 def add_vehicle():
     """
     Adds a new vehicle to the garage stock sheet with validated user input.
     """
+    # Ensure we have stock before proceeding, and get the sheet and current stock data for ID generation and appending.
     sheet, stock = require_stock_or_exit()
     if not stock:
         return
+    
+    # Determine next ID automatically based on existing stock, ensuring we handle the case where stock is empty by defaulting to 1.
+    next_id = max([v['id'] for v in stock], default=0) + 1
 
-    next_id = max([v['id'] for v in stock], default=0) + 1# Calculate next ID based on existing stock, default to 1 if stock is empty
-
+    # Collect vehicle data from user with validation to ensure all required fields are filled and correctly formatted.
     reg_number = get_required_input("\nEnter vehicle registration number (e.g., CN18 YGG): ").upper()
     make = get_required_input("\nEnter vehicle make (e.g., Ford): ").title()
     model = get_required_input("\nEnter vehicle model (e.g., Fiesta): ").title()
@@ -243,15 +279,17 @@ def remove_vehicle():
     sheet, stock = require_stock_or_exit()
     if not stock:
         return
-
+    
+    # Show all vehicles so user can choose
     view_all_vehicles(stock)
 
     while True:
+        # Ask which vehicle to remove by ID, validating input and confirming existence before attempting deletion
         vehicle_id = get_valid_int("\nEnter vehicle ID to remove: ", min_value=1)
         vehicle, row_number = find_vehicle_by_id(stock, vehicle_id)
 
         if vehicle:
-            # Confirmation prompt
+            # Confirm deletion with the user, showing the vehicle's registration number for clarity
             confirm = input(f"Are you sure you want to remove Vehicle ID {vehicle_id} ({vehicle['reg_number']})? (y/n): ").strip().lower()# strip() to remove leading/trailing spaces, lower() to standardize input
 
             if confirm == 'y':
@@ -270,7 +308,7 @@ def remove_vehicle():
         
 def main():
     """
-    Main program loop.
+    Main program loop for Garage Stock Manager. Displays the main menu and handles user choices until exit.
     """
     while True:
         display_main_menu()
@@ -292,3 +330,4 @@ def main():
         
 if __name__ == "__main__":
     main()
+   
