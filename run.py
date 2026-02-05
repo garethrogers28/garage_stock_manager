@@ -23,6 +23,7 @@ def safe_sheet_call(func, *args, **kwargs):
     except Exception as e:
         print(f"\nError accessing Google Sheet: {e}")
         return None
+    
 
 def display_main_menu():
     """
@@ -66,7 +67,7 @@ def get_stock(sheet):
     Returns stock records or None if empty or on error.
     Normalizes all vehicle IDs to integers.
     """
-    stock = safe_sheet_call(sheet.get_all_records)
+    stock = safe_sheet_call(sheet.get_all_records)# safe_sheet_call to handle potential API errors
     if stock is None:  # API error
         return None
 
@@ -83,7 +84,19 @@ def get_stock(sheet):
 
     return stock
 
+def require_stock_or_exit():
+    """
+    Retrieves the stock sheet and stock data.
+    Exits early with a user-friendly message if unavailable.
+    """
+    sheet = get_stock_sheet()
+    stock = get_stock(sheet)
 
+    if stock is None:
+        print("\nUnable to retrieve stock data. Please check your internet/API connection and try again.")
+        return None, None
+    
+    return sheet, stock
 
 def find_vehicle_by_id(stock, vehicle_id):
     """
@@ -237,7 +250,7 @@ def remove_vehicle():
 
         if vehicle:
             # Confirmation prompt
-            confirm = input(f"Are you sure you want to remove Vehicle ID {vehicle_id} ({vehicle['reg_number']})? (y/n): ").strip().lower()
+            confirm = input(f"Are you sure you want to remove Vehicle ID {vehicle_id} ({vehicle['reg_number']})? (y/n): ").strip().lower()# strip() to remove leading/trailing spaces, lower() to standardize input
             if confirm == 'y':
                 success = safe_sheet_call(sheet.delete_rows, row_number)
                 if success is not None:
