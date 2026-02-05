@@ -203,12 +203,13 @@ def get_valid_float(prompt, min_value=0):
 
 def add_vehicle():
     """
-    Adds a new vehicle to the garage stock sheet.
+    Adds a new vehicle to the garage stock sheet with validated user input.
     """
-    sheet = get_stock_sheet()
-    stock = get_stock(sheet)
+    sheet, stock = require_stock_or_exit()
+    if not stock:
+        return
 
-    next_id = max([v['id'] for v in stock], default=0) + 1 if stock else 1
+    next_id = max([v['id'] for v in stock], default=0) + 1# Calculate next ID based on existing stock, default to 1 if stock is empty
 
     reg_number = get_required_input("\nEnter vehicle registration number (e.g., CN18 YGG): ").upper()
     make = get_required_input("\nEnter vehicle make (e.g., Ford): ").title()
@@ -218,9 +219,11 @@ def add_vehicle():
     purchase_price = get_valid_float("\nEnter vehicle purchase price (e.g., 8000): ")
     sale_price = get_valid_float("\nEnter vehicle sale price (e.g., 10000): ")
 
+    
     status = 'For Sale'
     date_added = date.today().strftime("%Y-%m-%d")
 
+    # Append the new vehicle to the Google Sheet, handling potential API errors gracefully
     success = safe_sheet_call(
         sheet.append_row,
         [next_id, reg_number, make, model, year, mileage, purchase_price, sale_price, status, date_added]
