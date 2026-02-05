@@ -237,8 +237,7 @@ def remove_vehicle():
     Removes a vehicle from the garage stock sheet based on vehicle ID,
     with a confirmation prompt before deletion.
     """
-    sheet = get_stock_sheet()
-    stock = get_stock(sheet)
+    sheet, stock = require_stock_or_exit()
     if not stock:
         return
 
@@ -251,12 +250,14 @@ def remove_vehicle():
         if vehicle:
             # Confirmation prompt
             confirm = input(f"Are you sure you want to remove Vehicle ID {vehicle_id} ({vehicle['reg_number']})? (y/n): ").strip().lower()# strip() to remove leading/trailing spaces, lower() to standardize input
+
             if confirm == 'y':
                 success = safe_sheet_call(sheet.delete_rows, row_number)
                 if success is not None:
                     print(f"\nVehicle ID {vehicle_id} ({vehicle['reg_number']}) removed successfully!")
                 else:
-                    print("\nFailed to remove vehicle due to API error.")
+                    print("\nFailed to remove vehicle due to API error.")  
+                
             else:
                 print("\nRemoval cancelled.")
             break
