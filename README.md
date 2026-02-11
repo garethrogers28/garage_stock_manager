@@ -195,7 +195,31 @@ Acceptance Criteria:
 ## Future Features 
 
 
-## Technologies used 
+# Technologies used 
+
+## Programming Language
+
+- Python 3
+Core language used to develop the application logic, user interface, and data handling.
+
+## Libraries & Frameworks
+
+- gspread
+Python library used to interact with Google Sheets for reading, writing, and updating stock data.
+
+- google-auth (google.oauth2.service_account)
+Used to securely authenticate and authorise access to the Google Sheets API via service account credentials.
+
+- datetime (Python Standard Library)
+Used to automatically generate and store the date a vehicle is added to stock.
+
+## External Services
+
+- Google Sheets API
+Used as a cloud-based database to store vehicle inventory data.
+
+- Google Cloud Platform (GCP)
+Used to create and manage service account credentials for API authentication.
 
 
 
