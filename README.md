@@ -25,17 +25,17 @@ Scalable & Accessible Solution
 
 # User Stories 
 
-1. View Vehicles
+## View Vehicles
 
 - As a garage owner, I want to view all vehicles in stock, so that I can quickly know which cars are available for sale.
 
 Acceptance Criteria:
 
-All vehicles are listed with ID, registration number, make, model, year, mileage, price, and status.
+- All vehicles are listed with ID, registration number, make, model, year, mileage, price, and status.
 
-If no vehicles exist, a friendly message informs the user.
+- If no vehicles exist, a friendly message informs the user.
 
-2. Add Vehicles
+## Add Vehicles
 
 - As a garage manager, I want to add new vehicles with details like make, model, year, mileage, and price, so that the stock is always up-to-date.
 
@@ -49,7 +49,7 @@ Acceptance Criteria:
 
 - Vehicle is successfully added to the Google Sheet.
 
-3. Remove Vehicles
+## Remove Vehicles
 
 - As a garage manager, I want to remove vehicles that are sold or no longer available, so that the stock list remains accurate.
 
@@ -61,7 +61,7 @@ Acceptance Criteria:
 
 - Vehicle is removed from the Google Sheet successfully.
 
-4. Data Validation
+## Data Validation
 
 - As a garage owner, I want inputs like year, mileage, and price to be validated, so that incorrect data isn’t entered into the system.
 
@@ -71,7 +71,7 @@ Acceptance Criteria:
 
 - The system does not accept empty or malformed entries.
 
-5. Cloud Storage (Google Sheets)
+## Cloud Storage (Google Sheets)
 
 - As a garage manager, I want the stock data to be stored in Google Sheets, so that it can be accessed and updated from any device with internet access.
   
@@ -81,7 +81,7 @@ Acceptance Criteria:
 
 - Data persists between sessions.
 
-6. Handle API Failures
+## Handle API Failures
 
 - As a garage manager, I want to be notified if the system cannot access the stock data, so that I understand why the application isn’t working and can take appropriate action.
 
@@ -112,10 +112,84 @@ Acceptance Criteria:
 
 # Existing Features
 
-- View all vehicles in stock with details such as registration number, make, model, year, mileage, price, and status.
-- Add a vehicle to the stock with validation for all fields (year, mileage, purchase/sale price).
-- Remove a vehicle by ID with confirmation prompt.
-- Google Sheets integration for storing and retrieving stock data in real-time.
+## Menu-Driven Interface
+- Simple and user-friendly command-line menu with four clear options.
+
+## View All Vehicles
+- Displays a formatted list of all vehicles currently in stock, including:
+
+- Vehicle ID
+
+- Registration number
+
+- Make and model
+
+- Year
+
+- Mileage
+
+- Purchase price
+
+- Sale price
+
+- Status
+
+## Add a Vehicle
+- Allows users to add a new vehicle to stock with:
+
+- Automatic ID generation
+
+- Input validation for required fields
+
+- Year range validation
+
+- Numeric validation for mileage and pricing
+
+- Automatic status set to "For Sale"
+
+- Automatic date added
+
+## Remove a Vehicle
+
+- Select vehicle by ID
+
+- Confirmation prompt before deletion
+
+- Prevents accidental removal
+
+- Displays error if vehicle ID is not found
+
+## Google Sheets Integration
+
+- Uses Google Sheets as a cloud-based database
+
+- Real-time data storage and retrieval
+
+- Persistent data (data saved outside the program)
+
+## Error Handling
+
+- Handles Google Sheets API connection errors
+
+- Prevents crashes due to invalid data
+
+- ser-friendly error messages
+
+## Data Validation & Sanitisation
+
+- Prevents empty inputs
+
+- Ensures numeric fields are valid
+
+- Enforces valid year range
+
+- Standardises text formatting (e.g., uppercase registration, title-case make/model)
+
+## Continuous Program Loop
+
+- Returns to the main menu after each action
+
+- Runs until the user chooses to exit
 
 
 ## Future Features 
