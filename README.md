@@ -2,7 +2,7 @@
  
 ## Description
 
-Garage Stock Manager is a command-line application designed to help manage vehicle inventory for a used car garage. It allows the user to view, add, and remove vehicles from a Google Sheets-based stock database. This project was developed as Project 3 for the Code Institute Full Stack Developer Diploma.
+Garage Stock Manager is a command-line application designed to help manage vehicle inventory for a used car garage. It allows the user to view, add, and remove vehicles from a Google Sheets-based stock database.  This project was developed as Project 3 for the Code Institute Full Stack Developer Diploma and runs on their Mock terminal in Heroku.
  
 ## Business Goals/Visitor Goals
 
@@ -154,7 +154,7 @@ Acceptance Criteria:
 
 - Prevents crashes due to invalid data
 
-- ser-friendly error messages
+- User-friendly error messages
 
 ### 7. Data Validation & Sanitisation
 
@@ -241,14 +241,30 @@ Used to create and manage service account credentials for API authentication.
  
 ## IDE
 
-
+- Visual Studio Code 
 
 ## Version Control 
 
+- Github
 
+- link to repository  https://github.com/garethrogers28/garage_stock_manager
 
 ## Deployment
 
+- The project was deployed using Code Institute's Heroku mock terminal.
+- The following steps were followed during deployment:
+  
+1. Cloning this repository
+  
+2. Creating a new Heroku app for the project
+ 
+3. Add buildpacks for Python first and then for Node Js
+  
+4. Creating a Config Var called PORT with a value of 8000
+   
+5. Link the Heroku app to the repository
+ 
+6. Finally deploy by clicking Deploy
 
 
 ## Credits
