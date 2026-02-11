@@ -1,45 +1,45 @@
 ﻿# Garage Stock Manager
  
-# Description
+## Description
 
-- Garage Stock Manager is a command-line application designed to help manage vehicle inventory for a used car garage. It allows the user to view, add, and remove vehicles from a Google Sheets-based stock database. This project was developed as Project 3 for the Code Institute Full Stack Developer Diploma.
+Garage Stock Manager is a command-line application designed to help manage vehicle inventory for a used car garage. It allows the user to view, add, and remove vehicles from a Google Sheets-based stock database. This project was developed as Project 3 for the Code Institute Full Stack Developer Diploma.
  
-# Visitor Goals
+## Business Goals/Visitor Goals
+
+### 1. Efficient Inventory Management
+   
+Enable small used car garages to easily track and manage their vehicle stock without manual spreadsheets.
+
+### 2. Reduce Errors in Stock Tracking
+   
+Prevent mistakes in recording vehicle details, prices, and status by enforcing validated inputs.
+
+### 3. Improve Decision-Making
+
+Provide garage owners with up-to-date stock data to assist in sales, pricing, and stock rotation decisions.
+
+### 4. Scalable & Accessible Solution
+
+Use cloud-based storage (Google Sheets) so multiple team members can access and update stock in real-time.
 
 
+## User Stories 
 
-# Business Goals
-
-Efficient Inventory Management
-- Enable small used car garages to easily track and manage their vehicle stock without manual spreadsheets.
-
-Reduce Errors in Stock Tracking
-- Prevent mistakes in recording vehicle details, prices, and status by enforcing validated inputs.
-
-Improve Decision-Making
-- Provide garage owners with up-to-date stock data to assist in sales, pricing, and stock rotation decisions.
-
-Scalable & Accessible Solution
-- Use cloud-based storage (Google Sheets) so multiple team members can access and update stock in real-time.
-
-
-# User Stories 
-
-## View Vehicles
+### 1. View Vehicles
 
 - As a garage owner, I want to view all vehicles in stock, so that I can quickly know which cars are available for sale.
 
-Acceptance Criteria:
+### Acceptance Criteria:
 
 - All vehicles are listed with ID, registration number, make, model, year, mileage, price, and status.
 
 - If no vehicles exist, a friendly message informs the user.
 
-## Add Vehicles
+### 2. Add Vehicles
 
 - As a garage manager, I want to add new vehicles with details like make, model, year, mileage, and price, so that the stock is always up-to-date.
 
-Acceptance Criteria:
+### Acceptance Criteria:
 
 - Required fields cannot be empty.
 
@@ -49,11 +49,11 @@ Acceptance Criteria:
 
 - Vehicle is successfully added to the Google Sheet.
 
-## Remove Vehicles
+### 3. Remove Vehicles
 
 - As a garage manager, I want to remove vehicles that are sold or no longer available, so that the stock list remains accurate.
 
-Acceptance Criteria:
+### Acceptance Criteria:
 
 - Only existing vehicle IDs can be removed.
 
@@ -61,17 +61,17 @@ Acceptance Criteria:
 
 - Vehicle is removed from the Google Sheet successfully.
 
-## Data Validation
+### 4. Data Validation
 
 - As a garage owner, I want inputs like year, mileage, and price to be validated, so that incorrect data isn’t entered into the system.
 
-Acceptance Criteria:
+### Acceptance Criteria:
 
 - Invalid inputs prompt the user to re-enter values.
 
 - The system does not accept empty or malformed entries.
 
-## Cloud Storage (Google Sheets)
+### 5. Cloud Storage (Google Sheets)
 
 - As a garage manager, I want the stock data to be stored in Google Sheets, so that it can be accessed and updated from any device with internet access.
   
@@ -81,11 +81,11 @@ Acceptance Criteria:
 
 - Data persists between sessions.
 
-## Handle API Failures
+### 6. Handle API Failures
 
 - As a garage manager, I want to be notified if the system cannot access the stock data, so that I understand why the application isn’t working and can take appropriate action.
 
-Acceptance Criteria:
+### Acceptance Criteria:
 
 - If the Google Sheets API call fails, a clear, user-friendly message is displayed.
 
@@ -99,7 +99,7 @@ Acceptance Criteria:
 
 ## Wireframes
 
-
+- Command-line interface uses system defaults 
 
 
 ## Colours
@@ -110,46 +110,27 @@ Acceptance Criteria:
 
 
 
-# Existing Features
+## Existing Features
 
-## Menu-Driven Interface
+### 1. Menu-Driven Interface
 - Simple and user-friendly command-line menu with four clear options.
 
-## View All Vehicles
-- Displays a formatted list of all vehicles currently in stock, including:
+### 2. View All Vehicles
+- Displays a formatted list with:
 
-- Vehicle ID
+ - Vehicle ID, Registration Number, Make, Model, Year, Mileage, Purchase Price, Sale Price, Status
 
-- Registration number
-
-- Make and model
-
-- Year
-
-- Mileage
-
-- Purchase price
-
-- Sale price
-
-- Status
-
-## Add a Vehicle
-- Allows users to add a new vehicle to stock with:
+### 3. Add a Vehicle
 
 - Automatic ID generation
 
-- Input validation for required fields
-
-- Year range validation
-
-- Numeric validation for mileage and pricing
+- Input validation (year, mileage, price)
 
 - Automatic status set to "For Sale"
 
 - Automatic date added
 
-## Remove a Vehicle
+### 4. Remove a Vehicle
 
 - Select vehicle by ID
 
@@ -157,9 +138,9 @@ Acceptance Criteria:
 
 - Prevents accidental removal
 
-- Displays error if vehicle ID is not found
+- Error message if vehicle ID not found
 
-## Google Sheets Integration
+### 5. Google Sheets Integration
 
 - Uses Google Sheets as a cloud-based database
 
@@ -167,7 +148,7 @@ Acceptance Criteria:
 
 - Persistent data (data saved outside the program)
 
-## Error Handling
+### 6. Error Handling
 
 - Handles Google Sheets API connection errors
 
@@ -175,7 +156,7 @@ Acceptance Criteria:
 
 - ser-friendly error messages
 
-## Data Validation & Sanitisation
+### 7. Data Validation & Sanitisation
 
 - Prevents empty inputs
 
@@ -185,7 +166,7 @@ Acceptance Criteria:
 
 - Standardises text formatting (e.g., uppercase registration, title-case make/model)
 
-## Continuous Program Loop
+### 8. Continuous Program Loop
 
 - Returns to the main menu after each action
 
@@ -225,7 +206,13 @@ Used to create and manage service account credentials for API authentication.
 
 ## How to View the Project
 
+1. Clone the repository
 
+2. Install dependencies (pip install -r requirements.txt)
+
+3. Add your creds.json for Google Sheets API access
+
+4. Run the application
 
 # Testing
 
