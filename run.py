@@ -26,6 +26,7 @@ SHEET = GSPREAD_CLIENT.open('garage_stock_manager')
 #    - Generic reusable functions
 # =========================================
 
+
 def safe_sheet_call(func, *args, **kwargs):
     """
     Safely call a Google Sheets API function.
@@ -37,6 +38,7 @@ def safe_sheet_call(func, *args, **kwargs):
     except Exception as e:
         print(f"\nError accessing Google Sheet: {e}")
         return None
+
 
 def get_stock_sheet():
     """
@@ -69,6 +71,7 @@ def get_stock(sheet):
             return None
 
     return stock
+
 
 def require_stock_or_exit():
     """
@@ -184,6 +187,7 @@ def get_user_choice():
         else:
             print("Invalid choice. Please enter a number between 1 and 4.")
 
+
 def display_main_menu():
     """
     Display the main menu to the user.
@@ -200,7 +204,8 @@ def display_main_menu():
     print("3. Remove a vehicle")
     print("4. Exit\n")
 
-def view_all_vehicles(stock=None):# Allow passing stock data to avoid redundant API calls if we already have it, improving efficiency when called from other functions like remove_vehicle.
+
+def view_all_vehicles(stock=None): # Allow passing stock data to avoid redundant API calls if we already have it, improving efficiency when called from other functions like remove_vehicle.
     """
     Display all vehicles in stock.
 
