@@ -205,21 +205,14 @@ def display_main_menu():
     print("4. Exit\n")
 
 
-def view_all_vehicles(stock=None): # Allow passing stock data to avoid redundant API calls if we already have it, improving efficiency when called from other functions like remove_vehicle.
+def view_all_vehicles():
     """
     Display all vehicles in stock.
-
-    Args:
-        stock (list[dict], optional): List of vehicle records. 
-                                      If None, fetches from Google Sheet.
-    Returns:
-        None
+    Uses require_stock_or_exit() to safely retrieve the sheet and stock.
     """
-    if stock is None:
-        sheet = get_stock_sheet()
-        stock = get_stock(sheet)
-        if not stock:
-            return
+    sheet, stock = require_stock_or_exit()  # safe retrieval
+    if not stock:  # stops early if stock is empty or API failed
+        return
     
     print("\nCurrent Vehicles in Stock:\n")
     for vehicle in stock:
