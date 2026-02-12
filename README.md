@@ -177,6 +177,23 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 
 - Garage Stock manager can be edited to suit any small business that requires to store data not just car garages. 
 
+## Data Model
+
+- Garage Stock Manager uses a single Google Sheets worksheet (stock) as its database. Each row in the sheet represents one vehicle in the garage inventory.The system follows a simple single-entity data model, where all vehicle information is stored in structured columns.
+  
+- All operations (view, add, remove) interact directly with the stock worksheet.
+
+A single-table structure was chosen because:
+
+- The application is small and focused on stock management.
+
+- It simplifies CRUD operations.
+
+- Google Sheets acts as a lightweight cloud database.
+
+- No complex relational data is required.
+
+This design keeps the system efficient, easy to maintain, and suitable for a command-line application.
 
 # Technologies used 
 
