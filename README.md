@@ -98,6 +98,10 @@ Acceptance Criteria:
 
 # Design
 
+- Note: Since the application runs in the terminal, there is no design of the user interface as such.
+
+The deployed application runs in a mock terminal on Heroku in order to demonstrate the project, the design of the mock terminal is built into the template provided by Code Institute.
+
 ## Flowchart
 
 
@@ -108,48 +112,49 @@ Acceptance Criteria:
 ## Existing Features
 
 ### 1. Menu-Driven Interface
-- Simple and user-friendly command-line menu with four clear options.
+- Simple and user-friendly command-line menu with four clear options. The user is given a welcome message and given optins to View Vehicles, Add Vehicles, Remove Vehicles and Exit.
 
 ### 2. View All Vehicles
-- Displays a formatted list with:
 
- - Vehicle ID, Registration Number, Make, Model, Year, Mileage, Purchase Price, Sale Price, Status
+- Displays a formatted list to the user with:
+
+ - Vehicle ID, Registration Number, Make, Model, Year, Mileage, Purchase Price, Sale Price, Status. This is fantastic for the user to see all available stock.
 
 ### 3. Add a Vehicle
 
-- Automatic ID generation
+- Automatic ID generation. The user does not have to have give the vehicle an ID as this will be applied automatically depending on the next available space in the file.
 
-- Input validation (year, mileage, price)
+- Input validation (year, mileage, price). The user must enter a number. They must enter years between 1975 and 2028.
 
-- Automatic status set to "For Sale"
+- Automatic status set to "For Sale". The user does not have to enter thr status which streamlines the process for the user. 
 
-- Automatic date added
+- Automatic date added. The user does not havce to enter the date that the vehicle was added. This is great again to save time foe the user and eradicates any manual error.
 
 ### 4. Remove a Vehicle
 
-- Select vehicle by ID
+- View all Vehicles. The user is first given the list of vehicles.
 
-- Confirmation prompt before deletion
+- Select vehicle by ID. The user is asked to enter a Vehicle ID that they wish to remove. This reduces inpput for the user so they do not have to type in the full details. 
 
-- Prevents accidental removal
+- Confirmation prompt before deletion. Once the user has chosen the ID, Garage Stock Manager will prompt the user to confirm they are sure that they want to delete. This Prevents accidental removal
 
-- Error message if vehicle ID not found
+- Error message if vehicle ID not found. If the user enters an ID that is not available. The user will be asked to review the list and try again.
 
 ### 5. Google Sheets Integration
 
-- Uses Google Sheets as a cloud-based database
+- Uses Google Sheets as a cloud-based database. 
 
-- Real-time data storage and retrieval
+- Real-time data storage and retrieval. The user does not have to manually edit and save their spreadsheet/file. 
 
 - Persistent data (data saved outside the program)
 
 ### 6. Error Handling
 
-- Handles Google Sheets API connection errors
+- Handles Google Sheets API connection errors. If for some reason the API is no working or the interent connection goes down the user will be infomred at the earlies possible opportunity instead of making them go all the way to the end of the program.
 
 - Prevents crashes due to invalid data
 
-- User-friendly error messages
+- User-friendly error messages. The user is always prompted what wnet wrong if they enter incorrect data. This is brilliant for the user to alwasy be kept informed of their actions so they do not get lost.
 
 ### 7. Data Validation & Sanitisation
 
@@ -163,7 +168,7 @@ Acceptance Criteria:
 
 ### 8. Continuous Program Loop
 
-- Returns to the main menu after each action
+- Returns to the main menu after each action. The user can perfom multiple tasks in one session so they do not have to re run the program all the time. 
 
 - Runs until the user chooses to exit
 
@@ -201,13 +206,7 @@ Used to create and manage service account credentials for API authentication.
 
 ## How to View the Project
 
-1. Clone the repository
-
-2. Install dependencies (pip install -r requirements.txt)
-
-3. Add your creds.json for Google Sheets API access
-
-4. Run the application
+- https://garage-stock-manager-b939d726e046.herokuapp.com/
 
 # Testing
 
