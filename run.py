@@ -42,7 +42,7 @@ def get_stock_sheet():
     """
     Returns the stock worksheet from the Google Sheet.
     """
-     # Directly access the 'stock' worksheet, assuming it exists and is correctly named.
+    # Directly access the 'stock' worksheet, assuming it exists and is correctly named.
     return SHEET.worksheet('stock')
 
 
@@ -60,7 +60,7 @@ def get_stock(sheet):
         print("\nNo vehicles in stock.")
         return None
     
-     # Convert all 'id' fields to integers for consistency
+    # Convert all 'id' fields to integers for consistency
     for vehicle in stock:
         try:
             vehicle['id'] = int(vehicle['id'])
@@ -290,7 +290,7 @@ def remove_vehicle():
 
         if vehicle:
             # Confirm deletion with the user, showing the vehicle's registration number for clarity
-            confirm = input(f"Are you sure you want to remove Vehicle ID {vehicle_id} ({vehicle['reg_number']})? (y/n): ").strip().lower()# strip() to remove leading/trailing spaces, lower() to standardize input
+            confirm = input(f"\nAre you sure you want to remove Vehicle ID {vehicle_id} ({vehicle['reg_number']})? (y/n): ").strip().lower()# strip() to remove leading/trailing spaces, lower() to standardize input
 
             if confirm == 'y':
                 success = safe_sheet_call(sheet.delete_rows, row_number)
@@ -330,4 +330,3 @@ def main():
         
 if __name__ == "__main__":
     main()
-   
