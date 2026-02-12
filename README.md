@@ -175,6 +175,8 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 
 ## Future Features 
 
+- Garage Stock manager can be edited to suit any small business that requires to store data not just car garages. 
+
 
 # Technologies used 
 
