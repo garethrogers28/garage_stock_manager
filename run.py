@@ -85,7 +85,8 @@ def require_stock_or_exit():
 
     if stock is None:
         print(
-            "\nUnable to retrieve stock data. Please check your internet/API connection and try again."
+            "\nUnable to retrieve stock data "
+            "Please check your internet/API connection and try again."
         )
         return None, None
     return sheet, stock
@@ -144,7 +145,8 @@ def get_valid_year(prompt, min_year=1975, max_year=2028):
             if min_year <= year <= max_year:
                 return year
             else:
-                print(f"Please enter a valid year between {min_year} and {max_year}.")
+                print(f"\nPlease enter a valid year between "
+                      f"{min_year} and {max_year}.")
         except ValueError:
             print("Invalid input. Please enter a numeric year.")
 
@@ -157,7 +159,8 @@ def get_valid_int(prompt, min_value=0):
             if value >= min_value:
                 return value
             else:
-                print(f"Please enter a number greater than or equal to {min_value}.")
+                print(f"Please enter a number "
+                      f"greater than or equal to {min_value}.")
         except ValueError:
             print("Invalid input. Please enter a valid number.")
 
@@ -254,21 +257,29 @@ def add_vehicle():
     # ensuring we handle the case where stock is empty by defaulting to 1.
     next_id = max([v["id"] for v in stock], default=0) + 1
 
-    # Collect vehicle data from user with validation to ensure all required fields are filled and correctly formatted.
+    # Collect vehicle data from user with validation
+    # Ensure all required fields are filled and correctly formatted.
     reg_number = get_required_input(
         "\nEnter vehicle registration number (e.g., CN18 YGG): "
     ).upper()
-    make = get_required_input("\nEnter vehicle make (e.g., Ford): ").title()
-    model = get_required_input("\nEnter vehicle model (e.g., Fiesta): ").title()
-    year = get_valid_year("\nEnter vehicle year (e.g., 2018): ")
-    mileage = get_valid_int("\nEnter vehicle mileage (e.g., 50000): ")
-    purchase_price = get_valid_float("\nEnter vehicle purchase price (e.g., 8000): ")
-    sale_price = get_valid_float("\nEnter vehicle sale price (e.g., 10000): ")
+    make = get_required_input("\nEnter vehicle make "
+                              "(e.g., Ford): ").title()
+    model = get_required_input("\nEnter vehicle model "
+                               " (e.g., Fiesta): ").title()
+    year = get_valid_year("\nEnter vehicle year "
+                          "(e.g., 2018): ")
+    mileage = get_valid_int("\nEnter vehicle mileage "
+                            " (e.g., 50000): ")
+    purchase_price = get_valid_float("\nEnter vehicle purchase "
+                                     " price (e.g., 8000): ")
+    sale_price = get_valid_float("\nEnter vehicle sale price "
+                                 " (e.g., 10000): ")
 
     status = "For Sale"
     date_added = date.today().strftime("%Y-%m-%d")
 
-    # Append the new vehicle to the Google Sheet, handling potential API errors gracefully
+    # Append the new vehicle to the Google Sheet
+    # Handle potential API errors gracefully
     success = safe_sheet_call(
         sheet.append_row,
         [
@@ -286,7 +297,9 @@ def add_vehicle():
     )
 
     if success is not None:
-        print(f"\nVehicle ID {next_id} ({reg_number}) added successfully!")
+        print(
+            f"\nVehicle ID {next_id} "
+            f"({reg_number}) added successfully!")
     else:
         print("\nFailed to add vehicle due to API error.")
 
@@ -304,25 +317,31 @@ def remove_vehicle():
     view_all_vehicles()
 
     while True:
-        # Ask which vehicle to remove by ID, validating input and confirming existence before attempting deletion
-        vehicle_id = get_valid_int("\nEnter vehicle ID to remove: ", min_value=1)
+        # Ask which vehicle to remove by ID
+        # Validate input and confirming existence before attempting deletion
+        vehicle_id = get_valid_int("\nEnter vehicle ID "
+                                   " to remove: ", min_value=1)
         vehicle, row_number = find_vehicle_by_id(stock, vehicle_id)
 
         if vehicle:
-            # Confirm deletion with the user, showing the vehicle's registration number for clarity
+            # Confirm deletion with the user
+            # show the vehicle's registration number for clarity
             confirm = (
                 input(
-                    f"\nAre you sure you want to remove Vehicle ID {vehicle_id} ({vehicle['reg_number']})? (y/n): "
+                    f"\nAre you sure you want to remove "
+                    f"Vehicle ID {vehicle_id} "
+                    f"({vehicle['reg_number']})? (y/n): "
                 )
                 .strip()
                 .lower()
-            )  # strip() to remove leading/trailing spaces, lower() to standardize input
+            )
 
             if confirm == "y":
                 success = safe_sheet_call(sheet.delete_rows, row_number)
                 if success is not None:
                     print(
-                        f"\nVehicle ID {vehicle_id} ({vehicle['reg_number']}) removed successfully!"
+                        f"\nVehicle ID {vehicle_id} "
+                        f"({vehicle['reg_number']}) removed successfully!"
                     )
                 else:
                     print("\nFailed to remove vehicle due to API error.")
@@ -332,7 +351,8 @@ def remove_vehicle():
             break
         else:
             print(
-                f"\nVehicle ID {vehicle_id} not found, please review the list and try again."
+                f"\nVehicle ID {vehicle_id} not found "
+                f"please review the list and try again."
             )
 
 
