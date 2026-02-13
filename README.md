@@ -150,15 +150,15 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 
 ### 6. Error Handling
 
-- Handles Google Sheets API connection errors. If for some reason the API is no working or the interent connection goes down the user will be infomred at the earlies possible opportunity instead of making them go all the way to the end of the program.
+- Handles Google Sheets API connection errors. If for some reason the API is not working = down the user will be infomred at the earliest possible opportunity instead of making them go all the way to the end of the program.
 
 - Prevents crashes due to invalid data
 
-- User-friendly error messages. The user is always prompted what wnet wrong if they enter incorrect data. This is brilliant for the user to alwasy be kept informed of their actions so they do not get lost.
+- User-friendly error messages. The user is always prompted what went wrong if they enter incorrect data. This is brilliant for the user to alwasy be kept informed of their actions so they do not get lost.
 
 ### 7. Data Validation & Sanitisation
 
-- Prevents empty inputs
+- Prevents empty inputs. The user is unable to enter empty data ensuring all data is captured.
 
 - Ensures numeric fields are valid
 
@@ -175,7 +175,7 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 
 ## Future Features 
 
-- Garage Stock manager can be edited to suit any small business that requires to store data not just car garages. 
+- Garage Stock manager can be edited to suit any small business that requires to store data not just car garages.
 
 ## Data Model
 
