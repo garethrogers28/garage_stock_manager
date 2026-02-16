@@ -6,6 +6,7 @@ A command-line application to manage vehicle inventory for a used car garage.
 import gspread
 from google.oauth2.service_account import Credentials
 from datetime import date
+from tabulate import tabulate
 import re
 
 
@@ -260,17 +261,36 @@ def view_all_vehicles():
         return
 
     print("\nCurrent Vehicles in Stock:\n")
+
+
+     # Convert stock dictionaries into a list of lists
+    table_data = []
     for vehicle in stock:
-        print(
-            f"ID: {vehicle['id']}, "
-            f"Registration: {vehicle['reg_number']}, "
-            f"Make: {vehicle['make']}, "
-            f"Model: {vehicle['model']}, "
-            f"Year: {vehicle['year']}, "
-            f"Mileage: {vehicle['mileage']}, "
-            f"Sale Price: {vehicle['sale_price']}, "
-            f"Status: {vehicle['status']}\n"
-        )
+        table_data.append([
+            vehicle["id"],
+            vehicle["reg_number"],
+            vehicle["make"],
+            vehicle["model"],
+            vehicle["year"],
+            vehicle["mileage"],
+            vehicle["purchase_price"],
+            vehicle["sale_price"],
+            vehicle["status"],
+        ])
+
+    headers = [
+        "ID",
+        "Reg",
+        "Make",
+        "Model",
+        "Year",
+        "Mileage",
+        "Purchase £",
+        "Sale £",
+        "Status"
+    ]
+
+    print(tabulate(table_data, headers=headers, tablefmt="grid"))
 
 
 # 5. VEHICLE MANAGEMENT FUNCTIONS
