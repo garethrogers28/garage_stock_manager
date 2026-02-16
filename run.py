@@ -79,7 +79,12 @@ def require_stock_or_exit():
     Exit early with a user-friendly message if unavailable.
     """
     # Get the sheet
-    sheet = get_stock_sheet()
+    sheet = safe_sheet_call(SHEET.worksheet, "stock")
+    if sheet is None:
+        print("\nUnable to access the stock worksheet. " \
+              "Check your internet/API connection.")
+        return None, None
+    
     # Get the current stock
     stock = get_stock(sheet)
 
