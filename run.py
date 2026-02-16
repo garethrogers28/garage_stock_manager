@@ -6,6 +6,7 @@ A command-line application to manage vehicle inventory for a used car garage.
 import gspread
 from google.oauth2.service_account import Credentials
 from datetime import date
+import re
 
 
 # 1. SETUP / API CONNECTION
@@ -88,8 +89,14 @@ def require_stock_or_exit():
             "Please check your internet/API connection and try again."
         )
         return None, None
-    return sheet, stock
+    
+    if not stock:
+        stock = []
 
+    return sheet, stock
+    
+
+   
 
 def find_vehicle_by_id(stock, vehicle_id):
     """
@@ -124,7 +131,7 @@ def get_required_input(prompt):
             print("This field cannot be empty. Please enter a value.")
 
 
-def get_valid_year(prompt, min_year=1975, max_year=2028):
+def get_valid_year(prompt, min_year=2001, max_year=2028):
     """
     Prompt the user to enter a year and validate
     it falls within min_year and max_year.
@@ -174,6 +181,32 @@ def get_valid_float(prompt, min_value=0):
                 print(f"Value must be at least {min_value}.")
         except ValueError:
             print("Invalid input. Please enter a valid number.")
+
+
+def validate_registration(reg):
+    """
+    Validate UK vehicle registration (2001 onwards format).
+    Format: AA21 ABC
+    """
+    pattern = r"^[A-Z]{2}[0-9]{2}\s?[A-Z]{3}$"
+    return re.match(pattern, reg.upper()) is not None
+
+
+def get_valid_registration(stock):
+    """
+    Prompt the user for a UK registration number.
+    Validate format and check it's not already in stock.
+    """
+    while True:
+        reg = input("\nEnter vehicle registration number (e.g., CN18 YGG): ").upper().strip()
+        if not validate_registration(reg):
+            print("\nInvalid registration format. Please use the format AA12 ABC.")
+            continue
+        # Check if registration already exists
+        if stock and any(v["reg_number"].upper() == reg for v in stock):
+            print("\nThis registration already exists in stock. Please enter a different one.")
+            continue
+        return reg
 
 
 # 4. DISPLAY FUNCTIONS
@@ -244,18 +277,14 @@ def add_vehicle():
     Add a new vehicle to the garage stock sheet and validate user input.
     """
     sheet, stock = require_stock_or_exit()
-    if not stock:
-        return
 
     # Determine next ID automatically based on existing stock,
     # ensuring we handle the case where stock is empty by defaulting to 1.
     next_id = max([v["id"] for v in stock], default=0) + 1
 
-    # Collect vehicle data from user with validation
-    # Ensure all required fields are filled and correctly formatted.
-    reg_number = get_required_input(
-        "\nEnter vehicle registration number (e.g., CN18 YGG): "
-    ).upper()
+    
+    reg_number = get_valid_registration(stock)
+
     make = get_required_input("\nEnter vehicle make "
                               "(e.g., Ford): ").title()
     model = get_required_input("\nEnter vehicle model "
