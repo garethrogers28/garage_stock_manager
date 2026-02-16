@@ -7,9 +7,9 @@ import gspread
 from google.oauth2.service_account import Credentials
 from datetime import date
 
-# =========================================
+
 # 1. SETUP / API CONNECTION
-# =========================================
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -22,10 +22,9 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("garage_stock_manager")
 
-# =========================================
+
 # 2. HELPER FUNCTIONS
 #    - Generic reusable functions
-# =========================================
 
 
 def safe_sheet_call(func, *args, **kwargs):
@@ -108,10 +107,9 @@ def find_vehicle_by_id(stock, vehicle_id):
     return None, None
 
 
-# =========================================
 # 3. USER INPUT FUNCTIONS
 #    - Functions that validate and sanitize input
-# =========================================
+
 
 
 def get_required_input(prompt):
@@ -178,10 +176,8 @@ def get_valid_float(prompt, min_value=0):
             print("Invalid input. Please enter a valid number.")
 
 
-# =========================================
 # 4. DISPLAY FUNCTIONS
 #    - Functions that show information to the user
-# =========================================
 
 
 def get_user_choice():
@@ -239,10 +235,8 @@ def view_all_vehicles():
         )
 
 
-# =========================================
 # 5. VEHICLE MANAGEMENT FUNCTIONS
 #    - Add, remove vehicles
-# =========================================
 
 
 def add_vehicle():
@@ -279,7 +273,6 @@ def add_vehicle():
     date_added = date.today().strftime("%Y-%m-%d")
 
     # Append the new vehicle to the Google Sheet
-    # Handle potential API errors gracefully
     success = safe_sheet_call(
         sheet.append_row,
         [
@@ -301,7 +294,7 @@ def add_vehicle():
             f"\nVehicle ID {next_id} "
             f"({reg_number}) added successfully!")
     else:
-        print("\nFailed to add vehicle due to API error.")
+        print("\nFailed to add vehicle due to API error.")  
 
 
 def remove_vehicle():
