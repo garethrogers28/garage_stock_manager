@@ -175,6 +175,14 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 
 ## Future Features 
 
+- Edit Vehicle function can be added such as sale price and mileage.
+
+- Search for Vehicle by registration, make or year/price range.
+
+- Audit Trail to record sale prices and previous vehicle details.
+
+- a Profit section could be implemented using purchase and sold price once the sold price has been recorded. Creating new data for the user to benefit from. 
+
 - Garage Stock manager can be edited to suit any small business that requires to store data not just car garages.
 
 ## Data Model
