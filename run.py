@@ -292,7 +292,7 @@ def view_all_vehicles():
     ]
 
      # Define max widths per column manually (smaller for numeric fields)
-    max_widths = [4, 8, 10, 10, 4, 6, 9, 8, 8]
+    max_widths = [4, 8, 10, 10, 4, 7, 10, 8, 8]
 
     # Truncate each cell using its column's max width
     table_data = [
