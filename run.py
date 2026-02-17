@@ -142,7 +142,7 @@ def get_required_input(prompt):
             print("This field cannot be empty. Please enter a value.")
 
 
-def get_valid_year(prompt, min_year=2001, max_year=2028):
+def get_valid_year(prompt, min_year=2001, max_year=None):
     """
     Prompt the user to enter a year and validate
     it falls within min_year and max_year.
@@ -155,6 +155,10 @@ def get_valid_year(prompt, min_year=2001, max_year=2028):
     Returns:
         int: A valid year within the specified range.
     """
+
+    if max_year is None:
+        max_year = date.today().year + 10  # allow 10 years into the future
+
     while True:
         try:
             year = int(input(prompt))
