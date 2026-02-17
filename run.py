@@ -8,6 +8,8 @@ from google.oauth2.service_account import Credentials
 from datetime import date
 from tabulate import tabulate
 import re
+import shutil
+from textwrap import shorten
 
 
 # 1. SETUP / API CONNECTION
@@ -290,7 +292,22 @@ def view_all_vehicles():
         "Status"
     ]
 
-    print(tabulate(table_data, headers=headers, tablefmt="grid"))
+     # Get terminal width
+    term_width, _ = shutil.get_terminal_size(fallback=(80, 20))
+
+    # Calculate max width per column
+    max_col_width = max(term_width // len(headers), 10)  # min 10 chars
+
+    # Truncate each cell to max_col_width
+    table_data = [
+        [shorten(str(cell), width=max_col_width, placeholder="...") for cell in row]
+        for row in table_data
+    ]
+
+    # Truncate headers too if needed
+    headers = [shorten(h, width=max_col_width, placeholder="...") for h in headers]
+
+    print(tabulate(table_data, headers=headers, tablefmt="orgtbl"))
 
 
 # 5. VEHICLE MANAGEMENT FUNCTIONS
