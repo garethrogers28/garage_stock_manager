@@ -305,7 +305,7 @@ def view_all_vehicles():
     headers = [shorten(h, width=max_w, placeholder="...") 
                for h, max_w in zip(headers, max_widths)]
 
-    print(tabulate(table_data, headers=headers, tablefmt="orgtbl"))
+    print(tabulate(table_data, headers=headers, tablefmt="pretty"))
 
 
 # 5. VEHICLE MANAGEMENT FUNCTIONS
