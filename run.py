@@ -382,6 +382,9 @@ def remove_vehicle():
     sheet, stock = require_stock_or_exit()
     if not stock:
         return
+    
+    # Clear screen to keep terminal neat
+    clear_screen()
 
     # Show all vehicles so user can choose
     view_all_vehicles()
