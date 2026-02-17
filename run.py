@@ -53,23 +53,26 @@ def get_stock_sheet():
 
 def get_stock(sheet):
     """
-    Return stock records or None if empty or on error.
-    Normalize all vehicle IDs to integers.
+    Retrieve all vehicle records from the stock worksheet.
+
+    Returns:
+        list of dict: Stock records with 'id' as integers.
+        None: If there is an API error or invalid data.
     """
-    # Safe_sheet_call to handle potential API errors
+    # Attempt to fetch all records from the sheet
     stock = safe_sheet_call(sheet.get_all_records)
     if stock is None:  # API error
         return None
 
-    if not stock:
-        print("\nNo vehicles in stock.")
-        return None
+    if not stock:  # No vehicles in stock
+        return []
+
     # Convert all 'id' fields to integers for consistency
     for vehicle in stock:
         try:
-            vehicle["id"] = int(vehicle["id"])
+            vehicle["id"] = int(vehicle.get("id", 0))
         except (ValueError, TypeError):
-            print("\nInvalid vehicle ID found in stock data.")
+            print("\nInvalid vehicle ID found in stock data. Please check your sheet.")
             return None
 
     return stock
@@ -77,10 +80,14 @@ def get_stock(sheet):
 
 def require_stock_or_exit():
     """
-    Retrieve the stock sheet and stock data.
-    Exit early with a user-friendly message if unavailable.
+    Retrieve the stock worksheet and stock data.
+    Returns a tuple (sheet, stock).
+
+    - If the worksheet cannot be accessed, returns (None, None).
+    - If stock retrieval fails, returns (None, None).
+    - If stock is empty, returns an empty list.
     """
-    # Get the sheet
+    # Attempt to access the 'stock' worksheet
     sheet = safe_sheet_call(SHEET.worksheet, "stock")
     if sheet is None:
         print(
@@ -89,18 +96,19 @@ def require_stock_or_exit():
         )
         return None, None
 
-    # Get the current stock
+    # Attempt to get the current stock
     stock = get_stock(sheet)
 
-    if stock is None:
+    if stock is None:  # API error or invalid IDs
         print(
-            "\nUnable to retrieve stock data "
+            "\nUnable to retrieve stock data. "
             "Please check your internet/API connection and try again."
         )
         return None, None
 
+    # Return empty list if no vehicles in stock
     if not stock:
-        stock = []
+        return sheet, []
 
     return sheet, stock
 
@@ -109,23 +117,25 @@ def find_vehicle_by_id(stock, vehicle_id):
     """
     Return the vehicle dict and its row number in the sheet,
     or (None, None) if not found.
+
+    Handles missing or malformed IDs safely.
     """
-    for index, vehicle in enumerate(
-        stock, start=2
-    ):  # start=2 to account for header row being 1
+    for index, vehicle in enumerate(stock, start=2):  # start=2 for header row
         try:
-            if (vehicle["id"]) == vehicle_id:
+            vid = vehicle.get("id")
+            if isinstance(vid, int) and vid == vehicle_id:
                 return vehicle, index
-        except ValueError:
+        except (TypeError, ValueError):
             continue
     return None, None
+
 
 def clear_screen():
     """
     Clear the terminal screen.
     Works on Windows, macOS, and Linux.
     """
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system("cls" if os.name == "nt" else "clear")
 
 
 # 3. USER INPUT FUNCTIONS
@@ -297,8 +307,9 @@ def view_all_vehicles():
     # Truncate only very long text (numbers stay as-is)
     table_data = [
         [
-            str(cell) if isinstance(cell, (int, float))
-            else (cell if len(cell) <= w else cell[:w-3] + "...")
+            str(cell)
+            if isinstance(cell, (int, float))
+            else (cell if len(cell) <= w else cell[: w - 3] + "...")
             for cell, w in zip(row, max_widths)
         ]
         for row in table_data
@@ -317,6 +328,8 @@ def add_vehicle():
     Add a new vehicle to the garage stock sheet and validate user input.
     """
     sheet, stock = require_stock_or_exit()
+    if sheet is None:
+        return
 
     # Determine next ID automatically based on existing stock,
     # ensuring we handle the case where stock is empty by defaulting to 1.
@@ -374,7 +387,9 @@ def remove_vehicle():
     view_all_vehicles()
 
     while True:
-        user_input = input("\nEnter vehicle ID to remove or press Enter to return to main menu: ").strip()
+        user_input = input(
+            "\nEnter vehicle ID to remove or press Enter to return to main menu: "
+        ).strip()
         if user_input == "":
             print("\nReturning to main menu...")
             return  # Exit function without removing
@@ -383,16 +398,22 @@ def remove_vehicle():
         try:
             vehicle_id = int(user_input)
         except ValueError:
-            print("Invalid input. Please enter a valid numeric ID or press Enter to go back.")
+            print(
+                "Invalid input. Please enter a valid numeric ID or press Enter to go back."
+            )
             continue
 
         vehicle, row_number = find_vehicle_by_id(stock, vehicle_id)
 
         if vehicle:
-            confirm = input(
-                f"\nAre you sure you want to remove Vehicle ID {vehicle_id} "
-                f"({vehicle['reg_number']})? (y/n): "
-            ).strip().lower()
+            confirm = (
+                input(
+                    f"\nAre you sure you want to remove Vehicle ID {vehicle_id} "
+                    f"({vehicle['reg_number']})? (y/n): "
+                )
+                .strip()
+                .lower()
+            )
 
             if confirm == "y":
                 success = safe_sheet_call(sheet.delete_rows, row_number)
@@ -409,7 +430,9 @@ def remove_vehicle():
                 print("\nRemoval cancelled.")
             break
         else:
-            print(f"\nVehicle ID {vehicle_id} not found. Please review the list and try again.")
+            print(
+                f"\nVehicle ID {vehicle_id} not found. Please review the list and try again."
+            )
 
 
 def main():
