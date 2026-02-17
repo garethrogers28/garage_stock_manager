@@ -353,6 +353,9 @@ def add_vehicle():
 
     if success is not None:
         print(f"\nVehicle ID {next_id} ({reg_number}) added successfully!")
+        input("\nPress Enter to view updated stock...")
+        clear_screen()
+        view_all_vehicles()
     else:
         print("\nFailed to add vehicle due to API error.")
 
