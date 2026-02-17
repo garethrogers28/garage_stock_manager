@@ -292,7 +292,7 @@ def view_all_vehicles():
     ]
 
      # Define max widths per column manually (smaller for numeric fields)
-    max_widths = [5, 9, 11, 11, 5, 7, 10, 9, 9]
+    max_widths = [4, 8, 10, 10, 4, 6, 9, 8, 8]
 
     # Truncate each cell using its column's max width
     table_data = [
@@ -305,7 +305,7 @@ def view_all_vehicles():
     headers = [shorten(h, width=max_w, placeholder="...") 
                for h, max_w in zip(headers, max_widths)]
 
-    print(tabulate(table_data, headers=headers, tablefmt="pretty"))
+    print(tabulate(table_data, headers=headers, tablefmt="simple"))
 
 
 # 5. VEHICLE MANAGEMENT FUNCTIONS
