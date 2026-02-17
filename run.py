@@ -376,7 +376,7 @@ def remove_vehicle():
             print("\nReturning to main menu...")
             return  # Exit function without removing
 
-        # Validate numeric input using your helper
+        # Validate numeric input using helper
         try:
             vehicle_id = int(user_input)
         except ValueError:
@@ -397,6 +397,9 @@ def remove_vehicle():
                     print(
                         f"\nVehicle ID {vehicle_id} ({vehicle['reg_number']}) removed successfully!"
                     )
+                    input("\nPress Enter to view updated stock...")
+                    clear_screen()
+                    view_all_vehicles()
                 else:
                     print("\nFailed to remove vehicle due to API error.")
             else:
