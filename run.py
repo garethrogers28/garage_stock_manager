@@ -357,6 +357,7 @@ def remove_vehicle():
     """
     Remove a vehicle from the garage stock sheet based on vehicle ID,
     with a confirmation prompt before deletion.
+    User can press Enter to return to the main menu.
     """
     sheet, stock = require_stock_or_exit()
     if not stock:
@@ -366,42 +367,39 @@ def remove_vehicle():
     view_all_vehicles()
 
     while True:
-        # Ask which vehicle to remove by ID
-        # Validate input and confirming existence before attempting deletion
-        vehicle_id = get_valid_int("\nEnter vehicle ID  to remove: ", min_value=1)
+        user_input = input("\nEnter vehicle ID to remove or press Enter to return to main menu: ").strip()
+        if user_input == "":
+            print("\nReturning to main menu...")
+            return  # Exit function without removing
+
+        # Validate numeric input using your helper
+        try:
+            vehicle_id = int(user_input)
+        except ValueError:
+            print("Invalid input. Please enter a valid numeric ID or press Enter to go back.")
+            continue
+
         vehicle, row_number = find_vehicle_by_id(stock, vehicle_id)
 
         if vehicle:
-            # Confirm deletion with the user
-            # show the vehicle's registration number for clarity
-            confirm = (
-                input(
-                    f"\nAre you sure you want to remove "
-                    f"Vehicle ID {vehicle_id} "
-                    f"({vehicle['reg_number']})? (y/n): "
-                )
-                .strip()
-                .lower()
-            )
+            confirm = input(
+                f"\nAre you sure you want to remove Vehicle ID {vehicle_id} "
+                f"({vehicle['reg_number']})? (y/n): "
+            ).strip().lower()
 
             if confirm == "y":
                 success = safe_sheet_call(sheet.delete_rows, row_number)
                 if success is not None:
                     print(
-                        f"\nVehicle ID {vehicle_id} "
-                        f"({vehicle['reg_number']}) removed successfully!"
+                        f"\nVehicle ID {vehicle_id} ({vehicle['reg_number']}) removed successfully!"
                     )
                 else:
                     print("\nFailed to remove vehicle due to API error.")
-
             else:
                 print("\nRemoval cancelled.")
             break
         else:
-            print(
-                f"\nVehicle ID {vehicle_id} not found "
-                f"please review the list and try again."
-            )
+            print(f"\nVehicle ID {vehicle_id} not found. Please review the list and try again.")
 
 
 def main():
