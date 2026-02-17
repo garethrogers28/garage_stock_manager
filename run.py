@@ -8,7 +8,6 @@ from google.oauth2.service_account import Credentials
 from datetime import date
 from tabulate import tabulate
 import re
-from textwrap import wrap
 
 
 # 1. SETUP / API CONNECTION
@@ -254,7 +253,8 @@ def display_main_menu():
 def view_all_vehicles():
     """
     Display all vehicles in stock.
-    Wrap long text so the table always fits in Heroku terminal.
+    Fits neatly in Heroku terminal.
+    Purchase price column removed to save width.
     """
     sheet, stock = require_stock_or_exit()
     if not stock:
@@ -262,51 +262,37 @@ def view_all_vehicles():
 
     print("\nCurrent Vehicles in Stock:\n")
 
-    # Define max widths per column (text columns will wrap)
-    col_widths = [
-        4,
-        10,
-        12,
-        12,
-        4,
-        7,
-        8,
-        8,
-        10,
-    ]  # numeric columns small, text columns wider
-
-    # Helper function to wrap text for a column
-    def wrap_cell(text, width):
-        return "\n".join(wrap(str(text), width=width))
-
-    table_data = []
-    for vehicle in stock:
-        row = [
-            vehicle["id"],  # ID numeric
-            wrap_cell(vehicle["reg_number"], col_widths[1]),
-            wrap_cell(vehicle["make"], col_widths[2]),
-            wrap_cell(vehicle["model"], col_widths[3]),
-            vehicle["year"],  # numeric
-            vehicle["mileage"],  # numeric
-            vehicle["purchase_price"],  # numeric
-            vehicle["sale_price"],  # numeric
-            wrap_cell(vehicle["status"], col_widths[8]),
+    # Prepare table data
+    table_data = [
+        [
+            vehicle["id"],
+            vehicle["reg_number"],
+            vehicle["make"],
+            vehicle["model"],
+            vehicle["year"],
+            vehicle["mileage"],
+            vehicle["sale_price"],
+            vehicle["status"],
         ]
-        table_data.append(row)
-
-    headers = [
-        "ID",
-        "Reg",
-        "Make",
-        "Model",
-        "Year",
-        "Mileage",
-        "Purchase £",
-        "Sale £",
-        "Status",
+        for vehicle in stock
     ]
 
-    # Print the table in a compact format
+    headers = ["ID", "Reg", "Make", "Model", "Year", "Mileage", "Price", "Status"]
+
+    # Max widths per column (mostly for very long text)
+    max_widths = [4, 10, 10, 10, 4, 7, 8, 10]
+
+    # Truncate only very long text (numbers stay as-is)
+    table_data = [
+        [
+            str(cell) if isinstance(cell, (int, float))
+            else (cell if len(cell) <= w else cell[:w-3] + "...")
+            for cell, w in zip(row, max_widths)
+        ]
+        for row in table_data
+    ]
+
+    # Print table
     print(tabulate(table_data, headers=headers, tablefmt="simple"))
 
 
