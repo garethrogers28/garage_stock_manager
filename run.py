@@ -315,11 +315,11 @@ def get_user_choice():
         int: The menu option selected by the user (1, 2, 3, or 4).
     """
     while True:
-        choice = input("Enter your choice (1-4): ")
+        choice = input("\nEnter your choice (1-4): ")
         if choice in ["1", "2", "3", "4"]:
             return int(choice)
         else:
-            print("Invalid choice. Please enter a number between 1 and 4.")
+            print("\nInvalid choice. Please enter a number between 1 and 4.")
 
 
 def display_main_menu():
