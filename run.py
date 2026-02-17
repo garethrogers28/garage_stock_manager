@@ -8,7 +8,7 @@ from google.oauth2.service_account import Credentials
 from datetime import date
 from tabulate import tabulate
 import re
-from textwrap import shorten
+from textwrap import wrap
 
 
 # 1. SETUP / API CONNECTION
@@ -83,10 +83,12 @@ def require_stock_or_exit():
     # Get the sheet
     sheet = safe_sheet_call(SHEET.worksheet, "stock")
     if sheet is None:
-        print("\nUnable to access the stock worksheet. " \
-              "Check your internet/API connection.")
+        print(
+            "\nUnable to access the stock worksheet. "
+            "Check your internet/API connection."
+        )
         return None, None
-    
+
     # Get the current stock
     stock = get_stock(sheet)
 
@@ -96,14 +98,12 @@ def require_stock_or_exit():
             "Please check your internet/API connection and try again."
         )
         return None, None
-    
+
     if not stock:
         stock = []
 
     return sheet, stock
-    
 
-   
 
 def find_vehicle_by_id(stock, vehicle_id):
     """
@@ -125,13 +125,10 @@ def find_vehicle_by_id(stock, vehicle_id):
 #    - Functions that validate and sanitize input
 
 
-
 def get_required_input(prompt):
     """Prevent empty entry function"""
     while True:
-        value = input(
-            prompt
-        ).strip()  # Strip() to remove leading/trailing spaces
+        value = input(prompt).strip()  # Strip() to remove leading/trailing spaces
         if value:
             return value
         else:
@@ -157,8 +154,7 @@ def get_valid_year(prompt, min_year=2001, max_year=2028):
             if min_year <= year <= max_year:
                 return year
             else:
-                print(f"\nPlease enter a valid year between "
-                      f"{min_year} and {max_year}.")
+                print(f"\nPlease enter a valid year between {min_year} and {max_year}.")
         except ValueError:
             print("Invalid input. Please enter a numeric year.")
 
@@ -171,8 +167,7 @@ def get_valid_int(prompt, min_value=0):
             if value >= min_value:
                 return value
             else:
-                print(f"Please enter a number "
-                      f"greater than or equal to {min_value}.")
+                print(f"Please enter a number greater than or equal to {min_value}.")
         except ValueError:
             print("Invalid input. Please enter a valid number.")
 
@@ -205,13 +200,19 @@ def get_valid_registration(stock):
     Validate format and check it's not already in stock.
     """
     while True:
-        reg = input("\nEnter vehicle registration number (e.g., CN18 YGG): ").upper().strip()
+        reg = (
+            input("\nEnter vehicle registration number (e.g., CN18 YGG): ")
+            .upper()
+            .strip()
+        )
         if not validate_registration(reg):
             print("\nInvalid registration format. Please use the format AA12 ABC.")
             continue
         # Check if registration already exists
         if stock and any(v["reg_number"].upper() == reg for v in stock):
-            print("\nThis registration already exists in stock. Please enter a different one.")
+            print(
+                "\nThis registration already exists in stock. Please enter a different one."
+            )
             continue
         return reg
 
@@ -226,9 +227,7 @@ def get_user_choice():
     Validate the input to ensure it's between 1 and 4.
     """
     while True:
-        choice = input(
-            "Enter your choice (1-4): "
-        )
+        choice = input("Enter your choice (1-4): ")
         if choice in ["1", "2", "3", "4"]:
             return int(choice)
         else:
@@ -255,29 +254,45 @@ def display_main_menu():
 def view_all_vehicles():
     """
     Display all vehicles in stock.
-    Use require_stock_or_exit() to safely retrieve the sheet and stock.
+    Wrap long text so the table always fits in Heroku terminal.
     """
-    sheet, stock = require_stock_or_exit()  # Safe retrieval
-    if not stock:  # Stop early if stock is empty or API failed
+    sheet, stock = require_stock_or_exit()
+    if not stock:
         return
 
     print("\nCurrent Vehicles in Stock:\n")
 
+    # Define max widths per column (text columns will wrap)
+    col_widths = [
+        4,
+        10,
+        12,
+        12,
+        4,
+        7,
+        8,
+        8,
+        10,
+    ]  # numeric columns small, text columns wider
 
-     # Convert stock dictionaries into a list of lists
+    # Helper function to wrap text for a column
+    def wrap_cell(text, width):
+        return "\n".join(wrap(str(text), width=width))
+
     table_data = []
     for vehicle in stock:
-        table_data.append([
-            vehicle["id"],
-            vehicle["reg_number"],
-            vehicle["make"],
-            vehicle["model"],
-            vehicle["year"],
-            vehicle["mileage"],
-            vehicle["purchase_price"],
-            vehicle["sale_price"],
-            vehicle["status"],
-        ])
+        row = [
+            vehicle["id"],  # ID numeric
+            wrap_cell(vehicle["reg_number"], col_widths[1]),
+            wrap_cell(vehicle["make"], col_widths[2]),
+            wrap_cell(vehicle["model"], col_widths[3]),
+            vehicle["year"],  # numeric
+            vehicle["mileage"],  # numeric
+            vehicle["purchase_price"],  # numeric
+            vehicle["sale_price"],  # numeric
+            wrap_cell(vehicle["status"], col_widths[8]),
+        ]
+        table_data.append(row)
 
     headers = [
         "ID",
@@ -288,23 +303,10 @@ def view_all_vehicles():
         "Mileage",
         "Purchase £",
         "Sale £",
-        "Status"
+        "Status",
     ]
 
-     # Define max widths per column manually (smaller for numeric fields)
-    max_widths = [4, 8, 10, 10, 4, 7, 10, 8, 8]
-
-    # Truncate each cell using its column's max width
-    table_data = [
-        [shorten(str(cell), width=max_w, placeholder="...") 
-         for cell, max_w in zip(row, max_widths)]
-        for row in table_data
-    ]
-
-    # Truncate headers similarly
-    headers = [shorten(h, width=max_w, placeholder="...") 
-               for h, max_w in zip(headers, max_widths)]
-
+    # Print the table in a compact format
     print(tabulate(table_data, headers=headers, tablefmt="simple"))
 
 
@@ -322,21 +324,14 @@ def add_vehicle():
     # ensuring we handle the case where stock is empty by defaulting to 1.
     next_id = max([v["id"] for v in stock], default=0) + 1
 
-    
     reg_number = get_valid_registration(stock)
 
-    make = get_required_input("\nEnter vehicle make "
-                              "(e.g., Ford): ").title()
-    model = get_required_input("\nEnter vehicle model "
-                               " (e.g., Fiesta): ").title()
-    year = get_valid_year("\nEnter vehicle year "
-                          "(e.g., 2018): ")
-    mileage = get_valid_int("\nEnter vehicle mileage "
-                            " (e.g., 50000): ")
-    purchase_price = get_valid_float("\nEnter vehicle purchase "
-                                     "price (e.g., 8000): ")
-    sale_price = get_valid_float("\nEnter vehicle sale price "
-                                 " (e.g., 10000): ")
+    make = get_required_input("\nEnter vehicle make (e.g., Ford): ").title()
+    model = get_required_input("\nEnter vehicle model  (e.g., Fiesta): ").title()
+    year = get_valid_year("\nEnter vehicle year (e.g., 2018): ")
+    mileage = get_valid_int("\nEnter vehicle mileage  (e.g., 50000): ")
+    purchase_price = get_valid_float("\nEnter vehicle purchase price (e.g., 8000): ")
+    sale_price = get_valid_float("\nEnter vehicle sale price  (e.g., 10000): ")
 
     status = "For Sale"
     date_added = date.today().strftime("%Y-%m-%d")
@@ -359,11 +354,9 @@ def add_vehicle():
     )
 
     if success is not None:
-        print(
-            f"\nVehicle ID {next_id} "
-            f"({reg_number}) added successfully!")
+        print(f"\nVehicle ID {next_id} ({reg_number}) added successfully!")
     else:
-        print("\nFailed to add vehicle due to API error.")  
+        print("\nFailed to add vehicle due to API error.")
 
 
 def remove_vehicle():
@@ -381,8 +374,7 @@ def remove_vehicle():
     while True:
         # Ask which vehicle to remove by ID
         # Validate input and confirming existence before attempting deletion
-        vehicle_id = get_valid_int("\nEnter vehicle ID "
-                                   " to remove: ", min_value=1)
+        vehicle_id = get_valid_int("\nEnter vehicle ID  to remove: ", min_value=1)
         vehicle, row_number = find_vehicle_by_id(stock, vehicle_id)
 
         if vehicle:
