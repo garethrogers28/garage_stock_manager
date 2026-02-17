@@ -8,6 +8,7 @@ from google.oauth2.service_account import Credentials
 from datetime import date
 from tabulate import tabulate
 import re
+import os
 
 
 # 1. SETUP / API CONNECTION
@@ -118,6 +119,13 @@ def find_vehicle_by_id(stock, vehicle_id):
         except ValueError:
             continue
     return None, None
+
+def clear_screen():
+    """
+    Clear the terminal screen.
+    Works on Windows, macOS, and Linux.
+    """
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 # 3. USER INPUT FUNCTIONS
@@ -408,6 +416,7 @@ def main():
         if choice == 1:
             view_all_vehicles()
             input("\nPress Enter to return to the main menu...\n")
+            clear_screen()
         elif choice == 2:
             add_vehicle()
         elif choice == 3:
