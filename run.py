@@ -8,7 +8,6 @@ from google.oauth2.service_account import Credentials
 from datetime import date
 from tabulate import tabulate
 import re
-import shutil
 from textwrap import shorten
 
 
@@ -292,20 +291,19 @@ def view_all_vehicles():
         "Status"
     ]
 
-     # Get terminal width
-    term_width, _ = shutil.get_terminal_size(fallback=(80, 20))
+     # Define max widths per column manually (smaller for numeric fields)
+    max_widths = [5, 9, 11, 11, 5, 7, 10, 9, 9]
 
-    # Calculate max width per column
-    max_col_width = max(term_width // len(headers), 10)  # min 10 chars
-
-    # Truncate each cell to max_col_width
+    # Truncate each cell using its column's max width
     table_data = [
-        [shorten(str(cell), width=max_col_width, placeholder="...") for cell in row]
+        [shorten(str(cell), width=max_w, placeholder="...") 
+         for cell, max_w in zip(row, max_widths)]
         for row in table_data
     ]
 
-    # Truncate headers too if needed
-    headers = [shorten(h, width=max_col_width, placeholder="...") for h in headers]
+    # Truncate headers similarly
+    headers = [shorten(h, width=max_w, placeholder="...") 
+               for h, max_w in zip(headers, max_widths)]
 
     print(tabulate(table_data, headers=headers, tablefmt="orgtbl"))
 
@@ -336,7 +334,7 @@ def add_vehicle():
     mileage = get_valid_int("\nEnter vehicle mileage "
                             " (e.g., 50000): ")
     purchase_price = get_valid_float("\nEnter vehicle purchase "
-                                     " price (e.g., 8000): ")
+                                     "price (e.g., 8000): ")
     sale_price = get_valid_float("\nEnter vehicle sale price "
                                  " (e.g., 10000): ")
 
