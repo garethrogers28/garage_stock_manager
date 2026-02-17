@@ -1,6 +1,14 @@
 """
-Garage Stock Manager -
-A command-line application to manage vehicle inventory for a used car garage.
+Garage Stock Manager
+
+A command-line application to manage vehicle
+inventory for a used car garage.
+
+Features:
+- View all vehicles in stock
+- Add a new vehicle with validation
+- Remove vehicles with confirmation
+- Stores data in a Google Sheet
 """
 
 import gspread
@@ -26,14 +34,18 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("garage_stock_manager")
 
 
-# 2. HELPER FUNCTIONS
-#    - Generic reusable functions
-
-
 def safe_sheet_call(func, *args, **kwargs):
     """
     Safely call a Google Sheets API function.
-    Return None if there is an error.
+
+    Args:
+        func (callable): The gspread function to call.
+        *args: Positional arguments to pass to the function.
+        **kwargs: Keyword arguments to pass to the function.
+
+    Returns:
+        Any: The result of the function call,
+        or None if an error occurred.
     """
     try:
         # Attempt the API call
@@ -55,9 +67,14 @@ def get_stock(sheet):
     """
     Retrieve all vehicle records from the stock worksheet.
 
+    Args:
+        sheet (gspread.models.Worksheet): The Google Sheet worksheet object.
+
     Returns:
-        list of dict: Stock records with 'id' as integers.
-        None: If there is an API error or invalid data.
+        list[dict]: List of vehicle records with 'id' 
+        converted to integers.
+        []: If no vehicles are in stock.
+        None: If an API error occurs or a vehicle ID is invalid.
     """
     # Attempt to fetch all records from the sheet
     stock = safe_sheet_call(sheet.get_all_records)
@@ -80,12 +97,19 @@ def get_stock(sheet):
 
 def require_stock_or_exit():
     """
-    Retrieve the stock worksheet and stock data.
-    Returns a tuple (sheet, stock).
+    Retrieve the stock worksheet and its vehicle data.
 
-    - If the worksheet cannot be accessed, returns (None, None).
-    - If stock retrieval fails, returns (None, None).
-    - If stock is empty, returns an empty list.
+    Returns:
+        tuple: (sheet, stock)
+            sheet (gspread.models.Worksheet or None): 
+            The stock worksheet, None if unavailable.
+            stock (list[dict] or None): List of vehicle records,
+            empty list if no stock, or None on error.
+
+    Notes:
+        - Prints user-friendly messages if the worksheet
+          cannot be accessed or stock retrieval fails.
+        - Distinguishes between empty stock and API errors.
     """
     # Attempt to access the 'stock' worksheet
     sheet = safe_sheet_call(SHEET.worksheet, "stock")
@@ -115,10 +139,22 @@ def require_stock_or_exit():
 
 def find_vehicle_by_id(stock, vehicle_id):
     """
-    Return the vehicle dict and its row number in the sheet,
-    or (None, None) if not found.
+    Find a vehicle in stock by its ID.
 
-    Handles missing or malformed IDs safely.
+    Args:
+        stock (list[dict]): The list of vehicle records.
+        vehicle_id (int): The ID of the vehicle to search for.
+
+    Returns:
+        tuple: (vehicle, row_number)
+            vehicle (dict or None): The vehicle record
+             if found, otherwise None.
+            row_number (int or None): The corresponding
+            row number in the sheet, or None if not found.
+
+    Notes:
+        - Handles missing or malformed IDs safely.
+        - Row numbers start at 2 to account for the header row in Google Sheets.
     """
     for index, vehicle in enumerate(stock, start=2):  # start=2 for header row
         try:
@@ -138,12 +174,16 @@ def clear_screen():
     os.system("cls" if os.name == "nt" else "clear")
 
 
-# 3. USER INPUT FUNCTIONS
-#    - Functions that validate and sanitize input
-
-
 def get_required_input(prompt):
-    """Prevent empty entry function"""
+    """
+    Prompt the user for input and prevent empty entries.
+
+    Args:
+        prompt (str): The message displayed to the user.
+
+    Returns:
+        str: A non-empty string entered by the user.
+    """
     while True:
         value = input(prompt).strip()  # Strip() to remove leading/trailing spaces
         if value:
@@ -154,16 +194,16 @@ def get_required_input(prompt):
 
 def get_valid_year(prompt, min_year=2001, max_year=None):
     """
-    Prompt the user to enter a year and validate
-    it falls within min_year and max_year.
+    Prompt the user for a year and validate it falls within a specified range.
 
     Args:
-        prompt (str): The message shown to the user.
-        min_year (int): Minimum allowable year.
-        max_year (int): Maximum allowable year.
+        prompt (str): The message to display to the user.
+        min_year (int): Minimum allowable year (inclusive).
+        max_year (int, optional): Maximum allowable year (inclusive). 
+        Defaults to 10 years in the future.
 
     Returns:
-        int: A valid year within the specified range.
+        int: A valid year entered by the user.
     """
 
     if max_year is None:
@@ -181,7 +221,16 @@ def get_valid_year(prompt, min_year=2001, max_year=None):
 
 
 def get_valid_int(prompt, min_value=0):
-    """Prompt the user for an integer >= min_value."""
+    """
+    Prompt the user for an integer greater than or equal to min_value.
+
+    Args:
+        prompt (str): The message displayed to the user.
+        min_value (int, optional): Minimum allowable value (default is 0).
+
+    Returns:
+        int: A valid integer entered by the user.
+    """
     while True:
         try:
             value = int(input(prompt))
@@ -194,7 +243,16 @@ def get_valid_int(prompt, min_value=0):
 
 
 def get_valid_float(prompt, min_value=0):
-    """Prompt the user for a float >= min_value."""
+    """
+    Prompt the user for a float greater than or equal to min_value.
+
+    Args:
+        prompt (str): The message displayed to the user.
+        min_value (float, optional): Minimum allowable value (default is 0).
+
+    Returns:
+        float: A valid float entered by the user.
+    """
     while True:
         try:
             price = float(input(prompt))
@@ -217,8 +275,17 @@ def validate_registration(reg):
 
 def get_valid_registration(stock):
     """
-    Prompt the user for a UK registration number.
-    Validate format and check it's not already in stock.
+    Prompt the user for a UK vehicle registration number and validate it.
+
+    Args:
+        stock (list[dict]): Current stock to check for duplicates.
+
+    Returns:
+        str: A valid and unique registration number.
+
+    Notes:
+        - Validates format: AA21 ABC
+        - Checks for duplicates in the stock.
     """
     while True:
         reg = (
@@ -232,20 +299,20 @@ def get_valid_registration(stock):
         # Check if registration already exists
         if stock and any(v["reg_number"].upper() == reg for v in stock):
             print(
-                "\nThis registration already exists in stock. Please enter a different one."
+                "\nThis registration already exists in stock. " \
+                " Please enter a different one."
             )
             continue
         return reg
 
 
-# 4. DISPLAY FUNCTIONS
-#    - Functions that show information to the user
-
 
 def get_user_choice():
     """
-    Get the user choice and
-    Validate the input to ensure it's between 1 and 4.
+    Prompt the user to select an option from the main menu (1-4).
+
+    Returns:
+        int: The menu option selected by the user (1, 2, 3, or 4).
     """
     while True:
         choice = input("Enter your choice (1-4): ")
@@ -274,9 +341,12 @@ def display_main_menu():
 
 def view_all_vehicles():
     """
-    Display all vehicles in stock.
-    Fits neatly in Heroku terminal.
-    Purchase price column removed to save width.
+    Display all vehicles in stock in a neatly formatted table.
+
+    Notes:
+        - Truncates long text for readability in terminal.
+        - Removes purchase price column to save width.
+        - Handles empty stock gracefully.
     """
     sheet, stock = require_stock_or_exit()
     if not stock:
@@ -319,13 +389,15 @@ def view_all_vehicles():
     print(tabulate(table_data, headers=headers, tablefmt="simple"))
 
 
-# 5. VEHICLE MANAGEMENT FUNCTIONS
-#    - Add, remove vehicles
-
-
 def add_vehicle():
     """
-    Add a new vehicle to the garage stock sheet and validate user input.
+    Add a new vehicle to the stock sheet with validated user input.
+
+    Notes:
+        - Automatically assigns the next available vehicle ID.
+        - Validates registration, year, mileage, and prices.
+        - Ensures sale price is not less than purchase price.
+        - Appends the new vehicle to the Google Sheet and displays confirmation.
     """
     sheet, stock = require_stock_or_exit()
     if sheet is None:
@@ -366,7 +438,7 @@ def add_vehicle():
 
     if success is not None:
         print(f"\nVehicle ID {next_id} ({reg_number}) added successfully!")
-        input("\nPress Enter to view updated stock...")
+        input("\nPress Enter to view updated stock and return to main menu...")
         clear_screen()
         view_all_vehicles()
     else:
@@ -375,14 +447,18 @@ def add_vehicle():
 
 def remove_vehicle():
     """
-    Remove a vehicle from the garage stock sheet based on vehicle ID,
-    with a confirmation prompt before deletion.
-    User can press Enter to return to the main menu.
+    Remove a vehicle from stock based on its ID.
+
+    Notes:
+        - Clears the screen for a neat display.
+        - Shows all vehicles for reference.
+        - Prompts the user to confirm deletion.
+        - Allows user to press Enter to return to main menu without removing a vehicle.
     """
     sheet, stock = require_stock_or_exit()
     if not stock:
         return
-    
+
     # Clear screen to keep terminal neat
     clear_screen()
 
@@ -424,7 +500,9 @@ def remove_vehicle():
                     print(
                         f"\nVehicle ID {vehicle_id} ({vehicle['reg_number']}) removed successfully!"
                     )
-                    input("\nPress Enter to view updated stock...")
+                    input(
+                        "\nPress Enter to view updated stock and return to main menu..."
+                    )
                     clear_screen()
                     view_all_vehicles()
                 else:
