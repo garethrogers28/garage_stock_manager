@@ -76,11 +76,9 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 
 <img width="727" height="410" alt="add-vehicle-success" src="https://github.com/user-attachments/assets/d48ea171-b0eb-44a0-be7c-1e05d13783f2" />
 
-- Automatic ID and date generation. The user does not have to have give the vehicle an ID or date as this will be applied automatically depending on the next available space in the file.
+- Automatic ID and date generation. The user does not have to have give the vehicle an ID or date as this will be applied automatically depending on the next available space in the file. This is great again to save time for the user and eradicates any manual error.
 
 - Automatic status set to "For Sale". The user does not have to enter the status which streamlines the process for the user. 
-
-- Automatic date added. The user does not havce to enter the date that the vehicle was added. This is great again to save time for the user and eradicates any manual error.
 
 - User can go directly back to main menu after viewing the revised stock table.
 
