@@ -72,27 +72,17 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 
 ### 3. Add a Vehicle
 
-- Input validation for Registration using regex
+- Users can add a vehicle. The system will ask them for all vehicles details such as Registration Number, Make, Model, Year, Mileage, Purchase Price and Sale Price. They will receive a success message when complete.
 
-<img width="724" height="408" alt="validate-ukreg-number" src="https://github.com/user-attachments/assets/f64412d5-d7de-48c1-8443-4708c7cd8af7" />
+<img width="727" height="410" alt="add-vehicle-success" src="https://github.com/user-attachments/assets/d48ea171-b0eb-44a0-be7c-1e05d13783f2" />
 
-- Automatic ID generation. The user does not have to have give the vehicle an ID as this will be applied automatically depending on the next available space in the file.
-
-- Input validation (year, mileage, purchase price, sale price). The user must enter a number for mileage, purchase and sale prices. They must enter years between 2001 and 2036 or they will get feedback asking them to enter a valid number.
-
-<img width="722" height="407" alt="validate-mileage" src="https://github.com/user-attachments/assets/603c952a-b02a-4b06-a5c0-07d67559eeab" />
-<img width="719" height="178" alt="validate-purchase-price-int" src="https://github.com/user-attachments/assets/77da12c2-45e7-4729-ab6e-ebb25de69f2d" />
-<img width="726" height="170" alt="validate-sale-price-int" src="https://github.com/user-attachments/assets/dc3c6ade-9976-4b24-adaa-d240d3c5661f" />
+- Automatic ID and date generation. The user does not have to have give the vehicle an ID or date as this will be applied automatically depending on the next available space in the file.
 
 - Automatic status set to "For Sale". The user does not have to enter the status which streamlines the process for the user. 
 
 - Automatic date added. The user does not havce to enter the date that the vehicle was added. This is great again to save time for the user and eradicates any manual error.
 
-- Confirmation of vehicle added with updated stock table
-
-<img width="727" height="410" alt="add-vehicle-success" src="https://github.com/user-attachments/assets/d48ea171-b0eb-44a0-be7c-1e05d13783f2" />
-
-- User can go direclty back to main mernu after veiwing the revised stock table
+- User can go directly back to main menu after viewing the revised stock table.
 
 <img width="731" height="410" alt="updated-stock-return-menu" src="https://github.com/user-attachments/assets/a9d295d3-5b79-4f22-8f0f-2b22b51902a5" />
 
@@ -102,8 +92,6 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 - View all Vehicles. The user is first given the list of vehicles (same as view all vehicles)
 
 - Select vehicle by ID. The user is asked to enter a Vehicle ID that they wish to remove. This reduces input for the user so they do not have to type in the full details.
-
- <img width="731" height="413" alt="remove-vehicle-stock-list" src="https://github.com/user-attachments/assets/c4d426bd-468a-4b77-b040-a10d702d06a8" />
 
 - Confirmation prompt before deletion. Once the user has chosen the ID, Garage Stock Manager will prompt the user to confirm they are sure that they want to delete. This Prevents accidental removal
 
@@ -124,7 +112,7 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 
 ### 6. Error Handling
 
-- Handles Google Sheets API connection errors. If for some reason the API is not working = down the user will be infomred at the earliest possible opportunity instead of making them go all the way to the end of the program.
+- Handles Google Sheets API connection errors. If for some reason the API is not working, the user will be informed at the earliest possible opportunity instead of making them go all the way to the end of the program.
 
 - Prevents crashes due to invalid data
 
@@ -132,11 +120,18 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 
 ### 7. Data Validation & Sanitisation
 
+- Input validation (reg, year, mileage, purchase price, sale price). The user must enter a number for mileage, purchase and sale prices. They must enter registration that matches UK format: AB12 ASD. They must enter years between 2001 and 2036 or they will get feedback asking them to enter a valid number.
+
+ <img width="724" height="408" alt="validate-ukreg-number" src="https://github.com/user-attachments/assets/6a549133-ad3a-43dc-8c40-7129cda61b3b" />
+
+
 - Prevents empty inputs. The user is unable to enter empty data ensuring all data is captured.
 
 - Ensures numeric fields are valid
 
 - Enforces valid year range
+
+<img width="726" height="409" alt="validate-year-2001-2036" src="https://github.com/user-attachments/assets/ffe4fad4-9220-41da-b1b7-2f183cfc7047" />
 
 - Standardises text formatting (e.g., uppercase registration, title-case make/model)
 
