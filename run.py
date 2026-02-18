@@ -444,61 +444,61 @@ def remove_vehicle():
     Remove a vehicle from stock based on its ID.
 
     Returns:
-        bool: True if a vehicle was removed, False otherwise.
+        bool: True if at least one vehicle was removed, False otherwise.
+
+    Features:
+        - Confirms removal to the user.
+        - Allows the user to cancel removal or try another ID.
     """
     sheet, stock = require_stock_or_exit()
     if not stock:
+        print("\nNo vehicles in stock to remove.\n")
+        input("Press Enter to return to the main menu...")
         return False  # nothing removed
+
+    vehicle_removed = False
 
     while True:
         user_input = input(
             "\nEnter vehicle ID to remove or press Enter to return to main menu: "
         ).strip()
         if user_input == "":
-            return False  # user chose to exit
+            break  # user chose to exit
 
         try:
             vehicle_id = int(user_input)
         except ValueError:
-            print(
-                "Invalid input. Please enter a valid numeric ID or press Enter to go back."
-            )
+            print("\nInvalid input. Please enter a valid numeric ID or press Enter to go back.")
             continue
 
         vehicle, row_number = find_vehicle_by_id(stock, vehicle_id)
 
-        if vehicle:
-            confirm = (
-                input(
-                    f"\nAre you sure you want to remove Vehicle ID {vehicle_id} "
-                    f"({vehicle['reg_number']})? (y/n): "
-                )
-                .strip()
-                .lower()
-            )
+        if not vehicle:
+            print(f"\nVehicle ID {vehicle_id} not found. Please try again.")
+            continue
 
-            if confirm == "y":
-                success = safe_sheet_call(sheet.delete_rows, row_number)
-                if success is not None:
-                    print(
-                        f"\nVehicle ID {vehicle_id} ({vehicle['reg_number']}) removed successfully!"
-                    )
-                    return True  # vehicle was removed
-                else:
-                    print("\nFailed to remove vehicle due to API error.")
-                    return False
-            elif confirm == "n":
-                print(
-                    "\nRemoval cancelled. You can try another vehicle ID or press Enter to return."
-                )
-                continue  # loop again, so user can enter another ID
+        # Confirm removal
+        confirm = input(
+            f"\nAre you sure you want to remove Vehicle ID {vehicle_id} "
+            f"({vehicle['reg_number']})? (y/n): "
+        ).strip().lower()
+
+        if confirm == "y":
+            success = safe_sheet_call(sheet.delete_rows, row_number)
+            if success is not None:
+                print(f"\nVehicle ID {vehicle_id} ({vehicle['reg_number']}) removed successfully!")
+                vehicle_removed = True
             else:
-                print("\nInvalid choice. Please enter 'y' or 'n'.")
-                continue  # loop again for proper confirmation
+                print("\nFailed to remove vehicle due to API error.")
+            break  # exit after removal
+        elif confirm == "n":
+            print("\nRemoval cancelled. You can try another vehicle ID or press Enter to return.")
+            continue  # allow user to try another ID
         else:
-            print(
-                f"\nVehicle ID {vehicle_id} not found. Please review the list and try again."
-            )
+            print("\nInvalid choice. Please enter 'y' or 'n'.")
+
+    return vehicle_removed
+
 
 
 def main():
@@ -516,20 +516,21 @@ def main():
             clear_screen()
 
         elif choice == 2:
-            add_vehicle()
-            input("\nPress Enter to view updated stock...")
             clear_screen()
+            add_vehicle()
+            print("\nStock Updated:\n")
             view_all_vehicles()
             input("\nPress Enter to return to main menu...")
+            clear_screen()
 
         elif choice == 3:
             clear_screen()
             view_all_vehicles()
             removed = remove_vehicle()  # True if a vehicle was removed
             if removed:
-                clear_screen()
+                print("\nStock Updated:\n")
                 view_all_vehicles()  # show updated stock only if removed
-                input("\nPress Enter to return to main menu...")  # only if removed
+                input("\nPress Enter to return to main menu...")
             clear_screen()  # always clear at the end
 
         elif choice == 4:
