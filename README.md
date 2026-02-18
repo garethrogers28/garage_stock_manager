@@ -27,74 +27,17 @@ Use cloud-based storage (Google Sheets) so multiple team members can access and 
 
 ## User Stories 
 
-### 1. View Vehicles
+1. As a garage owner, I want to view all vehicles in stock, so that I can quickly know which cars are available for sale.
 
-- As a garage owner, I want to view all vehicles in stock, so that I can quickly know which cars are available for sale.
+2. As a garage manager, I want to add new vehicles with details like make, model, year, mileage, and price, so that the stock is always up-to-date.
+ 
+3. As a garage manager, I want to remove vehicles that are sold or no longer available, so that the stock list remains accurate.
 
-### Acceptance Criteria:
+4. As a garage owner, I want inputs like year, mileage, and price to be validated, so that incorrect data isn’t entered into the system.
+ 
+5. As a garage manager, I want the stock data to be stored in Google Sheets, so that it can be accessed and updated from any device with internet access.
 
-- All vehicles are listed with ID, registration number, make, model, year, mileage, price, and status.
-
-- If no vehicles exist, a friendly message informs the user.
-
-### 2. Add Vehicles
-
-- As a garage manager, I want to add new vehicles with details like make, model, year, mileage, and price, so that the stock is always up-to-date.
-
-### Acceptance Criteria:
-
-- Required fields cannot be empty.
-
-- Year must be within a valid range (1975–2028).
-
-- Mileage and prices must be numeric and non-negative.
-
-- Vehicle is successfully added to the Google Sheet.
-
-### 3. Remove Vehicles
-
-- As a garage manager, I want to remove vehicles that are sold or no longer available, so that the stock list remains accurate.
-
-### Acceptance Criteria:
-
-- Only existing vehicle IDs can be removed.
-
-- User must confirm deletion.
-
-- Vehicle is removed from the Google Sheet successfully.
-
-### 4. Data Validation
-
-- As a garage owner, I want inputs like year, mileage, and price to be validated, so that incorrect data isn’t entered into the system.
-
-### Acceptance Criteria:
-
-- Invalid inputs prompt the user to re-enter values.
-
-- The system does not accept empty or malformed entries.
-
-### 5. Cloud Storage (Google Sheets)
-
-- As a garage manager, I want the stock data to be stored in Google Sheets, so that it can be accessed and updated from any device with internet access.
-  
-Acceptance Criteria:
-
-- All stock changes (add/remove) are immediately reflected in the Google Sheet.
-
-- Data persists between sessions.
-
-### 6. Handle API Failures
-
-- As a garage manager, I want to be notified if the system cannot access the stock data, so that I understand why the application isn’t working and can take appropriate action.
-
-### Acceptance Criteria:
-
-- If the Google Sheets API call fails, a clear, user-friendly message is displayed.
-
-- The application does not crash or lose existing data.
-
-- Users are guided on next steps (e.g., “Please check your internet connection or API credentials and try again”).
-
+6. As a garage manager, I want to be notified if the system cannot access the stock data, so that I understand why the application isn’t working and can take appropriate action.
 
 # Design
 
@@ -112,7 +55,11 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 ## Existing Features
 
 ### 1. Menu-Driven Interface
-- Simple and user-friendly command-line menu with four clear options. The user is given a welcome message and given optins to View Vehicles, Add Vehicles, Remove Vehicles and Exit.
+
+- Simple and user-friendly command-line menu with four clear options. The user is given a welcome message and given options to View Vehicles, Add Vehicle, Remove Vehicle and Exit.
+
+<img width="728" height="406" alt="home-page-welcome" src="https://github.com/user-attachments/assets/aa70ace1-e80a-4aa7-829c-c725de1d0c48" />
+
 
 ### 2. View All Vehicles
 
