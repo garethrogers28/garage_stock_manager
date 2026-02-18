@@ -188,7 +188,7 @@ def get_required_input(prompt):
         if value:
             return value
         else:
-            print("This field cannot be empty. Please enter a value.")
+            print("\nThis field cannot be empty. Please enter a value.")
 
 
 def get_valid_year(prompt, min_year=2001, max_year=None):
@@ -244,7 +244,7 @@ def get_valid_int(prompt, min_value=0):
                     f"greater than or equal to {min_value}."
                 )
         except ValueError:
-            print("\n input. Please enter a valid number.")
+            print("\n Invalid input. Please enter a valid number.")
 
 
 def get_valid_float(prompt, min_value=0):
@@ -266,7 +266,7 @@ def get_valid_float(prompt, min_value=0):
             else:
                 print(f"Value must be at least {min_value}.")
         except ValueError:
-            print("Invalid input. Please enter a valid number.")
+            print("\nInvalid input. Please enter a valid number.")
 
 
 def validate_registration(reg):
