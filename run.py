@@ -244,7 +244,7 @@ def get_valid_int(prompt, min_value=0):
                     f"greater than or equal to {min_value}."
                 )
         except ValueError:
-            print("\n Invalid input. Please enter a valid number.")
+            print("\nInvalid input. Please enter a valid number.")
 
 
 def get_valid_float(prompt, min_value=0):
