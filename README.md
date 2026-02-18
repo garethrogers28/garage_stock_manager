@@ -187,6 +187,21 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 
 ## Data Model
 
+- Google Sheet
+
+| Column         | Description                                 |
+|----------------|---------------------------------------------|
+| id             | Auto-incremented unique vehicle ID          |
+| reg_number     | vehicle registration (UK format, validated) |
+| make           | Vehicle make (title-case)                   |
+| model          | Vehicle model (title-case)                  |
+| year           | Vehicle year (validated)                    |
+| mileage        | Vehicle mileage (numeric)                   |
+| purchase_price | Purchase price of vehicle (numeric)         |
+| sale_price     | Sale price of vehicle (numeric)             |
+| status         | Vehicle status (default: For Sale)          |
+| date_added     | Date the vehicle was added                  |
+
 - Garage Stock Manager uses a single Google Sheets worksheet (stock) as its database. Each row in the sheet represents one vehicle in the garage inventory.The system follows a simple single-entity data model, where all vehicle information is stored in structured columns.
   
 - All operations (view, add, remove) interact directly with the stock worksheet.
