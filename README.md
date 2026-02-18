@@ -63,29 +63,56 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 
 ### 2. View All Vehicles
 
-- Displays a formatted list to the user with:
+- Displays a table to the user with:
 
- - Vehicle ID, Registration Number, Make, Model, Year, Mileage, Purchase Price, Sale Price, Status. This is fantastic for the user to see all available stock.
+ - Vehicle ID, Registration Number, Make, Model, Year, Mileage, Sale Price, Status. This is fantastic for the user to see all available stock in a user friendly table using Tabulate.
+
+<img width="723" height="401" alt="View-all-vehicles" src="https://github.com/user-attachments/assets/9a2966a1-5c44-452f-b36e-9c43867700b3" />
+
 
 ### 3. Add a Vehicle
 
+- Input validation for Registration using regex
+
+<img width="724" height="408" alt="validate-ukreg-number" src="https://github.com/user-attachments/assets/f64412d5-d7de-48c1-8443-4708c7cd8af7" />
+
 - Automatic ID generation. The user does not have to have give the vehicle an ID as this will be applied automatically depending on the next available space in the file.
 
-- Input validation (year, mileage, price). The user must enter a number. They must enter years between 1975 and 2028.
+- Input validation (year, mileage, purchase price, sale price). The user must enter a number for mileage, purchase and sale prices. They must enter years between 2001 and 2036 or they will get feedback asking them to enter a valid number.
 
-- Automatic status set to "For Sale". The user does not have to enter thr status which streamlines the process for the user. 
+<img width="722" height="407" alt="validate-mileage" src="https://github.com/user-attachments/assets/603c952a-b02a-4b06-a5c0-07d67559eeab" />
+<img width="719" height="178" alt="validate-purchase-price-int" src="https://github.com/user-attachments/assets/77da12c2-45e7-4729-ab6e-ebb25de69f2d" />
+<img width="726" height="170" alt="validate-sale-price-int" src="https://github.com/user-attachments/assets/dc3c6ade-9976-4b24-adaa-d240d3c5661f" />
 
-- Automatic date added. The user does not havce to enter the date that the vehicle was added. This is great again to save time foe the user and eradicates any manual error.
+- Automatic status set to "For Sale". The user does not have to enter the status which streamlines the process for the user. 
+
+- Automatic date added. The user does not havce to enter the date that the vehicle was added. This is great again to save time for the user and eradicates any manual error.
+
+- Confirmation of vehicle added with updated stock table
+
+<img width="727" height="410" alt="add-vehicle-success" src="https://github.com/user-attachments/assets/d48ea171-b0eb-44a0-be7c-1e05d13783f2" />
+
+- User can go direclty back to main mernu after veiwing the revised stock table
+
+<img width="731" height="410" alt="updated-stock-return-menu" src="https://github.com/user-attachments/assets/a9d295d3-5b79-4f22-8f0f-2b22b51902a5" />
+
 
 ### 4. Remove a Vehicle
 
-- View all Vehicles. The user is first given the list of vehicles.
+- View all Vehicles. The user is first given the list of vehicles (same as view all vehicles)
 
-- Select vehicle by ID. The user is asked to enter a Vehicle ID that they wish to remove. This reduces inpput for the user so they do not have to type in the full details. 
+- Select vehicle by ID. The user is asked to enter a Vehicle ID that they wish to remove. This reduces input for the user so they do not have to type in the full details.
+
+ <img width="731" height="413" alt="remove-vehicle-stock-list" src="https://github.com/user-attachments/assets/c4d426bd-468a-4b77-b040-a10d702d06a8" />
 
 - Confirmation prompt before deletion. Once the user has chosen the ID, Garage Stock Manager will prompt the user to confirm they are sure that they want to delete. This Prevents accidental removal
 
+ <img width="731" height="415" alt="removal-confirmation-update-stock" src="https://github.com/user-attachments/assets/a0404f33-d3b7-481d-b150-e1d4c5c6bc17" />
+
 - Error message if vehicle ID not found. If the user enters an ID that is not available. The user will be asked to review the list and try again.
+
+<img width="720" height="411" alt="remove-vehicle-no-id-found" src="https://github.com/user-attachments/assets/d9c77965-eaa0-42d1-bd5e-4a1c980f13ba" />
+
 
 ### 5. Google Sheets Integration
 
