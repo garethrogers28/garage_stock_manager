@@ -422,7 +422,7 @@ def add_vehicle():
     model = get_required_input("\nEnter "
                                "vehicle model (e.g., Fiesta): ").title()
     year = get_valid_year("\nEnter vehicle year (e.g., 2018): ")
-    mileage = get_valid_int("\nEnter vehicle mileage  (e.g., 50000): ")
+    mileage = get_valid_int("\nEnter vehicle mileage (e.g., 50000): ")
     purchase_price = get_valid_float("\nEnter "
                                      "vehicle purchase price (e.g., 8000): ")
     sale_price = get_valid_float("\nEnter vehicle sale price (e.g., 10000): ")
