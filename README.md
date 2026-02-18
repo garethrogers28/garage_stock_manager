@@ -124,12 +124,7 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 
  <img width="724" height="408" alt="validate-ukreg-number" src="https://github.com/user-attachments/assets/6a549133-ad3a-43dc-8c40-7129cda61b3b" />
 
-
 - Prevents empty inputs. The user is unable to enter empty data ensuring all data is captured.
-
-- Ensures numeric fields are valid
-
-- Enforces valid year range
 
 <img width="726" height="409" alt="validate-year-2001-2036" src="https://github.com/user-attachments/assets/ffe4fad4-9220-41da-b1b7-2f183cfc7047" />
 
@@ -150,7 +145,7 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 
 - Audit Trail to record sale prices and previous vehicle details.
 
-- a Profit section could be implemented using purchase and sold price once the sold price has been recorded. Creating new data for the user to benefit from. 
+- Profit section could be implemented using purchase and sold price once the sold price has been recorded. Creating new data for the user to benefit from. 
 
 - Garage Stock manager can be edited to suit any small business that requires to store data not just car garages.
 
@@ -202,8 +197,14 @@ Python library used to interact with Google Sheets for reading, writing, and upd
 - google-auth (google.oauth2.service_account)
 Used to securely authenticate and authorise access to the Google Sheets API via service account credentials.
 
-- datetime (Python Standard Library)
+- datetime
 Used to automatically generate and store the date a vehicle is added to stock.
+
+- tabulate
+  used to display data into a nice table for better UX
+
+- Re
+  used to validate registration numbers 
 
 ## External Services
 
