@@ -273,13 +273,6 @@ def validate_registration(reg):
 def get_valid_registration(stock):
     """
     Prompt the user for a UK vehicle registration number and validate it.
-
-    Args:
-        stock (list[dict]): Current stock to check for duplicates.
-
-    Returns:
-        str: A valid and unique registration number.
-
     Notes:
         - Validates format: AA21 ABC
         - Checks for duplicates in the stock.
@@ -503,8 +496,10 @@ def remove_vehicle():
 def main():
     """
     Main program loop for Garage Stock Manager.
-    Displays the main menu and handles user choices until exit.
-    """
+
+    Displays the main menu, handles user input, and calls
+    relevant functions until the user chooses to exit.
+"""
     while True:
         display_main_menu()
         choice = get_user_choice()
