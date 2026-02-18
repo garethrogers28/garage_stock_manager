@@ -346,7 +346,7 @@ def view_all_vehicles():
     """
     sheet, stock = require_stock_or_exit()
     if not stock:
-        print("\nNo vehicles in stock.\n")
+        print("\n*** No vehicles in stock ***\n")
         return
 
     print("\nCurrent Vehicles in Stock:\n")
@@ -452,7 +452,7 @@ def remove_vehicle():
     """
     sheet, stock = require_stock_or_exit()
     if not stock:
-        print("\nNo vehicles in stock to remove.\n")
+        print("\n*** No vehicles in stock to remove ***\n")
         input("Press Enter to return to the main menu...")
         return False  # nothing removed
 
