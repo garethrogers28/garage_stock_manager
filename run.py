@@ -19,9 +19,6 @@ import re
 import os
 
 
-# 1. SETUP / API CONNECTION
-
-
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -71,7 +68,7 @@ def get_stock(sheet):
         sheet (gspread.models.Worksheet): The Google Sheet worksheet object.
 
     Returns:
-        list[dict]: List of vehicle records with 'id' 
+        list[dict]: List of vehicle records with 'id'
         converted to integers.
         []: If no vehicles are in stock.
         None: If an API error occurs or a vehicle ID is invalid.
@@ -101,7 +98,7 @@ def require_stock_or_exit():
 
     Returns:
         tuple: (sheet, stock)
-            sheet (gspread.models.Worksheet or None): 
+            sheet (gspread.models.Worksheet or None):
             The stock worksheet, None if unavailable.
             stock (list[dict] or None): List of vehicle records,
             empty list if no stock, or None on error.
@@ -199,7 +196,7 @@ def get_valid_year(prompt, min_year=2001, max_year=None):
     Args:
         prompt (str): The message to display to the user.
         min_year (int): Minimum allowable year (inclusive).
-        max_year (int, optional): Maximum allowable year (inclusive). 
+        max_year (int, optional): Maximum allowable year (inclusive).
         Defaults to 10 years in the future.
 
     Returns:
@@ -299,12 +296,11 @@ def get_valid_registration(stock):
         # Check if registration already exists
         if stock and any(v["reg_number"].upper() == reg for v in stock):
             print(
-                "\nThis registration already exists in stock. " \
+                "\nThis registration already exists in stock. "
                 " Please enter a different one."
             )
             continue
         return reg
-
 
 
 def get_user_choice():
@@ -436,11 +432,8 @@ def add_vehicle():
         ],
     )
 
-    if success is not None:
-        print(f"\nVehicle ID {next_id} ({reg_number}) added successfully!")
-        input("\nPress Enter to view updated stock and return to main menu...")
-        clear_screen()
-        view_all_vehicles()
+    if success is not None:  # <-- check result of API call
+        print(f"\nVehicle {reg_number} added successfully!")
     else:
         print("\nFailed to add vehicle due to API error.")
 
@@ -449,31 +442,20 @@ def remove_vehicle():
     """
     Remove a vehicle from stock based on its ID.
 
-    Notes:
-        - Clears the screen for a neat display.
-        - Shows all vehicles for reference.
-        - Prompts the user to confirm deletion.
-        - Allows user to press Enter to return to main menu without removing a vehicle.
+    Returns:
+        bool: True if a vehicle was removed, False otherwise.
     """
     sheet, stock = require_stock_or_exit()
     if not stock:
-        return
-
-    # Clear screen to keep terminal neat
-    clear_screen()
-
-    # Show all vehicles so user can choose
-    view_all_vehicles()
+        return False  # nothing removed
 
     while True:
         user_input = input(
             "\nEnter vehicle ID to remove or press Enter to return to main menu: "
         ).strip()
         if user_input == "":
-            print("\nReturning to main menu...")
-            return  # Exit function without removing
+            return False  # user chose to exit
 
-        # Validate numeric input using helper
         try:
             vehicle_id = int(user_input)
         except ValueError:
@@ -500,16 +482,18 @@ def remove_vehicle():
                     print(
                         f"\nVehicle ID {vehicle_id} ({vehicle['reg_number']}) removed successfully!"
                     )
-                    input(
-                        "\nPress Enter to view updated stock and return to main menu..."
-                    )
-                    clear_screen()
-                    view_all_vehicles()
+                    return True  # vehicle was removed
                 else:
                     print("\nFailed to remove vehicle due to API error.")
+                    return False
+            elif confirm == "n":
+                print(
+                    "\nRemoval cancelled. You can try another vehicle ID or press Enter to return."
+                )
+                continue  # loop again, so user can enter another ID
             else:
-                print("\nRemoval cancelled.")
-            break
+                print("\nInvalid choice. Please enter 'y' or 'n'.")
+                continue  # loop again for proper confirmation
         else:
             print(
                 f"\nVehicle ID {vehicle_id} not found. Please review the list and try again."
@@ -529,10 +513,24 @@ def main():
             view_all_vehicles()
             input("\nPress Enter to return to the main menu...\n")
             clear_screen()
+
         elif choice == 2:
             add_vehicle()
+            input("\nPress Enter to view updated stock...")
+            clear_screen()
+            view_all_vehicles()
+            input("\nPress Enter to return to main menu...")
+
         elif choice == 3:
-            remove_vehicle()
+            clear_screen()
+            view_all_vehicles()
+            removed = remove_vehicle()  # True if a vehicle was removed
+            if removed:
+                clear_screen()
+                view_all_vehicles()  # show updated stock only if removed
+                input("\nPress Enter to return to main menu...")  # only if removed
+            clear_screen()  # always clear at the end
+
         elif choice == 4:
             print("\nExiting Garage Stock Manager. Goodbye!\n")
             break
