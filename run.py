@@ -399,12 +399,12 @@ def view_all_vehicles():
 
 def add_vehicle():
     """
-    Add a new vehicle to the stock sheet with validated user input.
+    Appends the new vehicle to the stock worksheet and prints confirmation
 
     Notes:
         - Automatically assigns the next available vehicle ID.
-        - Validates registration, year, mileage, and prices.
-        - Ensures sale price is not less than purchase price.
+        - Validates registration, year, mileage.
+        - Collects purchase and sale price.
         - Appends the new vehicle to the
          Google Sheet and displays confirmation.
     """
@@ -420,12 +420,12 @@ def add_vehicle():
 
     make = get_required_input("\nEnter vehicle make (e.g., Ford): ").title()
     model = get_required_input("\nEnter "
-                               "vehicle model  (e.g., Fiesta): ").title()
+                               "vehicle model (e.g., Fiesta): ").title()
     year = get_valid_year("\nEnter vehicle year (e.g., 2018): ")
     mileage = get_valid_int("\nEnter vehicle mileage  (e.g., 50000): ")
     purchase_price = get_valid_float("\nEnter "
                                      "vehicle purchase price (e.g., 8000): ")
-    sale_price = get_valid_float("\nEnter vehicle sale price  (e.g., 10000): ")
+    sale_price = get_valid_float("\nEnter vehicle sale price (e.g., 10000): ")
 
     status = "For Sale"
     date_added = date.today().strftime("%Y-%m-%d")
@@ -461,8 +461,9 @@ def remove_vehicle():
         bool: True if at least one vehicle was removed, False otherwise.
 
     Features:
-        - Confirms removal to the user.
-        - Allows the user to cancel removal or try another ID.
+        - Prompts the user for a vehicle ID to remove.
+        - Confirms removal before deleting.
+    q   - Allows the user to cancel removal or try another ID if stock exists.
     """
     sheet, stock = require_stock_or_exit()
     if not stock:
