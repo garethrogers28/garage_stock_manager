@@ -71,7 +71,7 @@ Use cloud-based storage (Google Sheets) so multiple team members can access and 
 
 - Displays a table to the user with:
 
- - Vehicle ID, Registration Number, Make, Model, Year, Mileage, Sale Price, Status. This is fantastic for the user to see all available stock in a user friendly table using Tabulate.
+ - Vehicle ID, Registration Number, Make, Model, Year, Mileage, Sale Price, Status. This improves readability and enhances user experience.
 
 <img width="722" height="412" alt="View-all-vehicles" src="https://github.com/user-attachments/assets/f95149df-97c8-4f66-b01a-d81a2ead3747" />
 
@@ -119,7 +119,7 @@ Use cloud-based storage (Google Sheets) so multiple team members can access and 
 
 - Prevents crashes due to invalid data
 
-- User-friendly error messages. The user is always prompted what went wrong if they enter incorrect data. This is brilliant for the user to always be kept informed of their actions so they do not get lost.
+- User-friendly error messages. The user is always prompted what went wrong if they enter incorrect data. This ensures the user to always be kept informed of their actions so they do not get lost.
 
 ### 7. Data Validation & Sanitisation
 
@@ -290,11 +290,23 @@ When the Google Sheet API is inaccessible, some functions may display the error 
 
 This project was deployed using the Code Institute Heroku mock terminal.
 
-### Cloning the Repository
+### Installation & Local Development
 
 1. The project was created by cloning the Code Institute Python template repository.
 
-2. The repository was cloned locally using Git and opened in Visual Studio Code for development.
+- git clone https://github.com/garethrogers28/garage_stock_manager.git
+
+2. Navigate into the project directory
+
+- cd garage_stock_manager
+
+3. Install required dependencies:
+
+- pip install -r requirements.txt
+
+4. Create a creds.json file with your Google Service Account credentials.
+ 
+5. Run application python3 run.py 
 
 ### Heroku Deployment Steps
 
