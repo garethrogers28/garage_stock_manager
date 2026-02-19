@@ -37,18 +37,26 @@ def safe_sheet_call(func, *args, **kwargs):
 
     Args:
         func (callable): The gspread function to call.
-        *args: Positional arguments to pass to the function.
-        **kwargs: Keyword arguments to pass to the function.
+        *args, **kwargs: Arguments to pass to the function.
 
     Returns:
-        Any: The result of the function call,
-        or None if an error occurred.
+        Any: Result of the function call, or None if an error occurred.
+
+    Notes:
+        - Logs detailed API errors to 'sheet_errors.log'.
+        - Shows concise, user-friendly messages in the terminal.
     """
     try:
         # Attempt the API call
         return func(*args, **kwargs)
     except Exception as e:
-        print(f"\nError accessing Google Sheet: {e}")
+        # Log the full error with timestamp
+        with open("sheet_errors.log", "a") as f:
+            f.write(f"{date.today()} - {e}\n")
+        # Show clean message to user
+        print("\nUnable to access the stock worksheet. "
+              "Please ensure the Google Sheet exists "
+              "and the service account has permission.")
         return None
 
 
@@ -99,23 +107,17 @@ def require_stock_or_exit():
 
     Returns:
         tuple: (sheet, stock)
-            sheet (gspread.models.Worksheet or None):
-            The stock worksheet, None if unavailable.
-            stock (list[dict] or None): List of vehicle records,
-            empty list if no stock, or None on error.
+            sheet (gspread.models.Worksheet or None)
+            stock (list of dicts or None)
 
     Notes:
-        - Prints user-friendly messages if the worksheet
-          cannot be accessed or stock retrieval fails.
         - Distinguishes between empty stock and API errors.
+        - Provides concise, actionable messages for users.
     """
     # Attempt to access the 'stock' worksheet
     sheet = safe_sheet_call(SHEET.worksheet, "stock")
     if sheet is None:
-        print(
-            "\nUnable to access the stock worksheet. "
-            "Check your internet/API connection."
-        )
+    
         return None, None
 
     # Attempt to get the current stock
@@ -399,14 +401,13 @@ def view_all_vehicles():
 
 def add_vehicle():
     """
-    Appends the new vehicle to the stock worksheet and prints confirmation
+    Appends a new vehicle to the stock worksheet.
 
     Notes:
         - Automatically assigns the next available vehicle ID.
         - Validates registration, year, mileage.
         - Collects purchase and sale price.
-        - Appends the new vehicle to the
-         Google Sheet and displays confirmation.
+        - Shows user-friendly error if Google Sheet is inaccessible.
     """
     sheet, stock = require_stock_or_exit()
     if sheet is None:
