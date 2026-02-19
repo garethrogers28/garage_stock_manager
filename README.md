@@ -33,7 +33,7 @@ Use cloud-based storage (Google Sheets) so multiple team members can access and 
  
 3. As a garage manager, I want to remove vehicles that are sold or no longer available, so that the stock list remains accurate.
 
-4. As a garage owner, I want inputs like year, mileage, and price to be validated, so that incorrect data isn’t entered into the system.
+4. s a garage owner, I want inputs like registration, year, mileage, and price to be validated, so that incorrect data isn’t entered into the system.
  
 5. As a garage manager, I want the stock data to be stored in Google Sheets, so that it can be accessed and updated from any device with internet access.
 
@@ -221,7 +221,15 @@ Used to create and manage service account credentials for API authentication.
 
 
 ## User Story testing
-                                                                                                    |        |                          
+
+| User Story                                                                                                                                                                        | Result |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
+| 1. As a garage owner, I want to view all vehicles in stock, so that I can quickly know which cars are available for sale.                                                         | Pass   |
+| 2. As a garage manager, I want to add new vehicles with details like make, model, year, mileage, and price, so that the stock is always up-to-date.                               | Pass   |
+| 3. As a garage manager, I want to remove vehicles that are sold or no longer available, so that the stock list remains accurate.                                                  | Pass   |
+| 4. As a garage owner, I want inputs like registration, year, mileage, and price to be validated, so that incorrect data isn’t entered into the system.                            | Pass   |
+| 5. As a garage manager, I want the stock data to be stored in Google Sheets, so that it can be accessed and updated from any device with internet access.                         | Pass   |
+| 6. As a garage manager, I want to be notified if the system cannot access the stock data, so that I understand why the application isn’t working and can take appropriate action. | Pass   |                                                                                                    |        |                          
                                                                                 
 ## Manual testing 
 
