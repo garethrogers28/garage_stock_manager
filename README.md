@@ -1,26 +1,31 @@
 ﻿# Garage Stock Manager
+
+ <img width="728" height="406" alt="home-page-welcome" src="https://github.com/user-attachments/assets/7802d892-7028-4210-ba85-b8c1e8d06d41" />
+
  
 ## Description
 
 Garage Stock Manager is a command-line application designed to help manage vehicle inventory for a used car garage. It allows the user to view, add, and remove vehicles from a Google Sheets-based stock database.  This project was developed as Project 3 for the Code Institute Full Stack Developer Diploma and runs on their Mock terminal in Heroku.
 
 link to live site - https://garage-stock-manager-b939d726e046.herokuapp.com/
+
+link to repository  https://github.com/garethrogers28/garage_stock_manager
  
 ## Business Goals/Visitor Goals
 
-### 1. Efficient Inventory Management
+1. Efficient Inventory Management
    
 Enable small used car garages to easily track and manage their vehicle stock without manual spreadsheets.
 
-### 2. Reduce Errors in Stock Tracking
+2. Reduce Errors in Stock Tracking
    
 Prevent mistakes in recording vehicle details, prices, and status by enforcing validated inputs.
 
-### 3. Improve Decision-Making
+3. Improve Decision-Making
 
 Provide garage owners with up-to-date stock data to assist in sales, pricing, and stock rotation decisions.
 
-### 4. Scalable & Accessible Solution
+4. Scalable & Accessible Solution
 
 Use cloud-based storage (Google Sheets) so multiple team members can access and update stock in real-time.
 
@@ -33,7 +38,7 @@ Use cloud-based storage (Google Sheets) so multiple team members can access and 
  
 3. As a garage manager, I want to remove vehicles that are sold or no longer available, so that the stock list remains accurate.
 
-4. s a garage owner, I want inputs like registration, year, mileage, and price to be validated, so that incorrect data isn’t entered into the system.
+4. As a garage owner, I want inputs like registration, year, mileage, and price to be validated, so that incorrect data isn’t entered into the system.
  
 5. As a garage manager, I want the stock data to be stored in Google Sheets, so that it can be accessed and updated from any device with internet access.
 
@@ -43,9 +48,10 @@ Use cloud-based storage (Google Sheets) so multiple team members can access and 
 
 - Note: Since the application runs in the terminal, there is no design of the user interface as such.
 
-The deployed application runs in a mock terminal on Heroku in order to demonstrate the project, the design of the mock terminal is built into the template provided by Code Institute.
+- The deployed application runs in a mock terminal on Heroku in order to demonstrate the project, the design of the mock terminal is built into the template provided by Code Institute.
 
 ## Flowchart
+
 
 
 ## Wireframes
@@ -133,9 +139,9 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 
 ## Future Features 
 
-- Edit Vehicle function can be added such as sale price and mileage.
+- Edit Vehicle function can be added so the user can edit thngs like mileage and purchase price. Incase the car is not selling or if work has been done on a vehicle that increases the sale price.
 
-- Search for Vehicle by registration, make or year/price range.
+- Search for Vehicle by registration, make, model, year range or price range.
 
 - Audit Trail to record sale prices and previous vehicle details.
 
@@ -227,7 +233,7 @@ Used to create and manage service account credentials for API authentication.
 | 3. As a garage manager, I want to remove vehicles that are sold or no longer available, so that the stock list remains accurate.                                                  | Pass   |
 | 4. As a garage owner, I want inputs like registration, year, mileage, and price to be validated, so that incorrect data isn’t entered into the system.                            | Pass   |
 | 5. As a garage manager, I want the stock data to be stored in Google Sheets, so that it can be accessed and updated from any device with internet access.                         | Pass   |
-| 6. As a garage manager, I want to be notified if the system cannot access the stock data, so that I understand why the application isn’t working and can take appropriate action. | Pass   |                                                                                                    |        |                          
+| 6. As a garage manager, I want to be notified if the system cannot access the stock data, so that I understand why the application isn’t working and can take appropriate action. | Pass   |                                                                                                                             
                                                                                 
 ## Manual testing 
 
@@ -255,13 +261,13 @@ Used to create and manage service account credentials for API authentication.
 
 ## Bugs
 
-### Registration Validation
+- Registration Validation
 
 Before implementing registration validation, the system allowed duplicate or malformed registration numbers. This caused potential bugs such as duplicate vehicle entries, inconsistent IDs, and confusing stock listings. After adding get_valid_registration() and the regex check, these issues were prevented, and the system became more reliable.
 
-### Tabulate
+- Tabulate overflowing table
 
-When using tabulate, I struggled to ensure the table did not overflow onto separate lines. While the data displayed well in the terminal, it did not display neatly when deployed to Heroku. I was having issues with truncating I decided it was more important for the user to see the Sale Price over the Purchase Price, so I removed the purchase price column to maintain a clean layout. 
+When using tabulate, I struggled to ensure the table did not overflow onto separate lines. Whilst the data displayed well in the terminal, it did not display neatly when deployed to Heroku. I was having issues with truncating I decided it was more important for the user to see the Sale Price over the Purchase Price, so I removed the purchase price column to maintain a clean layout. 
 
 ### Duplicating api error messages
  
@@ -274,9 +280,11 @@ When the Google Sheet API is inaccessible, some functions may display the error 
 
 ## Version Control 
 
-- Github
+- Git was used to track and manage changes throughout development.
 
-- link to repository  https://github.com/garethrogers28/garage_stock_manager
+- Frequent commits were made with meaningful commit messages describing features, bug fixes, and refactoring.
+
+- The repository was regularly pushed to GitHub to ensure code was safely stored and versioned.
 
 ## Deployment
 
