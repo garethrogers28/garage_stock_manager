@@ -288,20 +288,37 @@ When the Google Sheet API is inaccessible, some functions may display the error 
 
 ## Deployment
 
-- The project was deployed using Code Institute's Heroku mock terminal.
-- The following steps were followed during deployment:
-  
-1. Cloning this repository
-  
-2. Creating a new Heroku app for the project
- 
-3. Add buildpacks for Python first and then for Node Js
-  
-4. Creating a Config Var called PORT with a value of 8000
-   
-5. Link the Heroku app to the repository
- 
-6. Finally deploy by clicking Deploy
+This project was deployed using the Code Institute Heroku mock terminal.
+
+### Cloning the Repository
+
+1. The project was created by cloning the Code Institute Python template repository.
+
+2. The repository was cloned locally using Git and opened in Visual Studio Code for development.
+
+### Heroku Deployment Steps
+
+1. A new Heroku app was created.
+
+2. The following buildpacks were added (in this order):
+
+- Python
+
+- Node.js
+
+3. A Config Var was added:
+
+- Key: PORT
+
+- Value: 8000
+
+4. The Heroku app was connected to the GitHub repository.
+
+5. Deployment was triggered via the Deploy tab.
+
+6. The live application link was generated after successful deployment.
+
+- All environment variables and credentials (Google Sheets API service account) were stored securely using Heroku Config Vars and were not committed to the repository.
 
 
 ## Credits
