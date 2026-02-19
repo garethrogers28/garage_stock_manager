@@ -67,14 +67,15 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 
  - Vehicle ID, Registration Number, Make, Model, Year, Mileage, Sale Price, Status. This is fantastic for the user to see all available stock in a user friendly table using Tabulate.
 
-<img width="723" height="401" alt="View-all-vehicles" src="https://github.com/user-attachments/assets/9a2966a1-5c44-452f-b36e-9c43867700b3" />
+<img width="722" height="412" alt="View-all-vehicles" src="https://github.com/user-attachments/assets/f95149df-97c8-4f66-b01a-d81a2ead3747" />
 
+- Pressing Enter takes the user back to the main menu and clears the screen to keep the terminal clean. 
 
 ### 3. Add a Vehicle
 
-- Users can add a vehicle. The system will ask them for all vehicles details such as Registration Number, Make, Model, Year, Mileage, Purchase Price and Sale Price. They will receive a success message when complete.
+- Users can add a vehicle. The system will ask them for all vehicles details such as Registration Number, Make, Model, Year, Mileage, Purchase Price and Sale Price. They will receive a success message when complete confirming ID and Reg number. 
 
-<img width="727" height="410" alt="add-vehicle-success" src="https://github.com/user-attachments/assets/d48ea171-b0eb-44a0-be7c-1e05d13783f2" />
+<img width="722" height="407" alt="add-vehicle" src="https://github.com/user-attachments/assets/267be1e7-de93-42c7-ae19-5fa937da87be" />
 
 - Automatic ID and date generation. The user does not have to have give the vehicle an ID or date as this will be applied automatically depending on the next available space in the file. This is great again to save time for the user and eradicates any manual error.
 
@@ -82,23 +83,19 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 
 - User can go directly back to main menu after viewing the revised stock table.
 
-<img width="731" height="410" alt="updated-stock-return-menu" src="https://github.com/user-attachments/assets/a9d295d3-5b79-4f22-8f0f-2b22b51902a5" />
-
-
 ### 4. Remove a Vehicle
 
 - View all Vehicles. The user is first given the list of vehicles (same as view all vehicles)
 
-- Select vehicle by ID. The user is asked to enter a Vehicle ID that they wish to remove. This reduces input for the user so they do not have to type in the full details.
+- Select vehicle by ID. The user is asked to enter a Vehicle ID that they wish to remove. This reduces input for the user so they do not have to type in the full details. 
 
 - Confirmation prompt before deletion. Once the user has chosen the ID, Garage Stock Manager will prompt the user to confirm they are sure that they want to delete. This Prevents accidental removal
 
- <img width="731" height="415" alt="removal-confirmation-update-stock" src="https://github.com/user-attachments/assets/a0404f33-d3b7-481d-b150-e1d4c5c6bc17" />
+ <img width="721" height="407" alt="remove-vehicle-success" src="https://github.com/user-attachments/assets/26f6f769-729d-427b-86c2-b68628308a71" />
 
 - Error message if vehicle ID not found. If the user enters an ID that is not available. The user will be asked to review the list and try again.
 
-<img width="720" height="411" alt="remove-vehicle-no-id-found" src="https://github.com/user-attachments/assets/d9c77965-eaa0-42d1-bd5e-4a1c980f13ba" />
-
+- The user will then be shown an updated stck table containing the new entry
 
 ### 5. Google Sheets Integration
 
@@ -111,20 +108,20 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 ### 6. Error Handling
 
 - Handles Google Sheets API connection errors. If for some reason the API is not working, the user will be informed at the earliest possible opportunity instead of making them go all the way to the end of the program.
+  
+<img width="721" height="409" alt="api-error-handling" src="https://github.com/user-attachments/assets/c10658cc-02a3-4b21-bc4b-bfec30185004" />
 
 - Prevents crashes due to invalid data
 
-- User-friendly error messages. The user is always prompted what went wrong if they enter incorrect data. This is brilliant for the user to alwasy be kept informed of their actions so they do not get lost.
+- User-friendly error messages. The user is always prompted what went wrong if they enter incorrect data. This is brilliant for the user to always be kept informed of their actions so they do not get lost.
 
 ### 7. Data Validation & Sanitisation
 
-- Input validation (reg, year, mileage, purchase price, sale price). The user must enter a number for mileage, purchase and sale prices. They must enter registration that matches UK format: AB12 ASD. They must enter years between 2001 and 2036 or they will get feedback asking them to enter a valid number.
+- Input validation (reg, year, mileage, purchase price, sale price). The user must enter a number for mileage, purchase and sale prices. They must enter registration that matches UK format: AB12 ASD. They must enter years between 2001 and 2036 or they will get feedback asking them to enter a valid number. The garage has no interest in selling cars that are over 25 years old which is why i have chosen 2001 as the oldest date.
 
- <img width="724" height="408" alt="validate-ukreg-number" src="https://github.com/user-attachments/assets/6a549133-ad3a-43dc-8c40-7129cda61b3b" />
+<img width="726" height="412" alt="validate-input" src="https://github.com/user-attachments/assets/9d875370-9372-41ce-9b2f-c9f5fea82bfb" />
 
 - Prevents empty inputs. The user is unable to enter empty data ensuring all data is captured.
-
-<img width="726" height="409" alt="validate-year-2001-2036" src="https://github.com/user-attachments/assets/ffe4fad4-9220-41da-b1b7-2f183cfc7047" />
 
 - Standardises text formatting (e.g., uppercase registration, title-case make/model)
 
@@ -133,7 +130,6 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 - Returns to the main menu after each action. The user can perfom multiple tasks in one session so they do not have to re run the program all the time. 
 
 - Runs until the user chooses to exit
-
 
 ## Future Features 
 
