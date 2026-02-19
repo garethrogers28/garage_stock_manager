@@ -216,7 +216,7 @@ def get_valid_year(prompt, min_year=2001, max_year=None):
             else:
                 print(
                     f"\nPlease enter a valid year "
-                    f" between {min_year} and {max_year}."
+                    f"between {min_year} and {max_year}."
                 )
         except ValueError:
             print("\nInvalid input. Please enter a numeric year.")
