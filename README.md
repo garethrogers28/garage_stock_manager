@@ -198,7 +198,10 @@ Used to automatically generate and store the date a vehicle is added to stock.
   used to display data into a nice table for better UX
 
 - Re
-  used to validate registration numbers 
+  used to validate registration numbers
+
+- os
+  used to clear terminal screen for user
 
 ## External Services
 
@@ -225,6 +228,17 @@ Used to create and manage service account credentials for API authentication.
 
 ## Bugs
 
+### Registration Validation
+
+Before implementing registration validation, the system allowed duplicate or malformed registration numbers. This caused potential bugs such as duplicate vehicle entries, inconsistent IDs, and confusing stock listings. After adding get_valid_registration() and the regex check, these issues were prevented, and the system became more reliable.
+
+### Tabulate
+
+When using tabulate, I struggled to ensure the table did not overflow onto separate lines. While the data displayed well in the terminal, it did not display neatly when deployed to Heroku. I was having issues with truncating I decided it was more important for the user to see the Sale Price over the Purchase Price, so I removed the purchase price column to maintain a clean layout. 
+
+### Duplicating api error messages
+ 
+When the Google Sheet API is inaccessible, some functions may display the error message twice. This does not affect functionality; user-friendly messages still guide the user and prevent crashes. PP3 has really helped me understand more about defensive programming and how important it is. 
 
  
 ## IDE
