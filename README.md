@@ -65,8 +65,6 @@ Use cloud-based storage (Google Sheets) so multiple team members can access and 
 
 ## Scope
 
-### Project Scope
-
 The scope of Garage Stock Manager was to develop a terminal-based inventory management system for small independent garages. The focus was on building a functional backend application that integrates with the Google Sheets API to manage live stock data.
 
 ### In Scope
@@ -106,14 +104,15 @@ The following features were considered beyond the scope of this project:
 These features could be implemented in future iterations but were not required for the current project objectives.
 
 
-
-# Design
+## Design
 
 - Note: Since the application runs in the terminal, there is no design of the user interface as such.
 
 - The deployed application runs in a mock terminal on Heroku in order to demonstrate the project, the design of the mock terminal is built into the template provided by Code Institute.
 
 ## Flowchart
+
+I used Lucid Chart for the flowchart (lucid chart stopped me from finishing my flowchart. They wanted me to sign up to a free trial and then pay over $100. I had to use Inkscape as this was the most appropriate tool for editing what I had created. I only needed to add 2 lines)
 
 <img width="1822" height="1563" alt="Flowcharts" src="https://github.com/user-attachments/assets/bba3c3bb-e752-4877-96e6-0ba33103a1a0" />
 
@@ -261,10 +260,13 @@ Core language used to develop the application logic, user interface, and data ha
 
 Note: HTML, CSS and Javascript exist in the template provided by Code Institute for this project but these are to run the mock terminal. The program itself is built purely using Python.
 
-## Libraries & Frameworks
+## Python Library Dependencies and Packages
+
+- Google sheet
+Display the orders for the kitchen, and to allow the Owner to update the menu and cost.
 
 - gspread
-Python library used to interact with Google Sheets for reading, writing, and updating stock data.
+Used to interact with Google Sheets for reading, writing, and updating stock data.
 
 - google-auth (google.oauth2.service_account)
 Used to securely authenticate and authorise access to the Google Sheets API via service account credentials.
@@ -297,7 +299,7 @@ Used to create and manage service account credentials for API authentication.
 
 Throughout the Build phase Python Tutor, PEP8 Online and Chrome Developer Tools are used to ensure the application works as expected. The app was tested on Chrome and Edge browsers. 
 
-When assessing pep8 validation the results were 
+When assessing pep8 validation there were no erros or warnings  
 
 - run.py - 0 Errors / 0 Warnings
 
@@ -433,14 +435,14 @@ This project was deployed using the Code Institute Heroku mock termin
 - Mentor Brian Macharia for guiding and advising throughout the projects lifecycle on how to improve UX and my code.
 - Code institute for the deployment process and deployment terminal.
 
-### Online Libraries and other software
+### Software & Web Applications
 
-- Stack for general question troubleshooting.
+- Stack overflow for general question troubleshooting.
 - Chatgpt (especially for understanding api error handling and how to replicate an api error).
-- Regular Expression to validate Registration numbers.
-- Datetime to add the date added into the file.
 - Ruff for code formatting (although this still required manual editing to ensure no errors).
-- Lucid Chart for the flowchart (lucid chart stopped me from finishing my flowchart. They wanted me to sign up to a free trial and then pay over $100. I had to use Inkscape as this was the most appropriate tool for editing what I had created. I only needed to add a few lines in. 
+- Lucid Chart for the flowchart
+- PEP8 Validator for validating Python code
+- Python tutor for testing sections of code 
 
 ## Content 
 
