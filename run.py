@@ -54,7 +54,7 @@ def safe_sheet_call(func, *args, **kwargs):
         with open("sheet_errors.log", "a") as f:
             f.write(f"{date.today()} - {e}\n")
         # Show clean message to user
-        print("\nUnable to access the stock worksheet. "
+        print("\n Unable to access the stock worksheet. "
               "Please ensure the Google Sheet exists "
               "and the service account has permission.")
         return None
@@ -94,7 +94,7 @@ def get_stock(sheet):
         try:
             vehicle["id"] = int(vehicle.get("id", 0))
         except (ValueError, TypeError):
-            print("\nInvalid vehicle ID found "
+            print("\n Invalid vehicle ID found "
                   "in stock data. Please check your sheet.")
             return None
 
@@ -125,7 +125,7 @@ def require_stock_or_exit():
 
     if stock is None:  # API error or invalid IDs
         print(
-            "\nUnable to retrieve stock data. "
+            "\n Unable to retrieve stock data. "
             "Please check your internet/API connection and try again."
         )
         return None, None
@@ -190,7 +190,7 @@ def get_required_input(prompt):
         if value:
             return value
         else:
-            print("\nThis field cannot be empty. Please enter a value.")
+            print("\n This field cannot be empty. Please enter a value.")
 
 
 def get_valid_year(prompt, min_year=2001, max_year=None):
@@ -217,11 +217,11 @@ def get_valid_year(prompt, min_year=2001, max_year=None):
                 return year
             else:
                 print(
-                    f"\nPlease enter a valid year "
+                    f"\n Please enter a valid year "
                     f"between {min_year} and {max_year}."
                 )
         except ValueError:
-            print("\nInvalid input. Please enter a numeric year.")
+            print("\n Invalid input. Please enter a numeric year.")
 
 
 def get_valid_int(prompt, min_value=0):
@@ -242,11 +242,11 @@ def get_valid_int(prompt, min_value=0):
                 return value
             else:
                 print(
-                    f"Please enter a number "
+                    f" Please enter a number "
                     f"greater than or equal to {min_value}."
                 )
         except ValueError:
-            print("\nInvalid input. Please enter a valid number.")
+            print("\n Invalid input. Please enter a valid number.")
 
 
 def get_valid_float(prompt, min_value=0):
@@ -266,9 +266,9 @@ def get_valid_float(prompt, min_value=0):
             if price >= min_value:
                 return price
             else:
-                print(f"Value must be at least {min_value}.")
+                print(f" Value must be at least {min_value}.")
         except ValueError:
-            print("\nInvalid input. Please enter a valid number.")
+            print("\n Invalid input. Please enter a valid number.")
 
 
 def validate_registration(reg):
@@ -289,18 +289,18 @@ def get_valid_registration(stock):
     """
     while True:
         reg = (
-            input("\nEnter vehicle registration number (e.g., CN18 YGG): ")
+            input("\n Enter vehicle registration number (e.g., CN18 YGG): ")
             .upper()
             .strip()
         )
         if not validate_registration(reg):
-            print("\nInvalid registration format. "
+            print("\n Invalid registration format. "
                   "Please use the format AA12 ABC.")
             continue
         # Check if registration already exists
         if stock and any(v["reg_number"].upper() == reg for v in stock):
             print(
-                "\nThis registration already exists in stock. "
+                "\n This registration already exists in stock. "
                 " Please enter a different one."
             )
             continue
@@ -315,11 +315,11 @@ def get_user_choice():
         int: The menu option selected by the user (1, 2, 3, or 4).
     """
     while True:
-        choice = input("\nEnter your choice (1-4): ")
+        choice = input("\n Enter your choice (1-4): ")
         if choice in ["1", "2", "3", "4"]:
             return int(choice)
         else:
-            print("\nInvalid choice. Please enter a number between 1 and 4.")
+            print("\n Invalid choice. Please enter a number between 1 and 4.")
 
 
 def display_main_menu():
@@ -331,12 +331,12 @@ def display_main_menu():
     3. Remove a vehicle
     4. Exit
     """
-    print("\nWelcome to Garage Stock Manager\n")
-    print("Please choose an option:")
-    print("\n1. View all vehicles")
-    print("2. Add a vehicle")
-    print("3. Remove a vehicle")
-    print("4. Exit\n")
+    print("\n Welcome to Garage Stock Manager\n")
+    print(" Please choose an option:")
+    print("\n 1. View all vehicles")
+    print(" 2. Add a vehicle")
+    print(" 3. Remove a vehicle")
+    print(" 4. Exit\n")
 
 
 def view_all_vehicles():
@@ -350,10 +350,10 @@ def view_all_vehicles():
     """
     sheet, stock = require_stock_or_exit()
     if not stock:
-        print("\n*** No vehicles in stock ***\n")
+        print("\n *** No vehicles in stock ***\n")
         return
 
-    print("\nCurrent Vehicles in Stock:\n")
+    print("\n Current Vehicles in Stock:\n")
 
     # Prepare table data
     table_data = [
@@ -419,14 +419,14 @@ def add_vehicle():
 
     reg_number = get_valid_registration(stock)
 
-    make = get_required_input("\nEnter vehicle make (e.g., Ford): ").title()
-    model = get_required_input("\nEnter "
+    make = get_required_input("\n Enter vehicle make (e.g., Ford): ").title()
+    model = get_required_input("\n Enter "
                                "vehicle model (e.g., Fiesta): ").title()
-    year = get_valid_year("\nEnter vehicle year (e.g., 2018): ")
-    mileage = get_valid_int("\nEnter vehicle mileage (e.g., 50000): ")
-    purchase_price = get_valid_float("\nEnter "
+    year = get_valid_year("\n Enter vehicle year (e.g., 2018): ")
+    mileage = get_valid_int("\n Enter vehicle mileage (e.g., 50000): ")
+    purchase_price = get_valid_float("\n Enter "
                                      "vehicle purchase price (e.g., 8000): ")
-    sale_price = get_valid_float("\nEnter vehicle sale price (e.g., 10000): ")
+    sale_price = get_valid_float("\n Enter vehicle sale price (e.g., 10000): ")
 
     status = "For Sale"
     date_added = date.today().strftime("%Y-%m-%d")
@@ -449,9 +449,9 @@ def add_vehicle():
     )
 
     if success is not None:  # <-- check result of API call
-        print(f"\nVehicle {reg_number} added successfully!")
+        print(f"\n Vehicle {reg_number} added successfully!")
     else:
-        print("\nFailed to add vehicle due to API error.")
+        print("\n Failed to add vehicle due to API error.")
 
 
 def remove_vehicle():
@@ -468,14 +468,14 @@ def remove_vehicle():
     """
     sheet, stock = require_stock_or_exit()
     if not stock:
-        input("Press Enter to return to the main menu...")
+        input(" Press Enter to return to the main menu...")
         return False  # nothing removed
 
     vehicle_removed = False
 
     while True:
         user_input = input(
-            "\nEnter vehicle ID to remove "
+            "\n Enter vehicle ID to remove "
             "or press Enter to return to main menu: "
         ).strip()
         if user_input == "":
@@ -485,7 +485,7 @@ def remove_vehicle():
             vehicle_id = int(user_input)
         except ValueError:
             print(
-                "\nInvalid input. Please enter a valid numeric ID "
+                "\n Invalid input. Please enter a valid numeric ID "
                 "or press Enter to go back."
             )
             continue
@@ -493,13 +493,13 @@ def remove_vehicle():
         vehicle, row_number = find_vehicle_by_id(stock, vehicle_id)
 
         if not vehicle:
-            print(f"\nVehicle ID {vehicle_id} not found. Please try again.")
+            print(f"\n Vehicle ID {vehicle_id} not found. Please try again.")
             continue
 
         # Confirm removal
         confirm = (
             input(
-                f"\nAre you sure you want to remove Vehicle ID {vehicle_id} "
+                f"\n Are you sure you want to remove Vehicle ID {vehicle_id} "
                 f"({vehicle['reg_number']})? (y/n): "
             )
             .strip()
@@ -510,21 +510,21 @@ def remove_vehicle():
             success = safe_sheet_call(sheet.delete_rows, row_number)
             if success is not None:
                 print(
-                    f"\nVehicle ID {vehicle_id} "
+                    f"\n Vehicle ID {vehicle_id} "
                     f" ({vehicle['reg_number']}) removed successfully!"
                 )
                 vehicle_removed = True
             else:
-                print("\nFailed to remove vehicle due to API error.")
+                print("\n Failed to remove vehicle due to API error.")
             break  # exit after removal
         elif confirm == "n":
             print(
-                "\nRemoval cancelled. You can try another "
+                "\n Removal cancelled. You can try another "
                 "vehicle ID or press Enter to return."
             )
             continue  # allow user to try another ID
         else:
-            print("\nInvalid choice. Please enter 'y' or 'n'.")
+            print("\n Invalid choice. Please enter 'y' or 'n'.")
 
     return vehicle_removed
 
@@ -542,15 +542,15 @@ def main():
 
         if choice == 1:
             view_all_vehicles()
-            input("\nPress Enter to return to the main menu...\n")
+            input("\n Press Enter to return to the main menu...\n")
             clear_screen()
 
         elif choice == 2:
             clear_screen()
             add_vehicle()
-            print("\nStock Updated:\n")
+            print("\n Stock Updated:\n")
             view_all_vehicles()
-            input("\nPress Enter to return to main menu...")
+            input("\n Press Enter to return to main menu...")
             clear_screen()
 
         elif choice == 3:
@@ -558,13 +558,13 @@ def main():
             view_all_vehicles()
             removed = remove_vehicle()  # True if a vehicle was removed
             if removed:
-                print("\nStock Updated:\n")
+                print("\n Stock Updated:\n")
                 view_all_vehicles()  # show updated stock only if removed
-                input("\nPress Enter to return to main menu...")
+                input("\n Press Enter to return to main menu...")
             clear_screen()  # always clear at the end
 
         elif choice == 4:
-            print("\nExiting Garage Stock Manager. Goodbye!\n")
+            print("\n Exiting Garage Stock Manager. Goodbye!\n")
             break
 
 
