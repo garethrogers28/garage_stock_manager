@@ -117,7 +117,7 @@ def require_stock_or_exit():
     # Attempt to access the 'stock' worksheet
     sheet = safe_sheet_call(SHEET.worksheet, "stock")
     if sheet is None:
-    
+
         return None, None
 
     # Attempt to get the current stock
