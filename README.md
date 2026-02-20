@@ -140,13 +140,14 @@ Here is the link to lucid chart (2 lines missing)
 
 - Vehicle ID, Registration Number, Make, Model, Year, Mileage, Sale Price, Status. This improves readability and enhances user experience.
 
-<img width="719" height="410" alt="view-all-vehicles" src="https://github.com/user-attachments/assets/38c6c8ac-aeaf-4a02-9c71-4bfe79187b7b" />
+<img width="725" height="408" alt="view-all-vehicles" src="https://github.com/user-attachments/assets/7145f6b1-994a-44dc-b750-709b5bca3cd0" />
+
 
 - Pressing Enter takes the user back to the main menu and clears the screen to keep the terminal clean. 
 
 ### 3. Add a Vehicle
 
-- Users can add a vehicle. The system will ask them for all vehicles details such as Registration Number, Make, Model, Year, Mileage, Purchase Price and Sale Price. They will receive a success message when complete confirming ID and Reg number and also be informed of the stock updating.
+- Users can add a vehicle. The system will ask them for all vehicles details such as Registration Number, Make, Model, Year, Mileage, Purchase Price and Sale Price. They will receive a success message when complete confirming Reg number and also be informed of the stock updating.
 
 <img width="722" height="409" alt="add-vehicle" src="https://github.com/user-attachments/assets/487a2a7a-9c84-4299-b440-f0ced0159ac3" />
 
@@ -164,7 +165,8 @@ Here is the link to lucid chart (2 lines missing)
 
 - Confirmation prompt before deletion. Once the user has chosen the ID, Garage Stock Manager will prompt the user to confirm they are sure that they want to delete. This Prevents accidental removal
 
- <img width="721" height="410" alt="remove-vehicle" src="https://github.com/user-attachments/assets/989f3675-34a1-4351-81eb-29a5a8b4e9f2" />
+ <img width="723" height="411" alt="remove-vehicle" src="https://github.com/user-attachments/assets/9ceec4ed-2836-417a-a242-dcc103e06749" />
+
 
 - Error message if vehicle ID not found. If the user enters an ID that is not available. The user will be asked to review the list and try again.
 
@@ -182,7 +184,8 @@ Here is the link to lucid chart (2 lines missing)
 
 - Handles Google Sheets API connection errors. If for some reason the API is not working, the user will be informed at the earliest possible opportunity instead of making them go all the way to the end of the program.
   
-<img width="728" height="411" alt="api-error" src="https://github.com/user-attachments/assets/966d7c12-6173-4586-99e6-decf5d74b4a9" />
+<img width="727" height="408" alt="api-error" src="https://github.com/user-attachments/assets/d2e18e9c-a25b-427d-bd2d-e5f3cd8d9905" />
+
 
 - Prevents crashes due to invalid data
 
