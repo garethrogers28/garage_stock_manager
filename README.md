@@ -1,11 +1,10 @@
 ﻿# Garage Stock Manager
 
-<img width="1044" height="592" alt="responsive" src="https://github.com/user-attachments/assets/2bc92dde-a0ec-4dad-82cc-8a54033241ea" />
 
 ## Table of Contents
 
 - [Description](#description)
-- [Business Goals](#business-goalsvisitor-goals)
+- [Business Goals](#business-goals)
 - [User Stories](#user-stories)
 - [Scope](#scope)
 - [Design](#design)
@@ -31,7 +30,7 @@ link to live site - https://garage-stock-manager-b939d726e046.herokuapp.com/
 
 link to repository  https://github.com/garethrogers28/garage_stock_manager
  
-## Business Goals/Visitor Goals
+## Business Goals
 
 1. Efficient Inventory Management
    
@@ -152,7 +151,7 @@ Here is the link to lucid chart (2 lines missing)
 
 <img width="722" height="409" alt="add-vehicle" src="https://github.com/user-attachments/assets/487a2a7a-9c84-4299-b440-f0ced0159ac3" />
 
-- Automatic ID and date generation. The user does not have to have give the vehicle an ID or date as this will be applied automatically depending on the next available space in the file. This is great again to save time for the user and eradicates any manual error.
+- Automatic ID and date generation. The user does not have to have give the vehicle an ID or date as this will be applied automatically depending on the next available space in the file. This reduces manual error and improves efficiency.
 
 - Automatic status set to "For Sale". The user does not have to enter the status which streamlines the process for the user. 
 
@@ -239,7 +238,7 @@ Here is the link to lucid chart (2 lines missing)
 
 - Garage Stock Manager uses a single Google Sheets worksheet (stock) as its database. Each row in the sheet represents one vehicle in the garage inventory.The system follows a simple single-entity data model, where all vehicle information is stored in structured columns.
   
-- All operations (view, add, remove) interact directly with the stock worksheet.
+- All operations (view, add, remove) interact directly with the stock worksheet. 
 
 A single-table structure was chosen because:
 
@@ -349,7 +348,7 @@ When using tabulate, I struggled to ensure the table did not overflow onto separ
 
 - Duplicating api error messages
  
-When the Google Sheet API is inaccessible, some functions may display the error message twice. This does not affect functionality; user-friendly messages still guide the user and prevent crashes. PP3 has really helped me understand more about defensive programming and how important it is. 
+When the Google Sheet API is inaccessible, some functions may display the error message twice. This does not affect functionality; user-friendly messages still guide the user and prevent crashes. This project strengthened my understanding of defensive programming principles.
 
  
 ## IDE
@@ -420,7 +419,11 @@ This project was deployed using the Code Institute Heroku mock terminal.
 
 6. The live application link was generated after successful deployment.
 
-- All environment variables and credentials (Google Sheets API service account) were stored securely using Heroku Config Vars and were not committed to the repository.
+### Security
+
+- Sensitive credentials such as the Google Sheets service account file were excluded from the repository and stored securely using Heroku Config Vars.
+
+- The project follows best practices by preventing exposure of API keys and authentication data.
 
 ## Credits
 
@@ -437,7 +440,7 @@ This project was deployed using the Code Institute Heroku mock terminal.
 - Regular Expression to validate Registration numbers.
 - Datetime to add the date added into the file.
 - Ruff for code formatting (although this still required manual editing to ensure no errors).
-- Lucid Chart for the flow (lucid chart stopped me from finishing my flowchart. They wanted mt to sign up to a free trial and then pay over $100. I had to use Inkscape as this was the most appropriate tool for editing what I had created. I only needed to add a few lines in. 
+- Lucid Chart for the flow (lucid chart stopped me from finishing my flowchart. They wanted me to sign up to a free trial and then pay over $100. I had to use Inkscape as this was the most appropriate tool for editing what I had created. I only needed to add a few lines in. 
 
 ## Content 
 
