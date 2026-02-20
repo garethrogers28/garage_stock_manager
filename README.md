@@ -1,6 +1,6 @@
 ﻿# Garage Stock Manager
 
-<img width="719" height="406" alt="menu-screen" src="https://github.com/user-attachments/assets/40bb609f-146d-40c9-be58-19b5939b94c2" />
+<img width="1044" height="592" alt="responsive" src="https://github.com/user-attachments/assets/2bc92dde-a0ec-4dad-82cc-8a54033241ea" />
 
 
  
@@ -53,6 +53,7 @@ Use cloud-based storage (Google Sheets) so multiple team members can access and 
 
 ## Flowchart
 
+<img width="1822" height="1563" alt="Flowcharts" src="https://github.com/user-attachments/assets/bba3c3bb-e752-4877-96e6-0ba33103a1a0" />
 
 
 ## Wireframes
@@ -118,17 +119,17 @@ Use cloud-based storage (Google Sheets) so multiple team members can access and 
   
 <img width="728" height="411" alt="api-error" src="https://github.com/user-attachments/assets/966d7c12-6173-4586-99e6-decf5d74b4a9" />
 
-
 - Prevents crashes due to invalid data
 
 - User-friendly error messages. The user is always prompted what went wrong if they enter incorrect data. This ensures the user to always be kept informed of their actions so they do not get lost.
+
+- sheet_erros.log stores all errors
 
 ### 7. Data Validation & Sanitisation
 
 - Input validation (reg, year, mileage, purchase price, sale price). The user must enter a number for mileage, purchase and both prices. They must enter registration that matches UK format: AB12 ASD. They must enter years between 2001 and 2036 or they will get feedback asking them to enter a valid year between 2001 and 2036. The garage has no interest in selling cars that are over 25 years old which is why I have chosen 2001 as the oldest date. This also means the system did not need to check for older version registration numbers. 
 
 <img width="722" height="409" alt="validation" src="https://github.com/user-attachments/assets/549175e0-401f-46b2-9a69-c1b8a879f7fd" />
-
 
 - Prevents empty inputs. The user is unable to enter empty data ensuring all data is captured.
 
@@ -192,6 +193,8 @@ This design keeps the system efficient, easy to maintain, and suitable for a com
 - Python 3
 Core language used to develop the application logic, user interface, and data handling.
 
+Note: HTML, CSS and Javascript exist in the template provided by Code Institute for this project but these are to run the mock terminal. The programme itself is built purely using Python.
+
 ## Libraries & Frameworks
 
 - gspread
@@ -226,6 +229,11 @@ Used to create and manage service account credentials for API authentication.
 
 # Testing
 
+Throughout the Build phase Python Tutor, PEP8 Online and Chrome Developer Tools are used to ensure the application works as expected. The app was tested on Chrome and Edge browsers. 
+
+When assessing pep8 validation the results were 
+
+- run.py - 0 Errors / 0 Warnings
 
 ## User Story testing
 
@@ -272,7 +280,7 @@ Before implementing registration validation, the system allowed duplicate or mal
 
 When using tabulate, I struggled to ensure the table did not overflow onto separate lines. Whilst the data displayed well in the terminal, it did not display neatly when deployed to Heroku. I was having issues with truncating I decided it was more important for the user to see the Sale Price over the Purchase Price, so I removed the purchase price column to maintain a clean layout. 
 
-### Duplicating api error messages
+- Duplicating api error messages
  
 When the Google Sheet API is inaccessible, some functions may display the error message twice. This does not affect functionality; user-friendly messages still guide the user and prevent crashes. PP3 has really helped me understand more about defensive programming and how important it is. 
 
@@ -309,7 +317,19 @@ This project was deployed using the Code Institute Heroku mock terminal.
 
 4. Create a creds.json file with your Google Service Account credentials.
  
-5. Run application python3 run.py 
+5. Run application python3 run.py
+
+### Limitations
+
+- The application requires an active internet connection to access the Google Sheets database.
+
+- If the Google Sheets API is unavailable, core functionality (viewing, adding, removing vehicles) will be temporarily restricted.
+
+- The application does not include user authentication or role-based access control.
+
+- The system uses a single Google Sheets worksheet, meaning it is not designed for complex relational data structures.
+
+- As a command-line application, it does not include a graphical user interface.
 
 ### Heroku Deployment Steps
 
@@ -335,11 +355,23 @@ This project was deployed using the Code Institute Heroku mock terminal.
 
 - All environment variables and credentials (Google Sheets API service account) were stored securely using Heroku Config Vars and were not committed to the repository.
 
-
 ## Credits
 
-- Code institute for the deployment process and deployment terminal
+### People
+
+- Code Institute Full Stack Devloper software course.
+- Mentor Brian Macharia for guiding and advising throughout the projects lifecycle on how to improve UX and my code.
+- Code institute for the deployment process and deployment terminal.
+
+### Online Libraries and other software
+
+- Stack for general question troubleshooting.
+- Chatgpt (especially for understanding api error handling and how to replicate an api error).
+- Regular Expression to validate Registration numbers.
+- Datetime to add the date added into the file.
+- Ruff for code formatting (although this still required manual editing to ensure no errors).
+- Lucid Chart for the flow (lucid chart stopped me from finishing my flowchart. They wanted mt to sign up to a free trial and then pay over $100. I had to use Inkscape as this was the most appropriate tool for editing what I had created. I only needed to add a few lines in. 
 
 ## Content 
 
-- I created the database on google sheets 
+- I created the database on google sheets
