@@ -476,7 +476,7 @@ def remove_vehicle():
     while True:
         user_input = input(
             "\n Enter vehicle ID to remove "
-            "or press Enter to return to main menu "
+            "or press Enter to return to main menu: "
         ).strip()
         if user_input == "":
             break  # user chose to exit
@@ -510,7 +510,7 @@ def remove_vehicle():
             success = safe_sheet_call(sheet.delete_rows, row_number)
             if success is not None:
                 print(
-                    f"\n Vehicle ID {vehicle_id} "
+                    f"\n Vehicle ID {vehicle_id}"
                     f" ({vehicle['reg_number']}) removed successfully!"
                 )
                 vehicle_removed = True
