@@ -1,18 +1,36 @@
 ﻿# Garage Stock Manager
 
-<img width="719" height="406" alt="menu-screen" src="https://github.com/user-attachments/assets/40bb609f-146d-40c9-be58-19b5939b94c2" />
+
+## Table of Contents
+
+- [Description](#description)
+- [Business Goals](#business-goals)
+- [User Stories](#user-stories)
+- [Scope](#scope)
+- [Design](#design)
+- [Features](#existing-features)
+- [Future Features](#future-features)
+- [Data Model](#data-model)
+- [Technologies Used](#technologies-used)
+- [Testing](#testing)
+- [Bugs](#bugs)
+- [Installation & Local Development](#installation--local-development)
+- [Deployment](#deployment)
+- [Limitations](#limitations)
+- [Credits](#credits)
 
 
- 
 ## Description
 
-Garage Stock Manager is a command-line application designed to help manage vehicle inventory for a used car garage. It allows the user to view, add, and remove vehicles from a Google Sheets-based stock database.  This project was developed as Project 3 for the Code Institute Full Stack Developer Diploma and runs on their Mock terminal in Heroku.
+Garage Stock Manager is a command-line application designed to help manage vehicle inventory for a used car garage. It allows the user to view, add, and remove vehicles from a Google Sheets-based stock database. The system was built using Python and integrates with the Google Sheets API to provide real-time data storage and retrieval. It focuses on simplicity, reliability, and data accuracy through structured validation and defensive programming techniques.
+
+This project was developed as Project 3 for the Code Institute Full Stack Developer Diploma and runs on their Mock terminal in Heroku.
 
 link to live site - https://garage-stock-manager-b939d726e046.herokuapp.com/
 
 link to repository  https://github.com/garethrogers28/garage_stock_manager
  
-## Business Goals/Visitor Goals
+## Business Goals
 
 1. Efficient Inventory Management
    
@@ -45,7 +63,48 @@ Use cloud-based storage (Google Sheets) so multiple team members can access and 
 
 6. As a garage manager, I want to be notified if the system cannot access the stock data, so that I understand why the application isn’t working and can take appropriate action.
 
-# Design
+## Scope
+
+The scope of Garage Stock Manager was to develop a terminal-based inventory management system for small independent garages. The focus was on building a functional backend application that integrates with the Google Sheets API to manage live stock data.
+
+### In Scope
+
+The following features were included within the project scope:
+
+- Viewing all vehicles currently in stock
+
+- Adding new vehicles with full input validation
+
+- Removing vehicles with confirmation prompts
+
+- Automatic ID, status, and date generation
+
+- Prevention of duplicate registrations
+
+- Defensive programming and error handling
+
+- Integration with Google Sheets for persistent cloud storage
+
+The application prioritises data integrity, usability within a command-line interface, and reliable API communication.
+
+### Out Of Scope
+
+The following features were considered beyond the scope of this project:
+
+- Editing existing vehicle records (e.g., updating mileage, purchase price, or sale price).
+
+- Advanced search functionality (e.g., searching by registration, make, model, year range, or price range).
+
+- Audit trail functionality to track historical changes, sale prices, and previous vehicle details.
+
+- Profit calculation and reporting based on purchase and final sale price.
+
+- Expansion of the system to support broader small business inventory management beyond vehicle stock.
+
+These features could be implemented in future iterations but were not required for the current project objectives.
+
+
+## Design
 
 - Note: Since the application runs in the terminal, there is no design of the user interface as such.
 
@@ -53,6 +112,13 @@ Use cloud-based storage (Google Sheets) so multiple team members can access and 
 
 ## Flowchart
 
+I used Lucid Chart for the flowchart (lucid chart stopped me from finishing my flowchart. They wanted me to sign up to a free trial and then pay over $100. I had to use Inkscape as this was the most appropriate tool for editing what I had created. I only needed to add 2 lines)
+
+<img width="1822" height="1563" alt="Flowcharts" src="https://github.com/user-attachments/assets/bba3c3bb-e752-4877-96e6-0ba33103a1a0" />
+
+Here is the link to lucid chart (2 lines missing) 
+
+- https://lucid.app/lucidchart/a798661a-fe63-45a9-876b-07ff947f5c8d/edit?viewport_loc=-9380%2C-4962%2C3626%2C1736%2C0_0&invitationId=inv_f127bb38-9463-474d-9fbc-592348816baa
 
 
 ## Wireframes
@@ -84,7 +150,7 @@ Use cloud-based storage (Google Sheets) so multiple team members can access and 
 
 <img width="722" height="409" alt="add-vehicle" src="https://github.com/user-attachments/assets/487a2a7a-9c84-4299-b440-f0ced0159ac3" />
 
-- Automatic ID and date generation. The user does not have to have give the vehicle an ID or date as this will be applied automatically depending on the next available space in the file. This is great again to save time for the user and eradicates any manual error.
+- Automatic ID and date generation. The user does not have to have give the vehicle an ID or date as this will be applied automatically depending on the next available space in the file. This reduces manual error and improves efficiency.
 
 - Automatic status set to "For Sale". The user does not have to enter the status which streamlines the process for the user. 
 
@@ -118,10 +184,11 @@ Use cloud-based storage (Google Sheets) so multiple team members can access and 
   
 <img width="728" height="411" alt="api-error" src="https://github.com/user-attachments/assets/966d7c12-6173-4586-99e6-decf5d74b4a9" />
 
-
 - Prevents crashes due to invalid data
 
 - User-friendly error messages. The user is always prompted what went wrong if they enter incorrect data. This ensures the user to always be kept informed of their actions so they do not get lost.
+
+- sheet_errors.log stores all errors
 
 ### 7. Data Validation & Sanitisation
 
@@ -129,20 +196,19 @@ Use cloud-based storage (Google Sheets) so multiple team members can access and 
 
 <img width="722" height="409" alt="validation" src="https://github.com/user-attachments/assets/549175e0-401f-46b2-9a69-c1b8a879f7fd" />
 
-
 - Prevents empty inputs. The user is unable to enter empty data ensuring all data is captured.
 
 - Standardises text formatting (e.g., uppercase registration, title-case make/model)
 
 ### 8. Continuous Program Loop
 
-- Returns to the main menu after each action. The user can perfom multiple tasks in one session so they do not have to re run the program all the time. 
+- Returns to the main menu after each action. The user can perform multiple tasks in one session so they do not have to re run the program all the time. 
 
 - Runs until the user chooses to exit
 
 ## Future Features 
 
-- Edit Vehicle function can be added so the user can edit thngs like mileage and purchase price. Incase the car is not selling or if work has been done on a vehicle that increases the sale price.
+- Edit Vehicle function can be added so the user can edit things like mileage and purchase price. Incase the car is not selling or if work has been done on a vehicle that increases the sale price.
 
 - Search for Vehicle by registration, make, model, year range or price range.
 
@@ -171,7 +237,7 @@ Use cloud-based storage (Google Sheets) so multiple team members can access and 
 
 - Garage Stock Manager uses a single Google Sheets worksheet (stock) as its database. Each row in the sheet represents one vehicle in the garage inventory.The system follows a simple single-entity data model, where all vehicle information is stored in structured columns.
   
-- All operations (view, add, remove) interact directly with the stock worksheet.
+- All operations (view, add, remove) interact directly with the stock worksheet. 
 
 A single-table structure was chosen because:
 
@@ -192,10 +258,15 @@ This design keeps the system efficient, easy to maintain, and suitable for a com
 - Python 3
 Core language used to develop the application logic, user interface, and data handling.
 
-## Libraries & Frameworks
+Note: HTML, CSS and Javascript exist in the template provided by Code Institute for this project but these are to run the mock terminal. The program itself is built purely using Python.
+
+## Python Library Dependencies and Packages
+
+- Google sheet
+Display the orders for the kitchen, and to allow the Owner to update the menu and cost.
 
 - gspread
-Python library used to interact with Google Sheets for reading, writing, and updating stock data.
+Used to interact with Google Sheets for reading, writing, and updating stock data.
 
 - google-auth (google.oauth2.service_account)
 Used to securely authenticate and authorise access to the Google Sheets API via service account credentials.
@@ -226,6 +297,11 @@ Used to create and manage service account credentials for API authentication.
 
 # Testing
 
+Throughout the Build phase Python Tutor, PEP8 Online and Chrome Developer Tools are used to ensure the application works as expected. The app was tested on Chrome and Edge browsers. 
+
+When assessing pep8 validation there were no erros or warnings  
+
+- run.py - 0 Errors / 0 Warnings
 
 ## User Story testing
 
@@ -272,9 +348,9 @@ Before implementing registration validation, the system allowed duplicate or mal
 
 When using tabulate, I struggled to ensure the table did not overflow onto separate lines. Whilst the data displayed well in the terminal, it did not display neatly when deployed to Heroku. I was having issues with truncating I decided it was more important for the user to see the Sale Price over the Purchase Price, so I removed the purchase price column to maintain a clean layout. 
 
-### Duplicating api error messages
+- Duplicating api error messages
  
-When the Google Sheet API is inaccessible, some functions may display the error message twice. This does not affect functionality; user-friendly messages still guide the user and prevent crashes. PP3 has really helped me understand more about defensive programming and how important it is. 
+When the Google Sheet API is inaccessible, some functions may display the error message twice. This does not affect functionality; user-friendly messages still guide the user and prevent crashes. This project strengthened my understanding of defensive programming principles.
 
  
 ## IDE
@@ -291,25 +367,7 @@ When the Google Sheet API is inaccessible, some functions may display the error 
 
 ## Deployment
 
-This project was deployed using the Code Institute Heroku mock terminal.
-
-### Installation & Local Development
-
-1. The project was created by cloning the Code Institute Python template repository.
-
-- git clone https://github.com/garethrogers28/garage_stock_manager.git
-
-2. Navigate into the project directory
-
-- cd garage_stock_manager
-
-3. Install required dependencies:
-
-- pip install -r requirements.txt
-
-4. Create a creds.json file with your Google Service Account credentials.
- 
-5. Run application python3 run.py 
+This project was deployed using the Code Institute Heroku mock termin
 
 ### Heroku Deployment Steps
 
@@ -333,13 +391,59 @@ This project was deployed using the Code Institute Heroku mock terminal.
 
 6. The live application link was generated after successful deployment.
 
-- All environment variables and credentials (Google Sheets API service account) were stored securely using Heroku Config Vars and were not committed to the repository.
+### Installation & Local Development
 
+1. The project was created by cloning the Code Institute Python template repository.
+
+- git clone https://github.com/garethrogers28/garage_stock_manager.git
+
+2. Navigate into the project directory
+
+- cd garage_stock_manager
+
+3. Install required dependencies:
+
+- pip install -r requirements.txt
+
+4. Create a creds.json file with your Google Service Account credentials.
+ 
+5. Run application python3 run.py
+
+### Limitations
+
+- The application requires an active internet connection to access the Google Sheets database.
+
+- If the Google Sheets API is unavailable, core functionality (viewing, adding, removing vehicles) will be temporarily restricted.
+
+- The application does not include user authentication or role-based access control.
+
+- The system uses a single Google Sheets worksheet, meaning it is not designed for complex relational data structures.
+
+- As a command-line application, it does not include a graphical user interface.
+
+### Security
+
+- Sensitive credentials such as the Google Sheets service account file were excluded from the repository and stored securely using Heroku Config Vars.
+
+- The project follows best practices by preventing exposure of API keys and authentication data.
 
 ## Credits
 
-- Code institute for the deployment process and deployment terminal
+### People
+
+- Code Institute Full Stack Developer software course.
+- Mentor Brian Macharia for guiding and advising throughout the projects lifecycle on how to improve UX and my code.
+- Code institute for the deployment process and deployment terminal.
+
+### Software & Web Applications
+
+- Stack overflow for general question troubleshooting.
+- Chatgpt (especially for understanding api error handling and how to replicate an api error).
+- Ruff for code formatting (although this still required manual editing to ensure no errors).
+- Lucid Chart for the flowchart
+- PEP8 Validator for validating Python code
+- Python tutor for testing sections of code 
 
 ## Content 
 
-- I created the database on google sheets 
+- I created the database on google sheets
