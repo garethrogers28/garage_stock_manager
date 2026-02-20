@@ -464,11 +464,11 @@ def remove_vehicle():
     Features:
         - Prompts the user for a vehicle ID to remove.
         - Confirms removal before deleting.
-    q   - Allows the user to cancel removal or try another ID if stock exists.
+        - Allows the user to cancel removal or try another ID if stock exists.
     """
     sheet, stock = require_stock_or_exit()
     if not stock:
-        input(" Press Enter to return to the main menu...")
+        input(" Press Enter to return to the main menu")
         return False  # nothing removed
 
     vehicle_removed = False
@@ -476,7 +476,7 @@ def remove_vehicle():
     while True:
         user_input = input(
             "\n Enter vehicle ID to remove "
-            "or press Enter to return to main menu: "
+            "or press Enter to return to main menu "
         ).strip()
         if user_input == "":
             break  # user chose to exit
@@ -542,7 +542,7 @@ def main():
 
         if choice == 1:
             view_all_vehicles()
-            input("\n Press Enter to return to the main menu...\n")
+            input("\n Press Enter to return to the main menu\n")
             clear_screen()
 
         elif choice == 2:
@@ -550,7 +550,7 @@ def main():
             add_vehicle()
             print("\n Stock Updated:\n")
             view_all_vehicles()
-            input("\n Press Enter to return to main menu...")
+            input("\n Press Enter to return to main menu")
             clear_screen()
 
         elif choice == 3:
@@ -560,7 +560,7 @@ def main():
             if removed:
                 print("\n Stock Updated:\n")
                 view_all_vehicles()  # show updated stock only if removed
-                input("\n Press Enter to return to main menu...")
+                input("\n Press Enter to return to main menu")
             clear_screen()  # always clear at the end
 
         elif choice == 4:
