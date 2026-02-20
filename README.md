@@ -1,6 +1,7 @@
 ﻿# Garage Stock Manager
 
- <img width="728" height="406" alt="home-page-welcome" src="https://github.com/user-attachments/assets/7802d892-7028-4210-ba85-b8c1e8d06d41" />
+<img width="719" height="406" alt="menu-screen" src="https://github.com/user-attachments/assets/40bb609f-146d-40c9-be58-19b5939b94c2" />
+
 
  
 ## Description
@@ -64,24 +65,24 @@ Use cloud-based storage (Google Sheets) so multiple team members can access and 
 
 - Simple and user-friendly command-line menu with four clear options. The user is given a welcome message and given options to View Vehicles, Add Vehicle, Remove Vehicle and Exit.
 
-<img width="728" height="406" alt="home-page-welcome" src="https://github.com/user-attachments/assets/aa70ace1-e80a-4aa7-829c-c725de1d0c48" />
+<img width="719" height="406" alt="menu-screen" src="https://github.com/user-attachments/assets/20616055-d18a-4f64-a1b7-a65801f29824" />
 
 
 ### 2. View All Vehicles
 
 - Displays a table to the user with:
 
- - Vehicle ID, Registration Number, Make, Model, Year, Mileage, Sale Price, Status. This improves readability and enhances user experience.
+- Vehicle ID, Registration Number, Make, Model, Year, Mileage, Sale Price, Status. This improves readability and enhances user experience.
 
-<img width="722" height="412" alt="View-all-vehicles" src="https://github.com/user-attachments/assets/f95149df-97c8-4f66-b01a-d81a2ead3747" />
+<img width="719" height="410" alt="view-all-vehicles" src="https://github.com/user-attachments/assets/38c6c8ac-aeaf-4a02-9c71-4bfe79187b7b" />
 
 - Pressing Enter takes the user back to the main menu and clears the screen to keep the terminal clean. 
 
 ### 3. Add a Vehicle
 
-- Users can add a vehicle. The system will ask them for all vehicles details such as Registration Number, Make, Model, Year, Mileage, Purchase Price and Sale Price. They will receive a success message when complete confirming ID and Reg number. 
+- Users can add a vehicle. The system will ask them for all vehicles details such as Registration Number, Make, Model, Year, Mileage, Purchase Price and Sale Price. They will receive a success message when complete confirming ID and Reg number and also be informed of the stock updating.
 
-<img width="722" height="407" alt="add-vehicle" src="https://github.com/user-attachments/assets/267be1e7-de93-42c7-ae19-5fa937da87be" />
+<img width="722" height="409" alt="add-vehicle" src="https://github.com/user-attachments/assets/487a2a7a-9c84-4299-b440-f0ced0159ac3" />
 
 - Automatic ID and date generation. The user does not have to have give the vehicle an ID or date as this will be applied automatically depending on the next available space in the file. This is great again to save time for the user and eradicates any manual error.
 
@@ -97,11 +98,11 @@ Use cloud-based storage (Google Sheets) so multiple team members can access and 
 
 - Confirmation prompt before deletion. Once the user has chosen the ID, Garage Stock Manager will prompt the user to confirm they are sure that they want to delete. This Prevents accidental removal
 
- <img width="721" height="407" alt="remove-vehicle-success" src="https://github.com/user-attachments/assets/26f6f769-729d-427b-86c2-b68628308a71" />
+ <img width="721" height="410" alt="remove-vehicle" src="https://github.com/user-attachments/assets/989f3675-34a1-4351-81eb-29a5a8b4e9f2" />
 
 - Error message if vehicle ID not found. If the user enters an ID that is not available. The user will be asked to review the list and try again.
 
-- The user will then be shown an updated stck table containing the new entry
+- The user will then be shown an updated stock table containing the new entry so they can see the new vehicle details.
 
 ### 5. Google Sheets Integration
 
@@ -115,7 +116,8 @@ Use cloud-based storage (Google Sheets) so multiple team members can access and 
 
 - Handles Google Sheets API connection errors. If for some reason the API is not working, the user will be informed at the earliest possible opportunity instead of making them go all the way to the end of the program.
   
-<img width="721" height="409" alt="api-error-handling" src="https://github.com/user-attachments/assets/c10658cc-02a3-4b21-bc4b-bfec30185004" />
+<img width="728" height="411" alt="api-error" src="https://github.com/user-attachments/assets/966d7c12-6173-4586-99e6-decf5d74b4a9" />
+
 
 - Prevents crashes due to invalid data
 
@@ -123,9 +125,10 @@ Use cloud-based storage (Google Sheets) so multiple team members can access and 
 
 ### 7. Data Validation & Sanitisation
 
-- Input validation (reg, year, mileage, purchase price, sale price). The user must enter a number for mileage, purchase and sale prices. They must enter registration that matches UK format: AB12 ASD. They must enter years between 2001 and 2036 or they will get feedback asking them to enter a valid number. The garage has no interest in selling cars that are over 25 years old which is why i have chosen 2001 as the oldest date.
+- Input validation (reg, year, mileage, purchase price, sale price). The user must enter a number for mileage, purchase and both prices. They must enter registration that matches UK format: AB12 ASD. They must enter years between 2001 and 2036 or they will get feedback asking them to enter a valid year between 2001 and 2036. The garage has no interest in selling cars that are over 25 years old which is why I have chosen 2001 as the oldest date. This also means the system did not need to check for older version registration numbers. 
 
-<img width="726" height="412" alt="validate-input" src="https://github.com/user-attachments/assets/9d875370-9372-41ce-9b2f-c9f5fea82bfb" />
+<img width="722" height="409" alt="validation" src="https://github.com/user-attachments/assets/549175e0-401f-46b2-9a69-c1b8a879f7fd" />
+
 
 - Prevents empty inputs. The user is unable to enter empty data ensuring all data is captured.
 
