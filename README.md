@@ -2,6 +2,24 @@
 
 <img width="1044" height="592" alt="responsive" src="https://github.com/user-attachments/assets/2bc92dde-a0ec-4dad-82cc-8a54033241ea" />
 
+## Table of Contents
+
+- [Description](#description)
+- [Business Goals](#business-goalsvisitor-goals)
+- [User Stories](#user-stories)
+- [Scope](#scope)
+- [Design](#design)
+- [Features](#existing-features)
+- [Future Features](#future-features)
+- [Data Model](#data-model)
+- [Technologies Used](#technologies-used)
+- [Testing](#testing)
+- [Bugs](#bugs)
+- [Installation & Local Development](#installation--local-development)
+- [Deployment](#deployment)
+- [Limitations](#limitations)
+- [Credits](#credits)
+
 
 ## Description
 
@@ -99,6 +117,10 @@ These features could be implemented in future iterations but were not required f
 ## Flowchart
 
 <img width="1822" height="1563" alt="Flowcharts" src="https://github.com/user-attachments/assets/bba3c3bb-e752-4877-96e6-0ba33103a1a0" />
+
+Here is the link to lucid chart (2 lines missing) 
+
+- https://lucid.app/lucidchart/a798661a-fe63-45a9-876b-07ff947f5c8d/edit?viewport_loc=-9380%2C-4962%2C3626%2C1736%2C0_0&invitationId=inv_f127bb38-9463-474d-9fbc-592348816baa
 
 
 ## Wireframes
