@@ -65,7 +65,7 @@ Use cloud-based storage (Google Sheets) so multiple team members can access and 
 
 ## Scope
 
-Project Scope
+### Project Scope
 
 The scope of Garage Stock Manager was to develop a terminal-based inventory management system for small independent garages. The focus was on building a functional backend application that integrates with the Google Sheets API to manage live stock data.
 
@@ -189,7 +189,7 @@ Here is the link to lucid chart (2 lines missing)
 
 - User-friendly error messages. The user is always prompted what went wrong if they enter incorrect data. This ensures the user to always be kept informed of their actions so they do not get lost.
 
-- sheet_erros.log stores all errors
+- sheet_errors.log stores all errors
 
 ### 7. Data Validation & Sanitisation
 
@@ -203,7 +203,7 @@ Here is the link to lucid chart (2 lines missing)
 
 ### 8. Continuous Program Loop
 
-- Returns to the main menu after each action. The user can perfom multiple tasks in one session so they do not have to re run the program all the time. 
+- Returns to the main menu after each action. The user can perform multiple tasks in one session so they do not have to re run the program all the time. 
 
 - Runs until the user chooses to exit
 
@@ -259,7 +259,7 @@ This design keeps the system efficient, easy to maintain, and suitable for a com
 - Python 3
 Core language used to develop the application logic, user interface, and data handling.
 
-Note: HTML, CSS and Javascript exist in the template provided by Code Institute for this project but these are to run the mock terminal. The programme itself is built purely using Python.
+Note: HTML, CSS and Javascript exist in the template provided by Code Institute for this project but these are to run the mock terminal. The program itself is built purely using Python.
 
 ## Libraries & Frameworks
 
@@ -365,7 +365,29 @@ When the Google Sheet API is inaccessible, some functions may display the error 
 
 ## Deployment
 
-This project was deployed using the Code Institute Heroku mock terminal.
+This project was deployed using the Code Institute Heroku mock termin
+
+### Heroku Deployment Steps
+
+1. A new Heroku app was created.
+
+2. The following buildpacks were added (in this order):
+
+- Python
+
+- Node.js
+
+3. A Config Var was added:
+
+- Key: PORT
+
+- Value: 8000
+
+4. The Heroku app was connected to the GitHub repository.
+
+5. Deployment was triggered via the Deploy tab.
+
+6. The live application link was generated after successful deployment.
 
 ### Installation & Local Development
 
@@ -397,28 +419,6 @@ This project was deployed using the Code Institute Heroku mock terminal.
 
 - As a command-line application, it does not include a graphical user interface.
 
-### Heroku Deployment Steps
-
-1. A new Heroku app was created.
-
-2. The following buildpacks were added (in this order):
-
-- Python
-
-- Node.js
-
-3. A Config Var was added:
-
-- Key: PORT
-
-- Value: 8000
-
-4. The Heroku app was connected to the GitHub repository.
-
-5. Deployment was triggered via the Deploy tab.
-
-6. The live application link was generated after successful deployment.
-
 ### Security
 
 - Sensitive credentials such as the Google Sheets service account file were excluded from the repository and stored securely using Heroku Config Vars.
@@ -429,7 +429,7 @@ This project was deployed using the Code Institute Heroku mock terminal.
 
 ### People
 
-- Code Institute Full Stack Devloper software course.
+- Code Institute Full Stack Developer software course.
 - Mentor Brian Macharia for guiding and advising throughout the projects lifecycle on how to improve UX and my code.
 - Code institute for the deployment process and deployment terminal.
 
@@ -440,7 +440,7 @@ This project was deployed using the Code Institute Heroku mock terminal.
 - Regular Expression to validate Registration numbers.
 - Datetime to add the date added into the file.
 - Ruff for code formatting (although this still required manual editing to ensure no errors).
-- Lucid Chart for the flow (lucid chart stopped me from finishing my flowchart. They wanted me to sign up to a free trial and then pay over $100. I had to use Inkscape as this was the most appropriate tool for editing what I had created. I only needed to add a few lines in. 
+- Lucid Chart for the flowchart (lucid chart stopped me from finishing my flowchart. They wanted me to sign up to a free trial and then pay over $100. I had to use Inkscape as this was the most appropriate tool for editing what I had created. I only needed to add a few lines in. 
 
 ## Content 
 
