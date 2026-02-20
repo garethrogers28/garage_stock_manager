@@ -3,10 +3,11 @@
 <img width="1044" height="592" alt="responsive" src="https://github.com/user-attachments/assets/2bc92dde-a0ec-4dad-82cc-8a54033241ea" />
 
 
- 
 ## Description
 
-Garage Stock Manager is a command-line application designed to help manage vehicle inventory for a used car garage. It allows the user to view, add, and remove vehicles from a Google Sheets-based stock database.  This project was developed as Project 3 for the Code Institute Full Stack Developer Diploma and runs on their Mock terminal in Heroku.
+Garage Stock Manager is a command-line application designed to help manage vehicle inventory for a used car garage. It allows the user to view, add, and remove vehicles from a Google Sheets-based stock database. The system was built using Python and integrates with the Google Sheets API to provide real-time data storage and retrieval. It focuses on simplicity, reliability, and data accuracy through structured validation and defensive programming techniques.
+
+This project was developed as Project 3 for the Code Institute Full Stack Developer Diploma and runs on their Mock terminal in Heroku.
 
 link to live site - https://garage-stock-manager-b939d726e046.herokuapp.com/
 
@@ -44,6 +45,50 @@ Use cloud-based storage (Google Sheets) so multiple team members can access and 
 5. As a garage manager, I want the stock data to be stored in Google Sheets, so that it can be accessed and updated from any device with internet access.
 
 6. As a garage manager, I want to be notified if the system cannot access the stock data, so that I understand why the application isn’t working and can take appropriate action.
+
+## Scope
+
+Project Scope
+
+The scope of Garage Stock Manager was to develop a terminal-based inventory management system for small independent garages. The focus was on building a functional backend application that integrates with the Google Sheets API to manage live stock data.
+
+### In Scope
+
+The following features were included within the project scope:
+
+- Viewing all vehicles currently in stock
+
+- Adding new vehicles with full input validation
+
+- Removing vehicles with confirmation prompts
+
+- Automatic ID, status, and date generation
+
+- Prevention of duplicate registrations
+
+- Defensive programming and error handling
+
+- Integration with Google Sheets for persistent cloud storage
+
+The application prioritises data integrity, usability within a command-line interface, and reliable API communication.
+
+### Out Of Scope
+
+The following features were considered beyond the scope of this project:
+
+- Editing existing vehicle records (e.g., updating mileage, purchase price, or sale price).
+
+- Advanced search functionality (e.g., searching by registration, make, model, year range, or price range).
+
+- Audit trail functionality to track historical changes, sale prices, and previous vehicle details.
+
+- Profit calculation and reporting based on purchase and final sale price.
+
+- Expansion of the system to support broader small business inventory management beyond vehicle stock.
+
+These features could be implemented in future iterations but were not required for the current project objectives.
+
+
 
 # Design
 
@@ -143,7 +188,7 @@ Use cloud-based storage (Google Sheets) so multiple team members can access and 
 
 ## Future Features 
 
-- Edit Vehicle function can be added so the user can edit thngs like mileage and purchase price. Incase the car is not selling or if work has been done on a vehicle that increases the sale price.
+- Edit Vehicle function can be added so the user can edit things like mileage and purchase price. Incase the car is not selling or if work has been done on a vehicle that increases the sale price.
 
 - Search for Vehicle by registration, make, model, year range or price range.
 
