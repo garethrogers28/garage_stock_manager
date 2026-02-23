@@ -112,7 +112,7 @@ These features could be implemented in future iterations but were not required f
 
 ## Flowchart
 
-I used Lucid Chart for the flowchart (lucid chart stopped me from finishing my flowchart. They wanted me to sign up to a free trial and then pay over $100. I had to use Inkscape as this was the most appropriate tool for editing what I had created. I only needed to add 2 lines)
+The flowchart was initially designed in Lucidchart and finalised using Inkscape.
 
 <img width="1822" height="1563" alt="Flowcharts" src="https://github.com/user-attachments/assets/bba3c3bb-e752-4877-96e6-0ba33103a1a0" />
 
@@ -305,7 +305,7 @@ Used to create and manage service account credentials for API authentication.
 
 # Testing
 
-Throughout the Build phase Python Tutor, PEP8 Online and Chrome Developer Tools are used to ensure the application works as expected. The app was tested on Chrome and Edge browsers. 
+Throughout the Build phase Python Tutor, PEP8 Online and Chrome Developer Tools are used to ensure the application works as expected. The app was tested on Chrome and Edge browsers. Testing was conducted throughout development to ensure functionality, reliability, and data integrity. Both manual testing and user story validation were performed to confirm that all core features met their intended objectives.
 
 When assessing pep8 validation there were no erros or warnings  
 
