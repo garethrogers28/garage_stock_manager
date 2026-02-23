@@ -103,6 +103,15 @@ The following features were considered beyond the scope of this project:
 
 These features could be implemented in future iterations but were not required for the current project objectives.
 
+### CRUD Functionality
+
+The application implements three of the four core CRUD operations:
+
+- Create (Add Vehicle)
+- Read (View Vehicles)
+- Delete (Remove Vehicle)
+
+Update functionality is planned for future development.
 
 ## Design
 
@@ -116,7 +125,7 @@ The flowchart was initially designed in Lucidchart and finalised using Inkscape.
 
 <img width="1822" height="1563" alt="Flowcharts" src="https://github.com/user-attachments/assets/bba3c3bb-e752-4877-96e6-0ba33103a1a0" />
 
-Here is the link to lucid chart (2 lines missing) 
+Here is the link to lucidchart
 
 - https://lucid.app/lucidchart/a798661a-fe63-45a9-876b-07ff947f5c8d/edit?viewport_loc=-9380%2C-4962%2C3626%2C1736%2C0_0&invitationId=inv_f127bb38-9463-474d-9fbc-592348816baa
 
@@ -189,7 +198,7 @@ Here is the link to lucid chart (2 lines missing)
 
 - Prevents crashes due to invalid data
 
-- User-friendly error messages. The user is always prompted what went wrong if they enter incorrect data. This ensures the user to always be kept informed of their actions so they do not get lost.
+- User-friendly error messages. The user is always prompted what went wrong if they enter incorrect data. This ensures the user is always informed of their actions and understands how to correct errors.
 
 - sheet_errors.log stores all errors
 
@@ -197,7 +206,7 @@ Here is the link to lucid chart (2 lines missing)
 
 - Input validation (reg, year, mileage, purchase price, sale price). The user must enter a number for mileage, purchase and both prices.
  
-- User must enter registration that matches UK format: AB12 ASD.
+- The user must enter a registration that matches UK format (e.g., AB12 ASD).
   
 - User must enter years between 2001 and 2036 or they will get feedback asking them to enter a valid year between 2001 and 2036.
   
@@ -259,7 +268,7 @@ A single-table structure was chosen because:
 
 This design keeps the system efficient, easy to maintain, and suitable for a command-line application.
 
-# Technologies used 
+## Technologies used 
 
 ## Programming Language
 
@@ -329,9 +338,9 @@ When assessing pep8 validation there were no erros or warnings
 | View All Vehicles                   | User chooses option 1 from menu                                                                      | All vehicles displayed in a table using tabulate. Table displays ID, Reg, Make, Model, Year, Mileage and Sale Price.                                                                       | Pass    |
 | Validate menu input                 | User chooses option that is not 1 to 4 or enters no option                                           | Invalid choice. Please enter a number between 1 and 4 is displayed to the user                                                                                                             | Pass    |
 | Add Vehicle                         | User chooses option 2 from menu                                                                      | User is prompted to enter all vehicle details such as Registration, Make, Model, Year, Mileage, Purchase Price and Sale Price                                                              | Pass    |
-| Validate Registration               | User types in Registration that doesnt match uk format or enters a registration that is already used | User is informed they have 'entered invalid format and prompted to enter Registration in UK format (AB97 LOL) or This registration already exists in stock.  Please enter a different one' | Pass    |
+| Validate Registration               | User types in Registration that doesn't match uk format or enters a registration that is already used | User is informed they have 'entered invalid format and prompted to enter Registration in UK format (AB97 LOL) or This registration already exists in stock.  Please enter a different one' | Pass    |
 | Validate Year                       | User tries to enter a year that is not in between 2001 and 2036                                      | User is given feedback - 'Please enter a valid year between 2001 and 2036.'                                                                                                                | Pass    |
-| Auto ID, Status and Date            | User successfully adds a vehicle                                                                     | The ID, Status (for sale) and date are automatically added to the google sheets.                                                                                                           | Pass    |
+| Auto ID, Status and Date            | User successfully adds a vehicle                                                                     | The ID, Status (for sale) and date are automatically added to Google sheets.                                                                                                           | Pass    |
 | Confirmation of Success             | User successfully adds a vehicle                                                                     | The user is given feedback of 'latest vehicle added such as Vehicle VB12 GHG added successfully!'                                                                                          | Pass    |
 | Stock Updated after adding vehicle  | User successfully adds a vehicle                                                                     | The stock table updates so the user can see the updated stock table                                                                                                                        | Pass    |
 | Return to main menu                 | When user is offered the chance to go back to main menu and presses enter                            | The screen clears and user is sent back to main menu with all 4 options again                                                                                                              | Pass    |
@@ -353,7 +362,7 @@ Before implementing registration validation, the system allowed duplicate or mal
 
 - Tabulate overflowing table
 
-When using tabulate, I struggled to ensure the table did not overflow onto separate lines. Whilst the data displayed well in the terminal, it did not display neatly when deployed to Heroku. I was having issues with truncating I decided it was more important for the user to see the Sale Price over the Purchase Price, so I removed the purchase price column to maintain a clean layout. 
+When using tabulate, I struggled to ensure the table did not overflow onto separate lines. Whilst the data displayed well in the terminal, it did not display neatly when deployed to Heroku. I was having issues with column truncation. I decided it was more important for the user to see the Sale Price rather than the Purchase Price, so I removed the purchase price column to maintain a clean layout.
 
 - Duplicating api error messages
  
@@ -374,7 +383,7 @@ When the Google Sheet API is inaccessible, some functions may display the error 
 
 ## Deployment
 
-This project was deployed using the Code Institute Heroku mock termin
+This project was deployed using the Code Institute Heroku mock terminal
 
 ### Heroku Deployment Steps
 
@@ -447,10 +456,10 @@ This project was deployed using the Code Institute Heroku mock termin
 - Stack overflow for general question troubleshooting.
 - Chatgpt (especially for understanding api error handling and how to replicate an api error).
 - Ruff for code formatting (although this still required manual editing to ensure no errors).
-- Lucid Chart for the flowchart
+- Lucidchart for the flowchart
 - PEP8 Validator for validating Python code
-- Python tutor for testing sections of code 
+- Python Tutor for testing sections of code 
 
 ## Content 
 
-- I created the database on google sheets
+- I created the database on Google Sheets
