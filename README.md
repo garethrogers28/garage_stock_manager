@@ -195,13 +195,18 @@ Here is the link to lucid chart (2 lines missing)
 
 ### 7. Data Validation & Sanitisation
 
-- Input validation (reg, year, mileage, purchase price, sale price). The user must enter a number for mileage, purchase and both prices. They must enter registration that matches UK format: AB12 ASD. They must enter years between 2001 and 2036 or they will get feedback asking them to enter a valid year between 2001 and 2036. The garage has no interest in selling cars that are over 25 years old which is why I have chosen 2001 as the oldest date. This also means the system did not need to check for older version registration numbers. 
+- Input validation (reg, year, mileage, purchase price, sale price). The user must enter a number for mileage, purchase and both prices.
+ 
+- User must enter registration that matches UK format: AB12 ASD.
+  
+- User must enter years between 2001 and 2036 or they will get feedback asking them to enter a valid year between 2001 and 2036.
+  
+Note
+The garage has no interest in selling cars that are over 25 years old which is why I have chosen 2001 as the oldest date. This also means the system did not need to check for older version registration numbers. 
 
 <img width="722" height="409" alt="validation" src="https://github.com/user-attachments/assets/549175e0-401f-46b2-9a69-c1b8a879f7fd" />
 
 - Prevents empty inputs. The user is unable to enter empty data ensuring all data is captured.
-
-- Standardises text formatting (e.g., uppercase registration, title-case make/model)
 
 ### 8. Continuous Program Loop
 
