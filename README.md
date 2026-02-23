@@ -270,22 +270,21 @@ Note: HTML, CSS and Javascript exist in the template provided by Code Institute 
 
 ## Python Library Dependencies and Packages
 
-- Google sheet
-Display the orders for the kitchen, and to allow the Owner to update the menu and cost.
-
 - gspread
 Used to interact with Google Sheets for reading, writing, and updating stock data.
 
 - google-auth (google.oauth2.service_account)
 Used to securely authenticate and authorise access to the Google Sheets API via service account credentials.
 
-- datetime
-Used to automatically generate and store the date a vehicle is added to stock.
-
 - tabulate
   used to display data into a nice table for better UX
 
-- Re
+## Built-in Python Modules
+
+-  datetime
+Used to automatically generate and store the date a vehicle is added to stock.  
+
+- re
   used to validate registration numbers
 
 - os
