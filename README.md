@@ -387,25 +387,29 @@ This project was deployed using the Code Institute Heroku mock terminal
 
 ### Heroku Deployment Steps
 
-1. A new Heroku app was created.
+Note
 
-2. The following buildpacks were added (in this order):
+The requirements.txt file in the IDE must be updated to package all dependencies. To do this:
 
-- Python
+- Enter the following into the terminal: 'pip3 freeze > requirements.txt'
+- Commit the changes and push to GitHub
+  
+Next, follow the steps below:
 
-- Node.js
-
-3. A Config Var was added:
-
-- Key: PORT
-
-- Value: 8000
-
-4. The Heroku app was connected to the GitHub repository.
-
-5. Deployment was triggered via the Deploy tab.
-
-6. The live application link was generated after successful deployment.
+1. Login to Heroku, create an account if necessary
+2. Once at your Dashboard, click 'Create New App'
+3. Enter a name for your application, this must be unique, and select a region
+4. Click 'Create App'
+5. At the Application Configuration page, apply the following to the Settings and Deploy sections:
+6. Within 'Settings', scroll down to the Config Vars section to apply the credentials being used by the application. In the Reveal Config Vars enter 'CREDS' for the Key field and paste the all the contents from the creds.json file into the Value field
+7. Click 'Add'
+8. Add another Config Var with the Key of 'PORT' and the Value of '8000'
+9. Within Settings, scroll down to the Buildpacks sections, click to Add a Buildpack
+10. Select Python from the pop-up window and Save
+11. Add the Node.js Buildpack using the same method
+12. Navigate to the Deploy section, select Github as the deployment method, and connect to GitHub when prompted
+13. Use your GitHub repository name created for this project
+14. Finally, scroll down to and select to deploy manually or automatically depending on your choice. I deployed manually on ths occasion. 
 
 ### Installation & Local Development
 
