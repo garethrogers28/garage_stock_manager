@@ -232,6 +232,8 @@ The garage has no interest in selling cars that are over 25 years old which is w
 
 - Search for Vehicle by registration, make, model, year range or price range.
 
+- A sell vehicle function that applies the 'Sold' status and records the 'sold price'.
+
 - Audit Trail to record sale prices and previous vehicle details.
 
 - Profit section could be implemented using purchase and sold price once the sold price has been recorded. Creating new data for the user to benefit from. 
