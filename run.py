@@ -276,20 +276,26 @@ def validate_registration(reg):
     Validate UK vehicle registration (2001 onwards format).
     Format: AA21 ABC
     """
-    pattern = r"^[A-Z]{2}[0-9]{2}\s?[A-Z]{3}$"
+    pattern = r"^[A-Z]{2}[0-9]{2}\s[A-Z]{3}$"
     return re.match(pattern, reg.upper()) is not None
 
 
 def get_valid_registration(stock):
     """
     Prompt the user for a UK vehicle registration number and validate it.
-    Notes:
-        - Validates format: AA21 ABC
-        - Checks for duplicates in the stock.
+
+    The function:
+        - Validates the format (AA12 ABC).
+        - Ensures the registration is stored in uppercase.
+        - Checks for duplicates in the existing stock.
+        - Re-prompts until a valid and unique registration is entered.
+
+    Returns:
+        str: A valid, unique vehicle registration number.
     """
     while True:
         reg = (
-            input("\n Enter vehicle registration number (e.g., CN18 YGG): ")
+            input("\n Enter vehicle registration number (e.g., AA12 ABC): ")
             .upper()
             .strip()
         )
@@ -381,7 +387,7 @@ def view_all_vehicles():
         "Status",
     ]
 
-    # Max widths per column (mostly for very long text)
+    # Max widths per column
     max_widths = [4, 10, 10, 10, 4, 7, 8, 10]
 
     # Truncate only very long text
@@ -395,7 +401,6 @@ def view_all_vehicles():
         for row in table_data
     ]
 
-    # Print table
     print(tabulate(table_data, headers=headers, tablefmt="simple"))
 
 
@@ -448,7 +453,7 @@ def add_vehicle():
         ],
     )
 
-    if success is not None:  # <-- check result of API call
+    if success is not None:  # check result of API call
         print(f"\n Vehicle {reg_number} added successfully!")
     else:
         print("\n Failed to add vehicle due to API error.")
