@@ -206,7 +206,9 @@ Here is the link to lucidchart
 
 - Input validation (reg, year, mileage, purchase price, sale price). The user must enter a number for mileage, purchase and both prices.
  
-- The user must enter a registration that matches UK format (e.g., AB12 ASD).
+- Vehicle registration numbers are validated using Regular Expressions (regex). The program ensures that registrations follow the UK 2001+ format: AB12 ABC
+
+- The program also converts user input to uppercase before validation.
   
 - User must enter years between 2001 and 2036 or they will get feedback asking them to enter a valid year between 2001 and 2036.
   
@@ -216,6 +218,7 @@ The garage has no interest in selling cars that are over 25 years old which is w
 <img width="722" height="409" alt="validation" src="https://github.com/user-attachments/assets/549175e0-401f-46b2-9a69-c1b8a879f7fd" />
 
 - Prevents empty inputs. The user is unable to enter empty data ensuring all data is captured.
+  
 
 ### 8. Continuous Program Loop
 
