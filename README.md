@@ -103,6 +103,15 @@ The following features were considered beyond the scope of this project:
 
 These features could be implemented in future iterations but were not required for the current project objectives.
 
+### CRUD Functionality
+
+The application implements three of the four core CRUD operations:
+
+- Create (Add Vehicle)
+- Read (View Vehicles)
+- Delete (Remove Vehicle)
+
+Update functionality is planned for future development.
 
 ## Design
 
@@ -112,11 +121,11 @@ These features could be implemented in future iterations but were not required f
 
 ## Flowchart
 
-I used Lucid Chart for the flowchart (lucid chart stopped me from finishing my flowchart. They wanted me to sign up to a free trial and then pay over $100. I had to use Inkscape as this was the most appropriate tool for editing what I had created. I only needed to add 2 lines)
+The flowchart was initially designed in Lucidchart and finalised using Inkscape.
 
 <img width="1822" height="1563" alt="Flowcharts" src="https://github.com/user-attachments/assets/bba3c3bb-e752-4877-96e6-0ba33103a1a0" />
 
-Here is the link to lucid chart (2 lines missing) 
+Here is the link to lucidchart
 
 - https://lucid.app/lucidchart/a798661a-fe63-45a9-876b-07ff947f5c8d/edit?viewport_loc=-9380%2C-4962%2C3626%2C1736%2C0_0&invitationId=inv_f127bb38-9463-474d-9fbc-592348816baa
 
@@ -140,13 +149,14 @@ Here is the link to lucid chart (2 lines missing)
 
 - Vehicle ID, Registration Number, Make, Model, Year, Mileage, Sale Price, Status. This improves readability and enhances user experience.
 
-<img width="719" height="410" alt="view-all-vehicles" src="https://github.com/user-attachments/assets/38c6c8ac-aeaf-4a02-9c71-4bfe79187b7b" />
+<img width="725" height="408" alt="view-all-vehicles" src="https://github.com/user-attachments/assets/7145f6b1-994a-44dc-b750-709b5bca3cd0" />
+
 
 - Pressing Enter takes the user back to the main menu and clears the screen to keep the terminal clean. 
 
 ### 3. Add a Vehicle
 
-- Users can add a vehicle. The system will ask them for all vehicles details such as Registration Number, Make, Model, Year, Mileage, Purchase Price and Sale Price. They will receive a success message when complete confirming ID and Reg number and also be informed of the stock updating.
+- Users can add a vehicle. The system will ask them for all vehicles details such as Registration Number, Make, Model, Year, Mileage, Purchase Price and Sale Price. They will receive a success message when complete confirming Reg number and also be informed of the stock updating.
 
 <img width="722" height="409" alt="add-vehicle" src="https://github.com/user-attachments/assets/487a2a7a-9c84-4299-b440-f0ced0159ac3" />
 
@@ -164,7 +174,8 @@ Here is the link to lucid chart (2 lines missing)
 
 - Confirmation prompt before deletion. Once the user has chosen the ID, Garage Stock Manager will prompt the user to confirm they are sure that they want to delete. This Prevents accidental removal
 
- <img width="721" height="410" alt="remove-vehicle" src="https://github.com/user-attachments/assets/989f3675-34a1-4351-81eb-29a5a8b4e9f2" />
+ <img width="723" height="411" alt="remove-vehicle" src="https://github.com/user-attachments/assets/9ceec4ed-2836-417a-a242-dcc103e06749" />
+
 
 - Error message if vehicle ID not found. If the user enters an ID that is not available. The user will be asked to review the list and try again.
 
@@ -182,23 +193,29 @@ Here is the link to lucid chart (2 lines missing)
 
 - Handles Google Sheets API connection errors. If for some reason the API is not working, the user will be informed at the earliest possible opportunity instead of making them go all the way to the end of the program.
   
-<img width="728" height="411" alt="api-error" src="https://github.com/user-attachments/assets/966d7c12-6173-4586-99e6-decf5d74b4a9" />
+<img width="727" height="408" alt="api-error" src="https://github.com/user-attachments/assets/d2e18e9c-a25b-427d-bd2d-e5f3cd8d9905" />
+
 
 - Prevents crashes due to invalid data
 
-- User-friendly error messages. The user is always prompted what went wrong if they enter incorrect data. This ensures the user to always be kept informed of their actions so they do not get lost.
+- User-friendly error messages. The user is always prompted what went wrong if they enter incorrect data. This ensures the user is always informed of their actions and understands how to correct errors.
 
 - sheet_errors.log stores all errors
 
 ### 7. Data Validation & Sanitisation
 
-- Input validation (reg, year, mileage, purchase price, sale price). The user must enter a number for mileage, purchase and both prices. They must enter registration that matches UK format: AB12 ASD. They must enter years between 2001 and 2036 or they will get feedback asking them to enter a valid year between 2001 and 2036. The garage has no interest in selling cars that are over 25 years old which is why I have chosen 2001 as the oldest date. This also means the system did not need to check for older version registration numbers. 
+- Input validation (reg, year, mileage, purchase price, sale price). The user must enter a number for mileage, purchase and both prices.
+ 
+- The user must enter a registration that matches UK format (e.g., AB12 ASD).
+  
+- User must enter years between 2001 and 2036 or they will get feedback asking them to enter a valid year between 2001 and 2036.
+  
+Note
+The garage has no interest in selling cars that are over 25 years old which is why I have chosen 2001 as the oldest date. This also means the system did not need to check for older version registration numbers. 
 
 <img width="722" height="409" alt="validation" src="https://github.com/user-attachments/assets/549175e0-401f-46b2-9a69-c1b8a879f7fd" />
 
 - Prevents empty inputs. The user is unable to enter empty data ensuring all data is captured.
-
-- Standardises text formatting (e.g., uppercase registration, title-case make/model)
 
 ### 8. Continuous Program Loop
 
@@ -251,7 +268,7 @@ A single-table structure was chosen because:
 
 This design keeps the system efficient, easy to maintain, and suitable for a command-line application.
 
-# Technologies used 
+## Technologies used 
 
 ## Programming Language
 
@@ -262,22 +279,21 @@ Note: HTML, CSS and Javascript exist in the template provided by Code Institute 
 
 ## Python Library Dependencies and Packages
 
-- Google sheet
-Display the orders for the kitchen, and to allow the Owner to update the menu and cost.
-
 - gspread
 Used to interact with Google Sheets for reading, writing, and updating stock data.
 
 - google-auth (google.oauth2.service_account)
 Used to securely authenticate and authorise access to the Google Sheets API via service account credentials.
 
-- datetime
-Used to automatically generate and store the date a vehicle is added to stock.
-
 - tabulate
   used to display data into a nice table for better UX
 
-- Re
+## Built-in Python Modules
+
+-  datetime
+Used to automatically generate and store the date a vehicle is added to stock.  
+
+- re
   used to validate registration numbers
 
 - os
@@ -297,7 +313,7 @@ Used to create and manage service account credentials for API authentication.
 
 # Testing
 
-Throughout the Build phase Python Tutor, PEP8 Online and Chrome Developer Tools are used to ensure the application works as expected. The app was tested on Chrome and Edge browsers. 
+Throughout the Build phase Python Tutor, PEP8 Online and Chrome Developer Tools are used to ensure the application works as expected. The app was tested on Chrome and Edge browsers. Testing was conducted throughout development to ensure functionality, reliability, and data integrity. Both manual testing and user story validation were performed to confirm that all core features met their intended objectives.
 
 When assessing pep8 validation there were no erros or warnings  
 
@@ -322,9 +338,9 @@ When assessing pep8 validation there were no erros or warnings
 | View All Vehicles                   | User chooses option 1 from menu                                                                      | All vehicles displayed in a table using tabulate. Table displays ID, Reg, Make, Model, Year, Mileage and Sale Price.                                                                       | Pass    |
 | Validate menu input                 | User chooses option that is not 1 to 4 or enters no option                                           | Invalid choice. Please enter a number between 1 and 4 is displayed to the user                                                                                                             | Pass    |
 | Add Vehicle                         | User chooses option 2 from menu                                                                      | User is prompted to enter all vehicle details such as Registration, Make, Model, Year, Mileage, Purchase Price and Sale Price                                                              | Pass    |
-| Validate Registration               | User types in Registration that doesnt match uk format or enters a registration that is already used | User is informed they have 'entered invalid format and prompted to enter Registration in UK format (AB97 LOL) or This registration already exists in stock.  Please enter a different one' | Pass    |
+| Validate Registration               | User types in Registration that doesn't match uk format or enters a registration that is already used | User is informed they have 'entered invalid format and prompted to enter Registration in UK format (AB97 LOL) or This registration already exists in stock.  Please enter a different one' | Pass    |
 | Validate Year                       | User tries to enter a year that is not in between 2001 and 2036                                      | User is given feedback - 'Please enter a valid year between 2001 and 2036.'                                                                                                                | Pass    |
-| Auto ID, Status and Date            | User successfully adds a vehicle                                                                     | The ID, Status (for sale) and date are automatically added to the google sheets.                                                                                                           | Pass    |
+| Auto ID, Status and Date            | User successfully adds a vehicle                                                                     | The ID, Status (for sale) and date are automatically added to Google sheets.                                                                                                           | Pass    |
 | Confirmation of Success             | User successfully adds a vehicle                                                                     | The user is given feedback of 'latest vehicle added such as Vehicle VB12 GHG added successfully!'                                                                                          | Pass    |
 | Stock Updated after adding vehicle  | User successfully adds a vehicle                                                                     | The stock table updates so the user can see the updated stock table                                                                                                                        | Pass    |
 | Return to main menu                 | When user is offered the chance to go back to main menu and presses enter                            | The screen clears and user is sent back to main menu with all 4 options again                                                                                                              | Pass    |
@@ -346,7 +362,7 @@ Before implementing registration validation, the system allowed duplicate or mal
 
 - Tabulate overflowing table
 
-When using tabulate, I struggled to ensure the table did not overflow onto separate lines. Whilst the data displayed well in the terminal, it did not display neatly when deployed to Heroku. I was having issues with truncating I decided it was more important for the user to see the Sale Price over the Purchase Price, so I removed the purchase price column to maintain a clean layout. 
+When using tabulate, I struggled to ensure the table did not overflow onto separate lines. Whilst the data displayed well in the terminal, it did not display neatly when deployed to Heroku. I was having issues with column truncation. I decided it was more important for the user to see the Sale Price rather than the Purchase Price, so I removed the purchase price column to maintain a clean layout.
 
 - Duplicating api error messages
  
@@ -367,29 +383,33 @@ When the Google Sheet API is inaccessible, some functions may display the error 
 
 ## Deployment
 
-This project was deployed using the Code Institute Heroku mock termin
+This project was deployed using the Code Institute Heroku mock terminal
 
 ### Heroku Deployment Steps
 
-1. A new Heroku app was created.
+Note
 
-2. The following buildpacks were added (in this order):
+The requirements.txt file in the IDE must be updated to package all dependencies. To do this:
 
-- Python
+- Enter the following into the terminal: 'pip3 freeze > requirements.txt'
+- Commit the changes and push to GitHub
+  
+Next, follow the steps below:
 
-- Node.js
-
-3. A Config Var was added:
-
-- Key: PORT
-
-- Value: 8000
-
-4. The Heroku app was connected to the GitHub repository.
-
-5. Deployment was triggered via the Deploy tab.
-
-6. The live application link was generated after successful deployment.
+1. Login to Heroku, create an account if necessary
+2. Once at your Dashboard, click 'Create New App'
+3. Enter a name for your application, this must be unique, and select a region
+4. Click 'Create App'
+5. At the Application Configuration page, apply the following to the Settings and Deploy sections:
+6. Within 'Settings', scroll down to the Config Vars section to apply the credentials being used by the application. In the Reveal Config Vars enter 'CREDS' for the Key field and paste the all the contents from the creds.json file into the Value field
+7. Click 'Add'
+8. Add another Config Var with the Key of 'PORT' and the Value of '8000'
+9. Within Settings, scroll down to the Buildpacks sections, click to Add a Buildpack
+10. Select Python from the pop-up window and Save
+11. Add the Node.js Buildpack using the same method
+12. Navigate to the Deploy section, select Github as the deployment method, and connect to GitHub when prompted
+13. Use your GitHub repository name created for this project
+14. Finally, scroll down to and select to deploy manually or automatically depending on your choice. I deployed manually on ths occasion. 
 
 ### Installation & Local Development
 
@@ -440,10 +460,10 @@ This project was deployed using the Code Institute Heroku mock termin
 - Stack overflow for general question troubleshooting.
 - Chatgpt (especially for understanding api error handling and how to replicate an api error).
 - Ruff for code formatting (although this still required manual editing to ensure no errors).
-- Lucid Chart for the flowchart
+- Lucidchart for the flowchart
 - PEP8 Validator for validating Python code
-- Python tutor for testing sections of code 
+- Python Tutor for testing sections of code 
 
 ## Content 
 
-- I created the database on google sheets
+- I created the database on Google Sheets
