@@ -114,7 +114,7 @@ def require_stock_or_exit():
         - Distinguishes between empty stock and API errors.
         - Provides concise, actionable messages for users.
     """
-    # Attempt to access the 'stock' worksheet
+    
     sheet = safe_sheet_call(SHEET.worksheet, "stock")
     if sheet is None:
 
@@ -465,6 +465,7 @@ def remove_vehicle():
 
     Returns:
         bool: True if at least one vehicle was removed, False otherwise.
+        
 
     Features:
         - Prompts the user for a vehicle ID to remove.
