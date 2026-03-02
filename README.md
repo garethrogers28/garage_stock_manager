@@ -448,9 +448,13 @@ Next, follow the steps below:
 
 ### Security
 
-- Sensitive credentials such as the Google Sheets service account file were excluded from the repository and stored securely using Heroku Config Vars.
+- The creds.json file is excluded via .gitignore to prevent accidental exposure of sensitive credentials.
 
-- The project follows best practices by preventing exposure of API keys and authentication data.
+- Environment variables are used to securely store authentication data in the deployed environment.
+
+- Input validation is implemented to protect against malformed or invalid data entry.
+
+- The Google Service Account is granted access only to the required worksheet, following the principle of least privilege.
 
 ## Credits
 
