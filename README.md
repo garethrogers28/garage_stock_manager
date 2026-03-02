@@ -1,5 +1,14 @@
 ﻿# Garage Stock Manager
 
+## Description
+
+Garage Stock Manager is a Python-based command-line inventory management system designed for small used car dealerships. It integrates with the Google Sheets API to provide real-time cloud-based stock management and implements validated Create, Read, and Delete operations with defensive programming techniques to ensure data accuracy and reliability.
+
+This project was developed as Project 3 for the Code Institute Full Stack Developer Diploma and runs on their Mock terminal in Heroku.
+
+- link to live site - https://garage-stock-manager-b939d726e046.herokuapp.com/
+
+- link to repository  https://github.com/garethrogers28/garage_stock_manager
 
 ## Table of Contents
 
@@ -19,17 +28,6 @@
 - [Limitations](#limitations)
 - [Credits](#credits)
 
-
-## Description
-
-Garage Stock Manager is a command-line application designed to help manage vehicle inventory for a used car garage. It allows the user to view, add, and remove vehicles from a Google Sheets-based stock database. The system was built using Python and integrates with the Google Sheets API to provide real-time data storage and retrieval. It focuses on simplicity, reliability, and data accuracy through structured validation and defensive programming techniques.
-
-This project was developed as Project 3 for the Code Institute Full Stack Developer Diploma and runs on their Mock terminal in Heroku.
-
-link to live site - https://garage-stock-manager-b939d726e046.herokuapp.com/
-
-link to repository  https://github.com/garethrogers28/garage_stock_manager
- 
 ## Business Goals
 
 1. Efficient Inventory Management
