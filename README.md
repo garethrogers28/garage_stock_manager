@@ -442,6 +442,8 @@ Next, follow the steps below:
 
 - As a command-line application, it does not include a graphical user interface.
 
+- Using the Heroku terminal meant having to decide which information is the most beneficial to the user. Whilst purchase price and date added are available data sets, I decided that Purchase Price and Date Added are the least beneficial to the user. 
+
 ### Security
 
 - Sensitive credentials such as the Google Sheets service account file were excluded from the repository and stored securely using Heroku Config Vars.
