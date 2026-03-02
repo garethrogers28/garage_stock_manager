@@ -224,7 +224,7 @@ The garage has no interest in selling cars that are over 25 years old which is w
 
 ## Future Features 
 
-- Edit Vehicle function can be added so the user can edit things like mileage and purchase price. Incase the car is not selling or if work has been done on a vehicle that increases the sale price.
+- Edit Vehicle function can be added so the user can edit things like mileage and purchase price. In case the car is not selling or if work has been done on a vehicle that increases the sale price.
 
 - Search for Vehicle by registration, make, model, year range or price range.
 
@@ -253,7 +253,7 @@ The garage has no interest in selling cars that are over 25 years old which is w
 | status         | Vehicle status (default: For Sale)          |
 | date_added     | Date the vehicle was added                  |
 
-- Garage Stock Manager uses a single Google Sheets worksheet (stock) as its database. Each row in the sheet represents one vehicle in the garage inventory.The system follows a simple single-entity data model, where all vehicle information is stored in structured columns.
+- Garage Stock Manager uses a single Google Sheets worksheet (stock) as its database. Each row in the sheet represents one vehicle in the garage inventory. The system follows a simple single-entity data model, where all vehicle information is stored in structured columns.
   
 - All operations (view, add, remove) interact directly with the stock worksheet. 
 
@@ -316,7 +316,7 @@ Used to create and manage service account credentials for API authentication.
 
 Throughout the Build phase Python Tutor, PEP8 Online and Chrome Developer Tools are used to ensure the application works as expected. The app was tested on Chrome and Edge browsers. Testing was conducted throughout development to ensure functionality, reliability, and data integrity. Both manual testing and user story validation were performed to confirm that all core features met their intended objectives.
 
-When assessing pep8 validation there were no erros or warnings.  
+When assessing pep8 validation there were no errors or warnings.  
 
 - run.py - 0 Errors / 0 Warnings
 
@@ -363,7 +363,7 @@ Before implementing registration validation, the system allowed duplicate or mal
 
 - Tabulate overflowing table
 
-When using tabulate, I struggled to ensure the table did not overflow onto separate lines. Whilst the data displayed well in the terminal, it did not display neatly when deployed to Heroku. I was having issues with column truncation. I decided it was more important for the user to see the Sale Price rather than the Purchase Price, so I removed the purchase price column to maintain a clean layout. I have included a link below to the correct page in the commit history.
+When using tabulate, I struggled to ensure the table did not overflow onto separate lines The data displayed well in the terminal, it did not display neatly when deployed to Heroku. I was having issues with column truncation. I decided it was more important for the user to see the Sale Price rather than the Purchase Price, so I removed the purchase price column to maintain a clean layout. I have included a link below to the correct page in the commit history.
 
 [link to commit history page 2 showing attempted fixes](https://github.com/garethrogers28/garage_stock_manager/commits/main/?after=b05534838084bca38e1e5499253b595d30c6b845+34)
 
@@ -412,7 +412,7 @@ Next, follow the steps below:
 11. Add the Node.js Buildpack using the same method
 12. Navigate to the Deploy section, select Github as the deployment method, and connect to GitHub when prompted
 13. Use your GitHub repository name created for this project
-14. Finally, scroll down to and select to deploy manually or automatically depending on your choice. I deployed manually on ths occasion. 
+14. Finally, scroll down to and select to deploy manually or automatically depending on your choice. I deployed manually on this occasion. 
 
 ### Installation & Local Development
 
@@ -430,7 +430,7 @@ Next, follow the steps below:
 
 4. Create a creds.json file with your Google Service Account credentials.
  
-5. Run application python3 run.py
+5. Run application: python3 run.py
 
 ### Limitations
 
@@ -458,14 +458,14 @@ Next, follow the steps below:
 
 - Code Institute Full Stack Developer software course.
 - Mentor Brian Macharia for guiding and advising throughout the projects lifecycle on how to improve UX and my code.
-- Code institute for the deployment process and deployment terminal.
+- Code Institute for the deployment process and deployment terminal.
 
 ### Software & Web Applications
 
 - Stack overflow for general question troubleshooting.
 - Chatgpt (especially for understanding api error handling and how to replicate an api error).
 - Ruff for code formatting (although this still required manual editing to ensure no errors).
-- Lucidchart for the flowchart.
+- DrawIO for the flowchart.
 - PEP8 Validator for validating Python code.
 - Python Tutor for testing sections of code .
 
