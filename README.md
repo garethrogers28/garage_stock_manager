@@ -121,18 +121,14 @@ Update functionality is planned for future development.
 
 ## Flowchart
 
-The flowchart was initially designed in Lucidchart and finalised using Inkscape.
+- The flowchart was designed on Drawio.
 
-<img width="1822" height="1563" alt="Flowcharts" src="https://github.com/user-attachments/assets/bba3c3bb-e752-4877-96e6-0ba33103a1a0" />
-
-Here is the link to lucidchart
-
-- https://lucid.app/lucidchart/a798661a-fe63-45a9-876b-07ff947f5c8d/edit?viewport_loc=-9380%2C-4962%2C3626%2C1736%2C0_0&invitationId=inv_f127bb38-9463-474d-9fbc-592348816baa
+<img width="1241" height="709" alt="Flowcharts" src="https://github.com/user-attachments/assets/c05e4a7c-4aab-4097-aa53-1f1e4f1ba297" />
 
 
 ## Wireframes
 
-- Command-line interface uses system defaults 
+- Command-line interface uses system defaults. 
 
 ## Existing Features
 
@@ -168,11 +164,11 @@ Here is the link to lucidchart
 
 ### 4. Remove a Vehicle
 
-- View all Vehicles. The user is first given the list of vehicles (same as view all vehicles)
+- View all Vehicles. The user is first given the list of vehicles (same as view all vehicles).
 
 - Select vehicle by ID. The user is asked to enter a Vehicle ID that they wish to remove. This reduces input for the user so they do not have to type in the full details. 
 
-- Confirmation prompt before deletion. Once the user has chosen the ID, Garage Stock Manager will prompt the user to confirm they are sure that they want to delete. This Prevents accidental removal
+- Confirmation prompt before deletion. Once the user has chosen the ID, Garage Stock Manager will prompt the user to confirm they are sure that they want to delete. This Prevents accidental removal.
 
  <img width="723" height="411" alt="remove-vehicle" src="https://github.com/user-attachments/assets/9ceec4ed-2836-417a-a242-dcc103e06749" />
 
@@ -187,7 +183,7 @@ Here is the link to lucidchart
 
 - Real-time data storage and retrieval. The user does not have to manually edit and save their spreadsheet/file. 
 
-- Persistent data (data saved outside the program)
+- Persistent data (data saved outside the program).
 
 ### 6. Error Handling
 
@@ -196,7 +192,7 @@ Here is the link to lucidchart
 <img width="727" height="408" alt="api-error" src="https://github.com/user-attachments/assets/d2e18e9c-a25b-427d-bd2d-e5f3cd8d9905" />
 
 
-- Prevents crashes due to invalid data
+- Prevents crashes due to invalid data.
 
 - User-friendly error messages. The user is always prompted what went wrong if they enter incorrect data. This ensures the user is always informed of their actions and understands how to correct errors.
 
@@ -224,7 +220,7 @@ The garage has no interest in selling cars that are over 25 years old which is w
 
 - Returns to the main menu after each action. The user can perform multiple tasks in one session so they do not have to re run the program all the time. 
 
-- Runs until the user chooses to exit
+- Runs until the user chooses to exit.
 
 ## Future Features 
 
@@ -320,7 +316,7 @@ Used to create and manage service account credentials for API authentication.
 
 Throughout the Build phase Python Tutor, PEP8 Online and Chrome Developer Tools are used to ensure the application works as expected. The app was tested on Chrome and Edge browsers. Testing was conducted throughout development to ensure functionality, reliability, and data integrity. Both manual testing and user story validation were performed to confirm that all core features met their intended objectives.
 
-When assessing pep8 validation there were no erros or warnings  
+When assessing pep8 validation there were no erros or warnings.  
 
 - run.py - 0 Errors / 0 Warnings
 
@@ -388,7 +384,7 @@ When the Google Sheet API is inaccessible, some functions may display the error 
 
 ## Deployment
 
-This project was deployed using the Code Institute Heroku mock terminal
+This project was deployed using the Code Institute Heroku mock terminal.
 
 ### Heroku Deployment Steps
 
@@ -465,10 +461,10 @@ Next, follow the steps below:
 - Stack overflow for general question troubleshooting.
 - Chatgpt (especially for understanding api error handling and how to replicate an api error).
 - Ruff for code formatting (although this still required manual editing to ensure no errors).
-- Lucidchart for the flowchart
-- PEP8 Validator for validating Python code
-- Python Tutor for testing sections of code 
+- Lucidchart for the flowchart.
+- PEP8 Validator for validating Python code.
+- Python Tutor for testing sections of code .
 
 ## Content 
 
-- I created the database on Google Sheets
+- I created the database on Google Sheets.
