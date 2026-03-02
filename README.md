@@ -199,7 +199,7 @@ Update functionality is planned for future development.
 
 ### 7. Data Validation & Sanitisation
 
-- Input validation (reg, year, mileage, purchase price, sale price). The user must enter a number for mileage, purchase and both prices.
+- Input validation (year, mileage, purchase price, sale price). The user must enter a number for year, mileage, purchase and sale price.
  
 - Vehicle registration numbers are validated using Regular Expressions (regex). The program ensures that registrations follow the UK 2001+ format: AB12 ABC
 
