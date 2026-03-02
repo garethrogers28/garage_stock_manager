@@ -363,7 +363,7 @@ Before implementing registration validation, the system allowed duplicate or mal
 
 - Tabulate overflowing table
 
-When using tabulate, I struggled to ensure the table did not overflow onto separate lines. Whilst the data displayed well in the terminal, it did not display neatly when deployed to Heroku. I was having issues with column truncation. I decided it was more important for the user to see the Sale Price rather than the Purchase Price, so I removed the purchase price column to maintain a clean layout.
+When using tabulate, I struggled to ensure the table did not overflow onto separate lines. Whilst the data displayed well in the terminal, it did not display neatly when deployed to Heroku. I was having issues with column truncation. I decided it was more important for the user to see the Sale Price rather than the Purchase Price, so I removed the purchase price column to maintain a clean layout. I have included a link below to the correct page in the commit history.
 
 [link to commit history page 2 showing attempted fixes](https://github.com/garethrogers28/garage_stock_manager/commits/main/?after=b05534838084bca38e1e5499253b595d30c6b845+34)
 
