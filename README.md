@@ -1,5 +1,14 @@
 ﻿# Garage Stock Manager
 
+## Description
+
+Garage Stock Manager is a Python-based command-line inventory management system designed for small used car dealerships. It integrates with the Google Sheets API to provide real-time cloud-based stock management and implements validated Create, Read, and Delete operations with defensive programming techniques to ensure data accuracy and reliability.
+
+This project was developed as Project 3 for the Code Institute Full Stack Developer Diploma and runs on their Mock terminal in Heroku.
+
+- link to live site - https://garage-stock-manager-b939d726e046.herokuapp.com/
+
+- link to repository  https://github.com/garethrogers28/garage_stock_manager
 
 ## Table of Contents
 
@@ -19,17 +28,6 @@
 - [Limitations](#limitations)
 - [Credits](#credits)
 
-
-## Description
-
-Garage Stock Manager is a command-line application designed to help manage vehicle inventory for a used car garage. It allows the user to view, add, and remove vehicles from a Google Sheets-based stock database. The system was built using Python and integrates with the Google Sheets API to provide real-time data storage and retrieval. It focuses on simplicity, reliability, and data accuracy through structured validation and defensive programming techniques.
-
-This project was developed as Project 3 for the Code Institute Full Stack Developer Diploma and runs on their Mock terminal in Heroku.
-
-link to live site - https://garage-stock-manager-b939d726e046.herokuapp.com/
-
-link to repository  https://github.com/garethrogers28/garage_stock_manager
- 
 ## Business Goals
 
 1. Efficient Inventory Management
@@ -121,18 +119,14 @@ Update functionality is planned for future development.
 
 ## Flowchart
 
-The flowchart was initially designed in Lucidchart and finalised using Inkscape.
+- The flowchart was designed on Drawio.
 
-<img width="1822" height="1563" alt="Flowcharts" src="https://github.com/user-attachments/assets/bba3c3bb-e752-4877-96e6-0ba33103a1a0" />
-
-Here is the link to lucidchart
-
-- https://lucid.app/lucidchart/a798661a-fe63-45a9-876b-07ff947f5c8d/edit?viewport_loc=-9380%2C-4962%2C3626%2C1736%2C0_0&invitationId=inv_f127bb38-9463-474d-9fbc-592348816baa
+<img width="1241" height="709" alt="Flowcharts" src="https://github.com/user-attachments/assets/c05e4a7c-4aab-4097-aa53-1f1e4f1ba297" />
 
 
 ## Wireframes
 
-- Command-line interface uses system defaults 
+- Command-line interface uses system defaults. 
 
 ## Existing Features
 
@@ -158,7 +152,8 @@ Here is the link to lucidchart
 
 - Users can add a vehicle. The system will ask them for all vehicles details such as Registration Number, Make, Model, Year, Mileage, Purchase Price and Sale Price. They will receive a success message when complete confirming Reg number and also be informed of the stock updating.
 
-<img width="722" height="409" alt="add-vehicle" src="https://github.com/user-attachments/assets/487a2a7a-9c84-4299-b440-f0ced0159ac3" />
+<img width="716" height="408" alt="add-vehicle" src="https://github.com/user-attachments/assets/c6c5031b-6169-45cb-bc04-44f283cd6736" />
+
 
 - Automatic ID and date generation. The user does not have to have give the vehicle an ID or date as this will be applied automatically depending on the next available space in the file. This reduces manual error and improves efficiency.
 
@@ -168,11 +163,11 @@ Here is the link to lucidchart
 
 ### 4. Remove a Vehicle
 
-- View all Vehicles. The user is first given the list of vehicles (same as view all vehicles)
+- View all Vehicles. The user is first given the list of vehicles (same as view all vehicles).
 
 - Select vehicle by ID. The user is asked to enter a Vehicle ID that they wish to remove. This reduces input for the user so they do not have to type in the full details. 
 
-- Confirmation prompt before deletion. Once the user has chosen the ID, Garage Stock Manager will prompt the user to confirm they are sure that they want to delete. This Prevents accidental removal
+- Confirmation prompt before deletion. Once the user has chosen the ID, Garage Stock Manager will prompt the user to confirm they are sure that they want to delete. This Prevents accidental removal.
 
  <img width="723" height="411" alt="remove-vehicle" src="https://github.com/user-attachments/assets/9ceec4ed-2836-417a-a242-dcc103e06749" />
 
@@ -187,7 +182,7 @@ Here is the link to lucidchart
 
 - Real-time data storage and retrieval. The user does not have to manually edit and save their spreadsheet/file. 
 
-- Persistent data (data saved outside the program)
+- Persistent data (data saved outside the program).
 
 ### 6. Error Handling
 
@@ -196,7 +191,7 @@ Here is the link to lucidchart
 <img width="727" height="408" alt="api-error" src="https://github.com/user-attachments/assets/d2e18e9c-a25b-427d-bd2d-e5f3cd8d9905" />
 
 
-- Prevents crashes due to invalid data
+- Prevents crashes due to invalid data.
 
 - User-friendly error messages. The user is always prompted what went wrong if they enter incorrect data. This ensures the user is always informed of their actions and understands how to correct errors.
 
@@ -204,30 +199,36 @@ Here is the link to lucidchart
 
 ### 7. Data Validation & Sanitisation
 
-- Input validation (reg, year, mileage, purchase price, sale price). The user must enter a number for mileage, purchase and both prices.
+- Input validation (year, mileage, purchase price, sale price). The user must enter a number for year, mileage, purchase and sale price.
  
-- The user must enter a registration that matches UK format (e.g., AB12 ASD).
+- Vehicle registration numbers are validated using Regular Expressions (regex). The program ensures that registrations follow the UK 2001+ format: AB12 ABC
+
+- The program also converts user input to uppercase before validation.
   
 - User must enter years between 2001 and 2036 or they will get feedback asking them to enter a valid year between 2001 and 2036.
   
 Note
 The garage has no interest in selling cars that are over 25 years old which is why I have chosen 2001 as the oldest date. This also means the system did not need to check for older version registration numbers. 
 
-<img width="722" height="409" alt="validation" src="https://github.com/user-attachments/assets/549175e0-401f-46b2-9a69-c1b8a879f7fd" />
+<img width="722" height="409" alt="validation" src="https://github.com/user-attachments/assets/44cb5c8b-fa63-4d34-87a3-79e3cfbfbdc7" />
+
 
 - Prevents empty inputs. The user is unable to enter empty data ensuring all data is captured.
+  
 
 ### 8. Continuous Program Loop
 
 - Returns to the main menu after each action. The user can perform multiple tasks in one session so they do not have to re run the program all the time. 
 
-- Runs until the user chooses to exit
+- Runs until the user chooses to exit.
 
 ## Future Features 
 
-- Edit Vehicle function can be added so the user can edit things like mileage and purchase price. Incase the car is not selling or if work has been done on a vehicle that increases the sale price.
+- Edit Vehicle function can be added so the user can edit things like mileage and purchase price. In case the car is not selling or if work has been done on a vehicle that increases the sale price.
 
 - Search for Vehicle by registration, make, model, year range or price range.
+
+- A sell vehicle function that applies the 'Sold' status and records the 'sold price'.
 
 - Audit Trail to record sale prices and previous vehicle details.
 
@@ -252,7 +253,7 @@ The garage has no interest in selling cars that are over 25 years old which is w
 | status         | Vehicle status (default: For Sale)          |
 | date_added     | Date the vehicle was added                  |
 
-- Garage Stock Manager uses a single Google Sheets worksheet (stock) as its database. Each row in the sheet represents one vehicle in the garage inventory.The system follows a simple single-entity data model, where all vehicle information is stored in structured columns.
+- Garage Stock Manager uses a single Google Sheets worksheet (stock) as its database. Each row in the sheet represents one vehicle in the garage inventory. The system follows a simple single-entity data model, where all vehicle information is stored in structured columns.
   
 - All operations (view, add, remove) interact directly with the stock worksheet. 
 
@@ -315,7 +316,7 @@ Used to create and manage service account credentials for API authentication.
 
 Throughout the Build phase Python Tutor, PEP8 Online and Chrome Developer Tools are used to ensure the application works as expected. The app was tested on Chrome and Edge browsers. Testing was conducted throughout development to ensure functionality, reliability, and data integrity. Both manual testing and user story validation were performed to confirm that all core features met their intended objectives.
 
-When assessing pep8 validation there were no erros or warnings  
+When assessing pep8 validation there were no errors or warnings.  
 
 - run.py - 0 Errors / 0 Warnings
 
@@ -362,7 +363,9 @@ Before implementing registration validation, the system allowed duplicate or mal
 
 - Tabulate overflowing table
 
-When using tabulate, I struggled to ensure the table did not overflow onto separate lines. Whilst the data displayed well in the terminal, it did not display neatly when deployed to Heroku. I was having issues with column truncation. I decided it was more important for the user to see the Sale Price rather than the Purchase Price, so I removed the purchase price column to maintain a clean layout.
+When using tabulate, I struggled to ensure the table did not overflow onto separate lines The data displayed well in the terminal, it did not display neatly when deployed to Heroku. I was having issues with column truncation. I decided it was more important for the user to see the Sale Price rather than the Purchase Price, so I removed the purchase price column to maintain a clean layout. I have included a link below to the correct page in the commit history.
+
+[link to commit history page 2 showing attempted fixes](https://github.com/garethrogers28/garage_stock_manager/commits/main/?after=b05534838084bca38e1e5499253b595d30c6b845+34)
 
 - Duplicating api error messages
  
@@ -383,7 +386,7 @@ When the Google Sheet API is inaccessible, some functions may display the error 
 
 ## Deployment
 
-This project was deployed using the Code Institute Heroku mock terminal
+This project was deployed using the Code Institute Heroku mock terminal.
 
 ### Heroku Deployment Steps
 
@@ -409,7 +412,7 @@ Next, follow the steps below:
 11. Add the Node.js Buildpack using the same method
 12. Navigate to the Deploy section, select Github as the deployment method, and connect to GitHub when prompted
 13. Use your GitHub repository name created for this project
-14. Finally, scroll down to and select to deploy manually or automatically depending on your choice. I deployed manually on ths occasion. 
+14. Finally, scroll down to and select to deploy manually or automatically depending on your choice. I deployed manually on this occasion. 
 
 ### Installation & Local Development
 
@@ -427,7 +430,7 @@ Next, follow the steps below:
 
 4. Create a creds.json file with your Google Service Account credentials.
  
-5. Run application python3 run.py
+5. Run application: python3 run.py
 
 ### Limitations
 
@@ -441,11 +444,17 @@ Next, follow the steps below:
 
 - As a command-line application, it does not include a graphical user interface.
 
+- Using the Heroku terminal meant having to decide which information is the most beneficial to the user. Whilst purchase price and date added are available data sets, I decided that Purchase Price and Date Added are the least beneficial to the user. 
+
 ### Security
 
-- Sensitive credentials such as the Google Sheets service account file were excluded from the repository and stored securely using Heroku Config Vars.
+- The creds.json file is excluded via .gitignore to prevent accidental exposure of sensitive credentials.
 
-- The project follows best practices by preventing exposure of API keys and authentication data.
+- Environment variables are used to securely store authentication data in the deployed environment.
+
+- Input validation is implemented to protect against malformed or invalid data entry.
+
+- The Google Service Account is granted access only to the required worksheet, following the principle of least privilege.
 
 ## Credits
 
@@ -453,17 +462,17 @@ Next, follow the steps below:
 
 - Code Institute Full Stack Developer software course.
 - Mentor Brian Macharia for guiding and advising throughout the projects lifecycle on how to improve UX and my code.
-- Code institute for the deployment process and deployment terminal.
+- Code Institute for the deployment process and deployment terminal.
 
 ### Software & Web Applications
 
 - Stack overflow for general question troubleshooting.
 - Chatgpt (especially for understanding api error handling and how to replicate an api error).
 - Ruff for code formatting (although this still required manual editing to ensure no errors).
-- Lucidchart for the flowchart
-- PEP8 Validator for validating Python code
-- Python Tutor for testing sections of code 
+- DrawIO for the flowchart.
+- PEP8 Validator for validating Python code.
+- Python Tutor for testing sections of code .
 
 ## Content 
 
-- I created the database on Google Sheets
+- I created the database on Google Sheets.
