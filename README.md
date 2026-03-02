@@ -154,7 +154,8 @@ Update functionality is planned for future development.
 
 - Users can add a vehicle. The system will ask them for all vehicles details such as Registration Number, Make, Model, Year, Mileage, Purchase Price and Sale Price. They will receive a success message when complete confirming Reg number and also be informed of the stock updating.
 
-<img width="722" height="409" alt="add-vehicle" src="https://github.com/user-attachments/assets/487a2a7a-9c84-4299-b440-f0ced0159ac3" />
+<img width="716" height="408" alt="add-vehicle" src="https://github.com/user-attachments/assets/c6c5031b-6169-45cb-bc04-44f283cd6736" />
+
 
 - Automatic ID and date generation. The user does not have to have give the vehicle an ID or date as this will be applied automatically depending on the next available space in the file. This reduces manual error and improves efficiency.
 
@@ -211,7 +212,8 @@ Update functionality is planned for future development.
 Note
 The garage has no interest in selling cars that are over 25 years old which is why I have chosen 2001 as the oldest date. This also means the system did not need to check for older version registration numbers. 
 
-<img width="722" height="409" alt="validation" src="https://github.com/user-attachments/assets/549175e0-401f-46b2-9a69-c1b8a879f7fd" />
+<img width="722" height="409" alt="validation" src="https://github.com/user-attachments/assets/44cb5c8b-fa63-4d34-87a3-79e3cfbfbdc7" />
+
 
 - Prevents empty inputs. The user is unable to enter empty data ensuring all data is captured.
   
