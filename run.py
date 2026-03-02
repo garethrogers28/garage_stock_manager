@@ -275,7 +275,13 @@ def validate_registration(reg):
     """
     Validate UK vehicle registration (2001 onwards format).
     Format: AA21 ABC
+    
     """
+    # Regex explanation:
+    # ^[A-Z]{2}    -> first two letters (local memory tag)
+    # [0-9]{2}     -> two digits (age identifier)
+    # \s           -> space separator
+    # [A-Z]{3}$    -> three letters (random sequence)
     pattern = r"^[A-Z]{2}[0-9]{2}\s[A-Z]{3}$"
     return re.match(pattern, reg.upper()) is not None
 
